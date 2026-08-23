@@ -27,6 +27,15 @@ hero:
 
   info: "Free to copy, adapt and ship. Built with **Hugo** and **Lotus Docs**."
 
+  # Fills the empty right-hand column of the hero. The theme inlines any SVG it
+  # finds here, so this is markup rather than a raster asset — it scales, needs
+  # no build step, and adds no request. Also overrides the theme's own
+  # lotus_docs_screenshot.png, which the module's data file merges in.
+  image:
+    path: images
+    filename: hero-template-library.svg
+    alt: "A document template: title, tabs, and a filled-in table"
+
 featureGrid:
   enable: true
   weight: 20
