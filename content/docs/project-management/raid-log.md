@@ -91,6 +91,14 @@ Last reviewed: 2026-08-21 by S. Lindqvist
 |---|---|---|---|---|---|
 | D-01 | PCI scope sign-off | Internal security | 2026-08-15 | A. Berg -> CISO | Late — in review, chased 2026-08-20 |
 | D-03 | Dual-feed capacity confirmation | Finance systems | 2026-08-31 | M. Duarte | On track |
+
+
+## Closed items
+| ID | Item | Closed | Outcome |
+|---|---|---|---|
+| A-05 | Assumption: incumbent will not charge early-termination fees | 2026-08-11 | Validated. Contract confirms no fee; the EUR 120k benefit in the business case stands |
+| I-02 | Sandbox rate limits block full-suite nightly runs | 2026-08-18 | Provider raised the limit to 50 rps. No code change needed |
+| R-02 | If the provider cannot support our refund flow, then Finance needs a manual process | 2026-07-04 | Closed as not-occurred. Refund API verified in the spike; risk retired |
 {{< /doctabs >}}
 
 ## Common mistakes

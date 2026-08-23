@@ -75,7 +75,8 @@ Automation catches formatting, obvious bugs and known vulnerabilities. A human r
 ## Worked example
 
 {{< doctabs >}}
-## Review of PR #482 — "Pin bundle version at request creation"
+## Review comments produced by working through the checklist
+PR #482 — "Pin bundle version at request creation"
 
 **Blocking**
 

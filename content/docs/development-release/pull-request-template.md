@@ -106,6 +106,10 @@ version when the pinned row was missing, which quietly defeats the whole point;
 it now errors. I would like a second opinion on whether `re-resolve` should be
 allowed while a request is APPLYING — currently it is not, and I think that is
 right, but it is a judgement call.
+
+## Screenshots / output
+n/a — no user-facing surface changes. The one observable difference is in the
+audit record, which is covered by the staging verification above.
 {{< /doctabs >}}
 
 ## Common mistakes
