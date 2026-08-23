@@ -25,6 +25,54 @@ An ADR captures a single significant decision at the moment it is made, while th
 
 ## Template
 
+{{< tabs tabTotal="2" >}}
+{{% tab tabName="Rendered" %}}
+
+**ADR-&lt;NNNN&gt;: &lt;Decision, phrased as a statement&gt;**
+
+- **Status:** Proposed / Accepted / Superseded by ADR-XXXX / Deprecated  
+- **Date:** YYYY-MM-DD  
+- **Deciders:** names  
+- **Consulted:** names  
+- **Supersedes:** ADR-XXXX (if any)  
+
+**Context**
+
+The forces at play: requirements, constraints, deadlines, team skills, existing  
+commitments. Write what was true *then*; do not update this section later.  
+
+**Decision**
+
+One sentence in the active voice: "We will ...".  
+Then the detail needed to act on it.  
+
+**Options considered**
+
+**Option A — &lt;name&gt;**
+
+Pros / cons / why not chosen.  
+
+**Option B — &lt;name&gt;**
+
+...  
+
+**Consequences**
+
+**Positive:** ...  
+**Negative:** ...  
+**Neutral / follow-up work:** ...  
+
+**Compliance**
+
+How we will notice if this decision is being violated in practice.  
+
+**Notes**
+
+Links to spikes, benchmarks, discussions.
+
+{{% /tab %}}
+{{% tab tabName="Markdown" %}}
+
 ```markdown
 # ADR-<NNNN>: <Decision, phrased as a statement>
 
@@ -61,7 +109,99 @@ How we will notice if this decision is being violated in practice.
 Links to spikes, benchmarks, discussions.
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Worked example
+
+{{< tabs tabTotal="2" >}}
+{{% tab tabName="Rendered" %}}
+
+**ADR-0012: In-flight provisioning requests keep the bundle version pinned at creation**
+
+- **Status:** Accepted  
+- **Date:** 2026-06-24  
+- **Deciders:** A. Vogel (architect), J. Marek (lead), K. Ferreira (People Ops)  
+- **Consulted:** L. Haddad (Internal Audit)  
+
+**Context**
+
+Access bundles map a job code to a set of entitlements, and People Ops edits  
+them directly (BR-04) — roughly twice a month, sometimes reactively after an  
+audit query. A provisioning request can live for weeks: requests are created  
+when the HR record appears, but entitlements are applied one working day before  
+the start date.  
+
+That means a bundle can change between request creation and application. Audit  
+requires that we can state, for any grant, which rule produced it (D1). Two  
+readings of "the correct entitlements" were in conflict: the bundle as it was  
+when the request was made, or as it is when access is granted.  
+
+Postgres row versioning was already in place for bundles; neither option  
+required new infrastructure.  
+
+**Decision**
+
+We will pin the bundle version onto the provisioning request at creation time,  
+and apply that pinned version even if the bundle has since changed.  
+
+A People Ops user may explicitly re-resolve a pending request against the  
+current bundle; this is an auditable action requiring a justification.  
+
+**Options considered**
+
+**Option A — Pin at creation (chosen)**
+
+Every grant traces to exactly one immutable bundle version. The audit answer is  
+a single row lookup. Cost: a bundle fix does not automatically reach the 30-odd  
+requests already pending, so a genuine correction needs an explicit re-resolve.  
+
+**Option B — Resolve at application time**
+
+Always applies the latest thinking, and corrections propagate automatically.  
+Rejected because the audit trail becomes ambiguous: a grant made at 06:00 and  
+one at 06:10 could differ with no visible cause, and reconstructing the reason  
+requires joining against bundle history by timestamp. Internal Audit stated  
+this would not satisfy the finding.  
+
+**Option C — Pin, but auto-re-resolve when the bundle changes**
+
+Rejected as the worst of both: the pin exists but is silently broken, so the  
+recorded version is not necessarily the one applied. Any implementation bug  
+here produces exactly the class of untraceable grant we are trying to remove.  
+
+**Consequences**
+
+**Positive**  
+- One row answers "which rule granted this?" — meets D1 directly.  
+- Bundle edits are safe to make at any time; they cannot retroactively alter  
+&nbsp;&nbsp;what a pending request will do.  
+
+**Negative**  
+- Removing a wrongly-included entitlement requires re-resolving pending  
+&nbsp;&nbsp;requests. Worst case observed in the September intake: 90 requests.  
+- People Ops needs a UI affordance to find and re-resolve pending requests,  
+&nbsp;&nbsp;which is extra work (story AP-131).  
+
+**Neutral / follow-up**  
+- Bundle rows become immutable; edits create a new version. Storage growth is  
+&nbsp;&nbsp;negligible (tens of rows per year).  
+- The re-resolve action must appear in the audit log with a justification.  
+
+**Compliance**
+
+A weekly check asserts that every grant record references a bundle version that  
+exists and is marked immutable. Any grant referencing a mutable or missing  
+bundle version alerts to the platform team.  
+
+**Notes**
+
+Spike results and the audit conversation are in the 2026-06-19 design review  
+minutes. This decision drove the state machine change recorded in the  
+technical design.
+
+{{% /tab %}}
+{{% tab tabName="Markdown" %}}
 
 ```markdown
 # ADR-0012: In-flight provisioning requests keep the bundle version pinned at creation
@@ -139,6 +279,9 @@ Spike results and the audit conversation are in the 2026-06-19 design review
 minutes. This decision drove the state machine change recorded in the
 technical design.
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Common mistakes
 

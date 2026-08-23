@@ -26,6 +26,69 @@ A DPIA is required under the GDPR (Article 35) where processing is likely to res
 
 ## Template
 
+{{< tabs tabTotal="2" >}}
+{{% tab tabName="Rendered" %}}
+
+**DPIA: &lt;Processing activity&gt;**
+
+| Field | Value |
+|---|---|
+| Version / date | |
+| Controller | |
+| DPO consulted | date |
+| Status | Draft / Approved / Under review |
+| Review date | |
+
+**1. Screening**
+
+Why a DPIA is required (or why not, if this is a screening record).  
+
+**2. Description of processing**
+
+Nature, scope, context and purposes. Data flows, including transfers.  
+
+| Data category | Subjects | Volume | Source | Retention | Special category? |
+|---|---|---|---|---|---|
+
+Recipients, sub-processors, transfers outside the jurisdiction.  
+
+**3. Lawful basis**
+
+Per purpose. For legitimate interests, include the balancing test.  
+
+**4. Necessity and proportionality**
+
+Could the purpose be met with less data, less granularity, or shorter  
+retention? Answer honestly, per data category.  
+
+**5. Consultation**
+
+Who was consulted — DPO, data subjects or their representatives, processors —  
+and what they said.  
+
+**6. Risks to individuals**
+
+| # | Risk to the individual | Likelihood | Severity | Overall |
+|---|---|---|---|---|
+
+**7. Measures**
+
+| Risk | Measure | Effect | Residual | Owner |
+|---|---|---|---|---|
+
+**8. Data subject rights**
+
+How access, rectification, erasure, restriction, portability and objection are  
+handled — including where a right is limited and why.  
+
+**9. Outcome**
+
+Sign-off, residual risk accepted, whether prior consultation with the  
+supervisory authority is required.
+
+{{% /tab %}}
+{{% tab tabName="Markdown" %}}
+
 ```markdown
 # DPIA: <Processing activity>
 
@@ -76,7 +139,133 @@ Sign-off, residual risk accepted, whether prior consultation with the
 supervisory authority is required.
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Worked example
+
+{{< tabs tabTotal="2" >}}
+{{% tab tabName="Rendered" %}}
+
+**DPIA: Automated access provisioning and deprovisioning**
+
+| Field | Value |
+|---|---|
+| Version / date | 1.3 / 2026-09-22 |
+| Controller | Example Group GmbH |
+| DPO consulted | 2026-05-14, 2026-08-30 |
+| Status | Approved |
+| Review date | 2027-09-22, or on material change |
+
+**1. Screening**
+
+The processing concerns employees, is systematic, and determines access to  
+systems required to perform their job. It is not automated decision-making with  
+legal effect under Article 22 — no employment decision is made — but it is  
+systematic monitoring-adjacent processing of employee data at organisational  
+scale, and the works council requested a full assessment. A DPIA was therefore  
+completed.  
+
+**2. Description of processing**
+
+Employee records flow from the HR system into a local projection, which drives  
+the creation and revocation of system access. Grants, revocations and approvals  
+are recorded in an append-only audit log.  
+
+| Data category | Subjects | Volume | Source | Retention | Special category? |
+|---|---|---|---|---|---|
+| Name, employee ID | Employees, ~4,100 | 4,100 | HR system | 90 days after leave date | No |
+| Job code, department, manager ID | Employees | 4,100 | HR system | 90 days after leave date | No |
+| Start and leave dates | Employees | 4,100 | HR system | 90 days after leave date | No |
+| Entitlement grants and revocations | Employees | ~9,000/yr | Generated | 7 years | No |
+| Approval justification (free text) | Employees + approving managers | ~800/yr | Manager input | 7 years | Potentially — free text |
+| Last authentication timestamp | Employees | 4,100 | Target systems | 12 months | No |
+
+Recipients: eleven internal target systems; Internal Audit (read-only export).  
+No transfers outside the EEA. One processor: the cloud infrastructure provider,  
+under an existing data processing agreement.  
+
+**3. Lawful basis**
+
+- Provisioning and revocation: legitimate interests (Art. 6(1)(f)) — securing  
+&nbsp;&nbsp;systems and enabling employees to work. Balancing test in section 4.  
+- Audit log retention for 7 years: legal obligation (Art. 6(1)(c)) under  
+&nbsp;&nbsp;financial-reporting record-keeping requirements, and legitimate interests for  
+&nbsp;&nbsp;the remainder.  
+- Last authentication timestamp: legitimate interests, for detecting dormant  
+&nbsp;&nbsp;accounts. Explicitly *not* used for performance management, and this  
+&nbsp;&nbsp;limitation is stated in the works council agreement and enforced by  
+&nbsp;&nbsp;restricting the field to the access review export.  
+
+**4. Necessity and proportionality**
+
+- **Could we use less data?** The projection holds only fields needed to resolve  
+&nbsp;&nbsp;a bundle and route an approval. Salary, contract type, absence and  
+&nbsp;&nbsp;performance data were available in the HR feed and are deliberately not  
+&nbsp;&nbsp;ingested. The feed is filtered at the source, not after ingestion.  
+- **Could retention be shorter?** The 90-day operational retention is set by the  
+&nbsp;&nbsp;need to investigate provisioning disputes. The 7-year audit retention follows  
+&nbsp;&nbsp;the statutory record-keeping period; shorter would not satisfy the audit  
+&nbsp;&nbsp;finding that prompted the system.  
+- **Is the free-text justification necessary?** Yes — an approval without a  
+&nbsp;&nbsp;reason does not satisfy the control. But it is the highest-risk field, since  
+&nbsp;&nbsp;a manager could type anything. Mitigated in section 7.  
+- **Is the last-authentication timestamp proportionate?** It is the only  
+&nbsp;&nbsp;practical way to find dormant accounts. Its use is contractually and  
+&nbsp;&nbsp;technically limited to that purpose.  
+
+**5. Consultation**
+
+DPO consulted twice; requested the free-text mitigation and the explicit  
+purpose limitation on the authentication timestamp, both adopted. The works  
+council was consulted over six weeks (2026-05-20 to 2026-07-01) and agreed,  
+conditional on the timestamp not being available to line managers and on  
+employees receiving a written explanation of the processing. Both conditions  
+are implemented.  
+
+**6. Risks to individuals**
+
+| # | Risk to the individual | Likelihood | Severity | Overall |
+|---|---|---|---|---|
+| 1 | A manager records sensitive information (health, union membership) in a justification field, which is then retained 7 years with no erasure path | Possible | High | High |
+| 2 | An employee is denied access they need because of an HR data error, and cannot get it corrected quickly | Possible | Medium | Medium |
+| 3 | The authentication timestamp is repurposed for performance monitoring | Unlikely | High | Medium |
+| 4 | Excess personal data reaches lower environments through a test data copy | Unlikely | High | Medium |
+| 5 | An individual cannot find out what access they hold or why | Possible | Low | Low |
+
+**7. Measures**
+
+| Risk | Measure | Effect | Residual | Owner |
+|---|---|---|---|---|
+| 1 | Field labelled with a warning; guidance in manager training; excluded from operational logs and from the audit export sent to third parties; quarterly sampling of 50 entries by the DPO with deletion of any sensitive content found | Reduced, not eliminated — the field is free text by necessity | Low–Medium, accepted, reviewed quarterly | DPO |
+| 2 | Errors are corrected in the HR system, which propagates within 5 minutes; People Ops can apply access immediately while the correction flows through; the process is documented in the employee-facing explanation | Reduced | Low | People Ops |
+| 3 | Field exposed only in the access review export; not in any manager-facing view; works council agreement records the purpose limitation; access to the export is logged | Reduced | Low | Platform |
+| 4 | Only anonymised copies reach lower environments; the anonymisation script is itself tested (TC-240) and a refresh is blocked if that test fails | Reduced | Low | QA |
+| 5 | Self-service page showing an employee their current entitlements, the bundle that granted each, and the date | Reduced | Low | Platform |
+
+**8. Data subject rights**
+
+- **Access:** the self-service page covers current entitlements; a full audit  
+&nbsp;&nbsp;history is available on request through the DPO.  
+- **Rectification:** flows from the HR system; the provisioning service is never  
+&nbsp;&nbsp;edited directly, so there is one place to correct.  
+- **Erasure:** operational data is deleted 90 days after the leave date. Audit  
+&nbsp;&nbsp;records are retained for 7 years on a legal-obligation basis, and erasure is  
+&nbsp;&nbsp;refused for that period — this refusal is explained in the employee-facing  
+&nbsp;&nbsp;notice rather than left to be discovered on request.  
+- **Objection:** legitimate-interests processing carries a right to object; an  
+&nbsp;&nbsp;objection would in practice mean no system access, so it is handled as an  
+&nbsp;&nbsp;HR conversation, not a technical setting.  
+
+**9. Outcome**
+
+Residual risk is Low, except risk 1 at Low–Medium, accepted by the DPO on  
+2026-09-22 with quarterly sampling. Prior consultation with the supervisory  
+authority is not required, as no high residual risk remains after measures.  
+Review on material change or by 2027-09-22.
+
+{{% /tab %}}
+{{% tab tabName="Markdown" %}}
 
 ```markdown
 # DPIA: Automated access provisioning and deprovisioning
@@ -187,6 +376,9 @@ Residual risk is Low, except risk 1 at Low–Medium, accepted by the DPO on
 authority is not required, as no high residual risk remains after measures.
 Review on material change or by 2027-09-22.
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Common mistakes
 

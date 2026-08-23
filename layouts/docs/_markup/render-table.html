@@ -1,0 +1,26 @@
+{{/* Wrap every markdown table in a horizontally scrollable container.
+     Worked-example tables run to 9 columns and overflow the ~690px content
+     column, which otherwise spills over the right-hand table of contents. */}}
+<div class="table-responsive">
+  <table
+    {{- range $k, $v := .Attributes }}{{ with $v }} {{ $k | safeHTML }}="{{ $v }}"{{ end }}{{ end }}>
+    <thead>
+      {{- range .THead }}
+        <tr>
+          {{- range . }}
+            <th {{- with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</th>
+          {{- end }}
+        </tr>
+      {{- end }}
+    </thead>
+    <tbody>
+      {{- range .TBody }}
+        <tr>
+          {{- range . }}
+            <td {{- with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</td>
+          {{- end }}
+        </tr>
+      {{- end }}
+    </tbody>
+  </table>
+</div>

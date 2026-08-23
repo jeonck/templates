@@ -25,6 +25,35 @@ A test case is a repeatable experiment. If the preconditions are vague or the ex
 
 ## Template
 
+{{< tabs tabTotal="2" >}}
+{{% tab tabName="Rendered" %}}
+
+| Field | Value |
+|---|---|
+| Case ID | TC-nnn |
+| Title | |
+| Verifies | FR/NFR/BR IDs |
+| Level | Unit / Integration / System / UAT |
+| Type | Positive / Negative / Boundary / Security / Performance |
+| Priority | |
+| Automated | Yes / No / Planned |
+| Preconditions | |
+| Test data | |
+
+**Steps**
+
+| # | Action | Expected result |
+|---|---|---|
+
+**Postconditions**
+
+State the system should be left in, including data and audit records.  
+
+**Cleanup**
+
+{{% /tab %}}
+{{% tab tabName="Markdown" %}}
+
 ```markdown
 | Field | Value |
 |---|---|
@@ -48,7 +77,52 @@ State the system should be left in, including data and audit records.
 ## Cleanup
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Worked example
+
+{{< tabs tabTotal="2" >}}
+{{% tab tabName="Rendered" %}}
+
+| Field | Value |
+|---|---|
+| Case ID | TC-124 |
+| Title | Approval times out after 72 hours and escalates to the manager's manager |
+| Verifies | FR-03, UC-07 extension 4a4 |
+| Level | Integration |
+| Type | Boundary / negative |
+| Priority | High — this is the path that silently blocks a joiner's start date |
+| Automated | Yes (int suite, clock injected) |
+| Preconditions | Service running with `approval_state_machine` enabled; employee E-TEST-01 exists with manager E-TEST-02, whose manager is E-TEST-03; notification service reachable |
+| Test data | Job code ENG-3 (bundle eng-3@17); additional entitlement `repo:payments:write` |
+
+**Steps**
+
+| # | Action | Expected result |
+|---|---|---|
+| 1 | Create a request for E-TEST-01 with the additional entitlement | 201; state AWAITING_APPROVAL; bundle_version = eng-3@17 |
+| 2 | Confirm no entitlement has been applied | All entitlements in state PENDING or AWAITING_APPROVAL; no adapter call recorded |
+| 3 | Confirm notification to E-TEST-02 | Notification record exists within 5 minutes, addressed to E-TEST-02 |
+| 4 | Advance the injected clock to T+71h59m | State unchanged; no escalation notification |
+| 5 | Advance the injected clock to T+72h01m | Within one poll interval (60s): notification sent to E-TEST-03; audit record `approval_escalated` written with both employee IDs |
+| 6 | Confirm bundle entitlements applied | The 9 bundle entitlements move to APPLIED; `repo:payments:write` remains AWAITING_APPROVAL |
+| 7 | Approve as E-TEST-03 with justification "Covering approver, joiner starts Monday" | 200; `repo:payments:write` moves to APPLIED; audit record shows approver E-TEST-03 and the justification |
+| 8 | Query the audit log for the request | Exactly one record per grant, one for the escalation, one for the approval; no duplicates |
+
+**Postconditions**
+
+Request in state COMPLETE with 10 applied entitlements. Audit log contains 12  
+records for this request. No open service desk ticket.  
+
+**Cleanup**
+
+Revoke all entitlements for E-TEST-01 via the deprovisioning flow (not by  
+direct database edit — the audit log must reflect the revocation). Reset the  
+injected clock.
+
+{{% /tab %}}
+{{% tab tabName="Markdown" %}}
 
 ```markdown
 | Field | Value |
@@ -84,6 +158,9 @@ Revoke all entitlements for E-TEST-01 via the deprovisioning flow (not by
 direct database edit — the audit log must reflect the revocation). Reset the
 injected clock.
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Common mistakes
 

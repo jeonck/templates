@@ -28,6 +28,71 @@ A charter is the document that turns an idea into a funded project. Its real job
 
 ## Template
 
+{{< tabs tabTotal="2" >}}
+{{% tab tabName="Rendered" %}}
+
+**Project Charter: &lt;Project Name&gt;**
+
+| Field | Value |
+|---|---|
+| Charter version | 1.0 |
+| Date | YYYY-MM-DD |
+| Sponsor | Name, role |
+| Project manager | Name, role |
+| Status | Draft / Approved |
+
+**1. Business case**
+
+Two or three sentences. What changes in the business if this succeeds, and what  
+happens if we do nothing.  
+
+**2. Objectives and success criteria**
+
+| # | Objective | Measure | Baseline | Target | Measured by |
+|---|---|---|---|---|---|
+| 1 | | | | | |
+
+**3. Scope**
+
+**In scope**  
+- ...  
+
+**Out of scope**  
+- ...  
+
+**Assumptions**  
+- ...  
+
+**4. Deliverables and milestones**
+
+| Milestone | Deliverable | Target date |
+|---|---|---|
+
+**5. Budget**
+
+| Category | Amount | Notes |
+|---|---|---|
+| People | | |
+| Licences / cloud | | |
+| Contingency | | |
+
+**6. Key risks**
+
+Top three only; the full list lives in the RAID log.  
+
+**7. Stakeholders and governance**
+
+| Name | Role | Decision rights | Cadence |
+|---|---|---|---|
+
+**8. Approval**
+
+| Name | Role | Date | Signature |
+|---|---|---|---|
+
+{{% /tab %}}
+{{% tab tabName="Markdown" %}}
+
 ```markdown
 # Project Charter: <Project Name>
 
@@ -81,7 +146,97 @@ Top three only; the full list lives in the RAID log.
 |---|---|---|---|
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Worked example
+
+{{< tabs tabTotal="2" >}}
+{{% tab tabName="Rendered" %}}
+
+**Project Charter: Payment Gateway Migration**
+
+| Field | Value |
+|---|---|
+| Charter version | 1.0 |
+| Date | 2026-03-02 |
+| Sponsor | R. Okafor, VP Engineering |
+| Project manager | S. Lindqvist |
+| Status | Approved |
+
+**1. Business case**
+
+Our contract with the incumbent payment provider ends 2027-01-31 and renewal  
+pricing is 40% higher. Migrating to the new provider saves roughly EUR 380k  
+per year and removes the single-region dependency that caused the outage in  
+January. Doing nothing means auto-renewal at the higher rate.  
+
+**2. Objectives and success criteria**
+
+| # | Objective | Measure | Baseline | Target | Measured by |
+|---|---|---|---|---|---|
+| 1 | Migrate all card traffic | % of volume on new provider | 0% | 100% | 2026-12-15 |
+| 2 | Hold authorisation rate | Weekly auth success rate | 96.4% | >= 96.4% | 2027-01-15 |
+| 3 | Reduce annual cost | Provider fees per year | EUR 950k | <= EUR 570k | FY2027 close |
+
+**3. Scope**
+
+**In scope**  
+- Card payments (credit, debit) on web and mobile.  
+- Refunds, chargeback handling, reconciliation feeds to Finance.  
+- Dual-running both providers during cutover.  
+
+**Out of scope**  
+- Bank transfers and direct debit — remain with the incumbent until 2028.  
+- Repricing of merchant fees to customers.  
+- Replacing the internal ledger service.  
+
+**Assumptions**  
+- The new provider's sandbox is available from 2026-04-01.  
+- Finance can accept two reconciliation feeds during dual-running.  
+
+**4. Deliverables and milestones**
+
+| Milestone | Deliverable | Target date |
+|---|---|---|
+| M1 | Integration spec signed off | 2026-05-15 |
+| M2 | Sandbox integration passing test suite | 2026-07-31 |
+| M3 | 5% live traffic on new provider | 2026-09-30 |
+| M4 | 100% traffic migrated | 2026-12-15 |
+| M5 | Incumbent card contract terminated | 2027-01-31 |
+
+**5. Budget**
+
+| Category | Amount | Notes |
+|---|---|---|
+| People | EUR 640k | 4 engineers, 1 QA, 0.5 PM for 9 months |
+| Licences / cloud | EUR 45k | Sandbox, additional egress during dual-run |
+| Contingency | EUR 100k | 15% |
+
+**6. Key risks**
+
+1. Authorisation rate drops after cutover and revenue falls before we can react.  
+2. The provider's PSD2 flow differs enough to require checkout redesign.  
+3. Finance reconciliation cannot handle dual feeds, delaying month-end close.  
+
+**7. Stakeholders and governance**
+
+| Name | Role | Decision rights | Cadence |
+|---|---|---|---|
+| R. Okafor | Sponsor | Budget, go/no-go on cutover | Monthly steering |
+| M. Duarte | Head of Finance | Accepts reconciliation design | Monthly steering |
+| S. Lindqvist | PM | Day-to-day scope within charter | Weekly |
+| A. Berg | Security lead | Accepts PCI scope changes | Gate reviews |
+
+**8. Approval**
+
+| Name | Role | Date | Signature |
+|---|---|---|---|
+| R. Okafor | Sponsor | 2026-03-02 | signed |
+| M. Duarte | Head of Finance | 2026-03-04 | signed |
+
+{{% /tab %}}
+{{% tab tabName="Markdown" %}}
 
 ```markdown
 # Project Charter: Payment Gateway Migration
@@ -157,6 +312,9 @@ January. Doing nothing means auto-renewal at the higher rate.
 | R. Okafor | Sponsor | 2026-03-02 | signed |
 | M. Duarte | Head of Finance | 2026-03-04 | signed |
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Common mistakes
 

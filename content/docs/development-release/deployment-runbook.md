@@ -24,6 +24,61 @@ A deployment runbook is executed under time pressure by someone who may not have
 
 ## Template
 
+{{< tabs tabTotal="2" >}}
+{{% tab tabName="Rendered" %}}
+
+**Deployment Runbook: &lt;Release / change&gt;**
+
+| Field | Value |
+|---|---|
+| Change reference | CR-xxxx |
+| Scheduled window | |
+| Deployer | |
+| Approver present | |
+| Comms channel | |
+| Expected duration | |
+| Point of no return | Step N |
+
+**1. Pre-checks (T-24h)**
+
+- [ ] Change approved  
+- [ ] CI green on the exact commit: &lt;sha&gt;  
+- [ ] Backup verified, restore tested: &lt;evidence&gt;  
+- [ ] Dependent teams notified  
+- [ ] Rollback rehearsed in staging on &lt;date&gt;  
+
+**2. Go/no-go (T-0)**
+
+| Condition | Check | Go? |
+|---|---|---|
+
+**3. Steps**
+
+| # | Action | Command | Expected result | Verify | Owner |
+|---|---|---|---|---|---|
+
+Mark the point of no return explicitly.  
+
+**4. Verification**
+
+| Check | How | Pass criteria | Owner |
+|---|---|---|---|
+
+**5. Rollback**
+
+Trigger conditions, procedure, expected duration, data implications.  
+
+**6. Post-deployment**
+
+Monitoring period, who watches what, when the change is declared stable.  
+
+**7. Comms**
+
+Who is told at start, at completion, and on rollback.
+
+{{% /tab %}}
+{{% tab tabName="Markdown" %}}
+
 ```markdown
 # Deployment Runbook: <Release / change>
 
@@ -68,7 +123,105 @@ Monitoring period, who watches what, when the change is declared stable.
 Who is told at start, at completion, and on rollback.
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Worked example
+
+{{< tabs tabTotal="2" >}}
+{{% tab tabName="Rendered" %}}
+
+**Deployment Runbook: Provisioning API v1.14.0**
+
+| Field | Value |
+|---|---|
+| Change reference | CR-2026-0884 |
+| Scheduled window | 2026-11-12, 07:00–08:00 UTC (before the HR feed's 09:00 burst) |
+| Deployer | J. Marek |
+| Approver present | A. Vogel |
+| Comms channel | #platform-deploys |
+| Expected duration | 25 minutes |
+| Point of no return | Step 5 (migration applied) |
+
+**1. Pre-checks (T-24h)**
+
+- [x] CR-2026-0884 approved at CAB 2026-11-10  
+- [x] CI green on commit 9f3c1ab  
+- [x] Postgres PITR verified; restore of a 2026-11-09 snapshot into staging  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;completed in 41 minutes  
+- [x] Service desk notified — bulk import unavailable for ~10 minutes  
+- [x] Rollback rehearsed in staging 2026-11-07  
+
+**2. Go/no-go (T-0)**
+
+| Condition | Check | Go? |
+|---|---|---|
+| No open Sev-1/2 incident | Incident board | |
+| Error rate at baseline | Dashboard "Provisioning — pipeline" | |
+| No HR bulk load running | `SELECT count(*) FROM due_action WHERE state='RUNNING'` returns 0 | |
+| Approver present | — | |
+
+**3. Steps**
+
+| # | Action | Command | Expected result | Verify | Owner |
+|---|---|---|---|---|---|
+| 1 | Announce start | post in #platform-deploys | — | — | J. Marek |
+| 2 | Pause the HR ingest consumer | `provctl ingest pause` | "paused" | `provctl ingest status` shows paused | J. Marek |
+| 3 | Confirm the pipeline has drained | — | 0 requests in APPLYING | `requests_by_state{state="APPLYING"}` = 0 on dashboard | J. Marek |
+| 4 | Snapshot the database | `provctl db snapshot --tag pre-1.14.0` | Snapshot ID printed | Snapshot listed and marked complete | J. Marek |
+| 5 | **Apply migration (point of no return for schema)** | `provctl migrate up --to 0042` | "applied 1 migration" | `provctl migrate status` shows 0042 current | J. Marek |
+| 6 | Deploy v1.14.0 | `provctl deploy --version 1.14.0` | Rolling update completes | All pods Ready, version endpoint reports 1.14.0 | J. Marek |
+| 7 | Resume ingest | `provctl ingest resume` | "running" | Backlog drains within 5 minutes | J. Marek |
+| 8 | Announce completion | post in #platform-deploys | — | — | J. Marek |
+
+Migration 0042 is additive (adds a nullable column and an index) and is  
+reversible with `migrate down --to 0041`; "point of no return" here means any  
+rollback after step 5 must go through the documented down-migration rather than  
+a simple redeploy.  
+
+**4. Verification**
+
+| Check | How | Pass criteria | Owner |
+|---|---|---|---|
+| Service healthy | `/healthz` on each pod | All 200 | J. Marek |
+| Contract tests | `make contract-test ENV=prod-readonly` | All pass | H. Ito |
+| Real request end to end | Create a test request for job code TEST-1 | Reaches COMPLETE, audit record written | H. Ito |
+| Error rate | Dashboard, 15 minutes | 5xx rate <= baseline + 0.1pp | A. Vogel |
+| New metric present | `grants_with_missing_bundle_version` | Exists and is 0 | J. Marek |
+
+**5. Rollback**
+
+**Trigger any of:** 5xx rate above baseline + 1pp for 5 minutes; any request  
+reaching PARTIAL that would not have before; contract tests failing;  
+`grants_with_missing_bundle_version` &gt; 0.  
+
+**Procedure (approx. 12 minutes):**  
+1. `provctl ingest pause`  
+2. `provctl deploy --version 1.13.4`  
+3. `provctl migrate down --to 0041` — only if v1.13.4 fails to start; the  
+&nbsp;&nbsp;&nbsp;column is otherwise ignored and can stay.  
+4. `provctl ingest resume`  
+5. Verify with the same checks in section 4.  
+
+**Data implications:** requests created under v1.14.0 have a populated  
+`bundle_version`, which v1.13.4 ignores. No data loss on rollback. Any  
+re-resolve actions performed under v1.14.0 remain in the audit log and cannot  
+be undone — this is intentional.  
+
+**6. Post-deployment**
+
+Deployer watches the dashboard for 60 minutes. On-call is briefed at handover.  
+The change is declared stable after the next HR bulk event (09:00) processes  
+cleanly. If stable, close CR-2026-0884 by 12:00.  
+
+**7. Comms**
+
+Start and completion in #platform-deploys. On rollback: #platform-deploys plus  
+a direct message to the service desk lead, since bulk import stays paused  
+during rollback.
+
+{{% /tab %}}
+{{% tab tabName="Markdown" %}}
 
 ```markdown
 # Deployment Runbook: Provisioning API v1.14.0
@@ -153,6 +306,9 @@ Start and completion in #platform-deploys. On rollback: #platform-deploys plus
 a direct message to the service desk lead, since bulk import stays paused
 during rollback.
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Common mistakes
 
