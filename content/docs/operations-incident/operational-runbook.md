@@ -104,6 +104,18 @@ significant problem; a four-hour outage overnight usually is not.
 | Target systems (11) | Only those entitlements fail; requests end PARTIAL | Varies — see adapter table |
 
 
+## 3. Health checks
+Sixty-second triage, in this order:
+
+`provctl status` — one line per component.
+`provctl poller status` — is a leader elected, and how old is the lease?
+`provctl adapter status --all` — per-target error rate and retry backlog.
+
+Healthy is: a leader elected with a lease under 30 seconds old, zero overdue
+due-actions, every adapter under a 5% error rate, and nothing stuck in
+APPLYING for more than a few minutes on the pipeline dashboard. If all four
+hold, this service is fine and the problem is somewhere else.
+
 ## 4. Alerts
 
 ### PROV_DUE_ACTIONS_OVERDUE
@@ -150,6 +162,25 @@ significant problem; a four-hour outage overnight usually is not.
 - **Fix:** none at 3am. Page the owner (A. Vogel) regardless of hour, and open
   a Sev-1 incident. Do not attempt to reconstruct the bundle version.
 
+## 5. Common procedures
+**Pause and resume ingest** — `provctl ingest pause` / `resume`. Events queue
+at the webhook for up to 24 hours with no loss. Do this before any deploy.
+
+**Pause one adapter** — `provctl adapter pause <target>` / `resume <target>`.
+Other targets keep working, but requests needing the paused target end PARTIAL
+and raise tickets, so prefer this only for a known maintenance window.
+
+**Rotate a target's credentials** — `provctl secrets rotate <target>`. About
+30 seconds of auth failures during the swap, absorbed by adapter retries.
+
+**Replay a stuck request** — `provctl request replay <id>`. Idempotent:
+already-applied entitlements are not re-applied. Never edit `request.state`
+directly to achieve the same thing.
+
+**Drain before maintenance** — pause ingest, then wait for
+`requests_by_state{state="APPLYING"}` to reach zero. Under two minutes outside
+the 09:00 burst.
+
 ## 6. Safe / unsafe actions
 | Action | Safe? | Notes |
 |---|---|---|
@@ -160,6 +191,17 @@ significant problem; a four-hour outage overnight usually is not.
 | Delete rows from `due_action` | **No** | Silently drops provisioning; no recovery path |
 | Edit `request.state` directly | **No** | Bypasses the audit log; creates states the application cannot produce |
 | Re-run a completed request | **No** | Use the re-resolve action, which is audited |
+
+
+## 7. Maintenance
+| Task | Cadence | Owner | Notes |
+|---|---|---|---|
+| Target credential rotation | 90 days, automated | Platform | Alerts if any credential passes 90 days; rotate with the command in section 5 |
+| Admin ingress certificate | 90 days, automated at 02:00 | Platform | Manual fallback `provctl cert renew --ingress admin` |
+| Audit export to cold storage | Monthly, automated | Security | Failure alerts within 2h; a missed month is a reportable control gap, not a nuisance |
+| Bundle version pruning | Never | — | Deliberately disabled: deleting a pinned bundle version breaks grant attribution, which caused DEF-2026-0311 |
+| Postgres disk headroom | Weekly glance | Platform | Alert at 85%; growth ~1.5pp/week, dominated by the audit table |
+| DR exercise | Every 6 months | Platform | Last 2026-10-22, next due 2027-04 |
 
 
 ## 8. Recovery

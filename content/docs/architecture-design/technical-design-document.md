@@ -81,6 +81,15 @@ Flags, migration order, backwards compatibility window, kill switch.
 | Related | FR-03, UC-07 ext. 4a, ADR-0012 |
 
 
+## 1. Problem
+Provisioning requests are created when an HR joiner event arrives, but
+entitlements are applied one working day before the start date — often weeks
+later. Some entitlements need a line manager's approval first, and nothing in
+the current design holds a request in a waiting state or chases the approver.
+Today a request applies everything or nothing, so People Operations handles
+every non-standard case by hand and the approval ends up in a ticket rather
+than the audit log — which is what audit finding 2025-11 objects to.
+
 ## 2. Goals and non-goals
 **Goals:** a single authoritative state per request; no entitlement applied
 before approval where approval is required; every transition auditable;
@@ -141,6 +150,22 @@ the legacy ERP accepts one batch per night regardless. The design would be
 wrong if a single request needed more than ~50 entitlements, since application
 is sequential per request; at 9 this is not worth parallelising.
 
+## 8. Security and privacy
+Approval is the security-relevant step, so it gets the attention. Approving
+requires a user-delegated token; a service token holding
+`provisioning.approve` is rejected, because an approval that cannot be
+attributed to a person does not satisfy the control. The approver's identity
+comes from the token, never from the request body — otherwise a caller could
+name any approver it liked.
+
+The justification field is free text typed by a manager and is treated as
+potentially personal: written to the audit store, excluded from operational
+logs and from the log export, retained seven years, not erasable. The DPIA
+records that refusal.
+
+No new secrets are introduced. The state machine holds no credentials; only
+adapters talk to targets, using existing per-target service credentials.
+
 ## 9. Observability
 - `requests_by_state` gauge, `transition_total{from,to}` counter.
 - `approvals_pending` gauge, alert at >20 for 2 hours.
@@ -148,6 +173,20 @@ is sequential per request; at 9 this is not worth parallelising.
 - Every log line carries request_id and correlation_id.
 - Dashboard "Provisioning — pipeline" shows state counts, adapter error rates
   and the overdue gauge on one screen.
+
+## 10. Testing strategy
+- **Unit:** table-driven over every permitted *and* forbidden transition. The
+  forbidden half is the one that matters — a state machine that allows too
+  much is the failure mode here.
+- **Integration:** the four extension paths from UC-07 against sandbox
+  targets, plus the 72-hour escalation with an injected clock (TC-124).
+- **Contract:** unchanged; the adapter interface does not move.
+- **Concurrency:** two simultaneous approvals must yield one applied approval
+  and one 412 — asserted in a test, not reasoned about.
+- **Replay:** the same HR event delivered twice must produce one request and
+  one set of grants, tested by replaying a recorded event stream.
+- **Load:** no separate suite. The intake load test covers this path; the
+  bottleneck is adapters, not the state machine.
 
 ## 11. Rollout and rollback
 Behind flag `approval_state_machine`. Enabled first for a single job code

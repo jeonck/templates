@@ -84,6 +84,25 @@ Entities, retention, residency, classification.
 | Status | Approved for build |
 
 
+## 1. Purpose and scope
+Specifies the Access Provisioning Service, which grants and revokes employee
+access to eleven internal systems in response to HR events. It covers the
+joiner, mover and leaver flows for permanent and fixed-term employees.
+Contractors are out of scope for this release (see section 9). This document
+is the acceptance baseline for the build; it supersedes the requirements
+section of BRD v1.2 where the two disagree.
+
+## 2. Definitions and abbreviations
+| Term | Meaning |
+|---|---|
+| Bundle | The set of entitlements a job code grants, versioned and immutable |
+| Entitlement | One permission in one target system, e.g. `repo:payments:write` |
+| Joiner / mover / leaver | HR events for starting, changing role, and leaving |
+| Standard access | Entitlements resolved from the bundle, needing no approval |
+| Target system | Any of the eleven systems this service provisions into |
+| SCIM | System for Cross-domain Identity Management, RFC 7644 |
+
+
 ## 3. System context
 Actors: HR system (source of record), line manager (approver), target systems
 (11), service desk agent (exception handling), auditor (read-only). The service
@@ -121,6 +140,31 @@ existing secrets manager.
 | Target systems (9) | Out | SCIM 2.0 | Identity platform | Retry per FR-07, then ticket |
 | Legacy ERP | Out | SFTP batch, fixed-width, nightly | ERP team | File rejected -> ticket + no partial apply |
 | Audit export | Out | Signed NDJSON to object storage, daily | Internal Audit | Missing file alerts within 2h |
+
+
+## 7. Data requirements
+| Entity | Purpose | Retention | Classification | Residency |
+|---|---|---|---|---|
+| Employee projection | Fields needed to resolve a bundle and route approval | 90 days after leave date | Personal | EEA only |
+| Bundle version | Immutable rule a grant is attributed to | 7 years | Internal | EEA only |
+| Request | One provisioning workflow instance | 7 years | Personal | EEA only |
+| Entitlement grant | One entitlement applied to one person | 7 years | Personal | EEA only |
+| Audit record | Append-only fact about a grant, revocation or approval | 7 years | Personal | EEA only |
+
+
+The HR system remains the system of record; the projection is read-only and is
+never edited in this service. Corrections flow from HR. The full model is in
+the data model document.
+
+## 8. Constraints
+- The HR system cannot be modified and exposes a read-only feed; no write-back.
+- Two of the eleven targets have no modern API. The legacy ERP accepts one
+  SFTP batch per night, which bounds FR-04 for that target.
+- No budget for additional identity licences before FY2027, so the existing
+  identity platform must carry the nine SCIM targets.
+- Works council agreement limits use of the last-authentication timestamp to
+  dormant-account detection; it must not be exposed to line managers.
+- Bundle definitions must be editable by People Operations without a release.
 
 
 ## 9. Out of scope

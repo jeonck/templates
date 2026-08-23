@@ -109,6 +109,22 @@ prove performance or resilience — those are covered by the system test plan.
 | 8 | Something goes wrong: a target system is down | D. Achebe | Simulated adapter outage | A ticket is raised with the correlation ID, and other entitlements still apply |
 
 
+## 4. Environment and data
+UAT runs on the `uat` environment, refreshed 2026-11-14 from a production copy
+with names, email addresses and free-text justifications replaced by generated
+values. Employee IDs are pseudonymised consistently, so managers, departments
+and reporting lines still hang together — a randomised copy would make
+scenarios 3 and 4 meaningless.
+
+`uat` is connected to the vendor sandboxes, not to live target systems, so no
+participant can grant real access by accident. It is shared with the Finance
+reconciliation project; slots are booked (see section 10 of the test plan).
+
+Two records were built by hand because the anonymised set contained no
+employee without a line manager — the exact case scenario 2 needs. This is
+noted in the test summary report, because it makes that scenario less well
+evidenced than the rest.
+
 ## 5. Entry criteria
 System test exit criteria met; zero open Sev-1; uat refreshed within 7 days;
 participants trained (one 90-minute session on 2026-11-14).
@@ -127,6 +143,22 @@ remediation is a rejection.
 Raised in the tracker with the UAT label; triaged twice daily at 10:00 and
 15:00. Sev-1 gets a fix or a workaround within one working day, Sev-2 within
 three. The business owner decides severity disputes, not engineering.
+
+## 8. Schedule
+| Day | Activity | Who |
+|---|---|---|
+| 2026-11-14 | Environment refresh, 90-minute training session | H. Ito, all participants |
+| 2026-11-17 | Scenarios 1 and 2 | T. Blomqvist |
+| 2026-11-18 to 19 | Scenario 3, three managers rotating | Line managers |
+| 2026-11-20 to 21 | Scenarios 4 and 5 | T. Blomqvist, D. Achebe |
+| 2026-11-24 | Scenario 6 | K. Ferreira |
+| 2026-11-25 | Scenario 7 | L. Haddad |
+| 2026-11-26 | Scenario 8, simulated adapter outage | D. Achebe, Platform |
+| 2026-11-27 | Defect fix window and re-test | H. Ito, developers |
+| 2026-11-28 | Acceptance decision | K. Ferreira |
+
+
+Triage runs at 10:00 and 15:00 every working day of the window.
 
 ## 9. Sign-off
 | Name | Role | Decision | Date | Conditions |

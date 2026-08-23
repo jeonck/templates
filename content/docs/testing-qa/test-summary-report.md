@@ -140,6 +140,21 @@ Open Sev-3:
   order. Impact: cosmetic but slows the review. Workaround: sort in the
   spreadsheet. Fix scheduled 1.0.1.
 
+## 5. Coverage
+Per the RTM at v3:
+
+| Priority | Requirements | With >=1 test | Passing | Notes |
+|---|---|---|---|---|
+| Must | 12 | 12 (100%) | 11 | FR-04 fails only for the legacy ERP target |
+| Should | 3 | 3 (100%) | 3 | — |
+| Could | 2 | 0 | 0 | Deferred to phase 2, agreed with the business owner |
+| NFR | 7 | 7 (100%) | 7 | Includes the DR exercise and the pen test |
+
+
+Backward trace found two built elements with no requirement: `/admin/bulk-import`,
+retained and written up as FR-08 in SRS v2.1, and a Slack notification channel,
+removed before the release. No other untraceable functionality was found.
+
 ## 6. Non-functional results
 - Performance: p95 11 min, p99 19 min at 40 events/hour. Bottleneck is adapter
   latency, not the service.

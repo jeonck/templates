@@ -132,6 +132,20 @@ See finding 3.
 | 5 | 4 third-party accounts belonged to individuals whose contract ended | 4 | Revoked same day; supplier notified | T. Blomqvist | 2026-12-08 | Closed |
 
 
+## 5. Revocations performed
+| Account | Access removed | Reason | Date | Verified by |
+|---|---|---|---|---|
+| e.nakamura | ERP: finance_reader | Moved to Engineering in August; entitlement left over from the previous role | 2026-12-12 | T. Blomqvist |
+| j.ortiz | Collaboration: admin | Privileged, no authentication in 214 days | 2026-12-15 | D. Achebe |
+| svc-reporting-etl | Warehouse: write | Service account with no named owner; replaced by svc-reporting-etl-v2 | 2026-12-16 | A. Vogel |
+| p.hallberg (external) | Platform: repo read | Supplier contract ended 2026-11-30 | 2026-12-08 | T. Blomqvist |
+| 103 further accounts | Various | Full list in the review export, ticket ACC-4471 | 2026-12-08 to 2026-12-19 | Per-system owner |
+
+
+Every revocation above went through the deprovisioning flow, so each has an
+audit record. None were applied by direct database edit — an unlogged
+revocation would defeat the point of the review.
+
 ## 6. Exclusions
 Two systems (the archived reporting warehouse and the decommissioned intranet)
 were excluded: both are read-only, offline, and scheduled for deletion in

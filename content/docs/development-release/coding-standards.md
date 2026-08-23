@@ -82,6 +82,20 @@ How to deviate: marker, justification, approver, review date.
 Reviewers must not comment on anything in this table. If a rule is wrong,
 change the config, not the review comment.
 
+## 2. Language conventions
+- One package per bounded concept (`approval`, `bundles`, `audit`), not per
+  layer. `util` and `helpers` packages do not pass review.
+- Exported identifiers are a deliberate surface. Default to unexported;
+  export when a second package genuinely needs it, not in anticipation.
+- Constructors return concrete types; consumers declare the interfaces they
+  need. An interface with one implementation and one caller should be the
+  concrete type.
+- `context.Context` is the first parameter and is never stored in a struct.
+- No `init()` outside `main`. Wiring goes in an explicit constructor so tests
+  can build the thing under test.
+- File names match the primary type: `resolver.go` holds `Resolver`, with
+  `resolver_test.go` beside it.
+
 ## 3. Error handling
 - Wrap with context at boundaries: `fmt.Errorf("resolve bundle %s: %w", code, err)`.
   Do not wrap the same error twice in one call chain.

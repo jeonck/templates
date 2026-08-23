@@ -90,6 +90,14 @@ Latency targets, availability, and where they are measured.
 | Stability | Stable since 2026-09-01 |
 
 
+## 1. Purpose and audience
+Lets internal callers create and track access provisioning requests, and lets
+line managers approve entitlements that fall outside a joiner's standard role
+bundle. Its consumers are the service desk tooling, the People Operations
+admin UI, and the manager approval app. It is not exposed outside the
+corporate network and is not intended for bulk reporting — use the daily audit
+export for that.
+
 ## 2. Authentication and authorisation
 OAuth 2.0 client credentials. Tokens live 15 minutes. Scopes:
 
@@ -180,6 +188,17 @@ returns the original 201 for 24 hours. The same key with a *different* body
 returns 409 `idempotency_key_reuse`. Approve and reject require `If-Match` with
 the request's ETag, so two managers cannot decide simultaneously.
 
+## 7. Pagination, filtering, sorting
+`GET /requests` is cursor paginated. Pass `limit` (default 50, max 200) and
+`cursor` from the previous response's `next_cursor`; a null `next_cursor`
+means the last page. Offset paging is not supported, because requests change
+state while a caller walks the list and offsets would skip or repeat rows.
+
+Filters: `state`, `employee_id`, `job_code`, `created_after`, `created_before`.
+Repeated values for one filter are OR-ed, different filters are AND-ed.
+Sorting is fixed at `created_at` descending; it is not a client choice, which
+keeps the cursor implementation honest.
+
 ## 8. Rate limits and quotas
 600 requests per minute per client. Responses carry `RateLimit-Limit`,
 `RateLimit-Remaining` and `RateLimit-Reset`. Bulk import is exempt but capped
@@ -196,6 +215,14 @@ served for at least 6 months. Deprecated endpoints return `Deprecation` and
 p95 < 300 ms for reads and < 800 ms for writes, measured at the service's
 ingress. 99.5% monthly availability. These are the numbers the owning team is
 paged against.
+
+## 11. Changelog
+| Version | Date | Change |
+|---|---|---|
+| 1.14.0 | 2026-11-12 | Added `POST /requests/{id}/re-resolve` and `RateLimit-*` headers; `bundle_version` is now always present |
+| 1.12.0 | 2026-10-01 | Deprecated `X-Request-Trace` in favour of `X-Correlation-Id` |
+| 1.9.0 | 2026-09-01 | Declared stable; no breaking change will ship inside v1 |
+| 1.0.0 | 2026-07-14 | First release |
 {{< /doctabs >}}
 
 ## Common mistakes

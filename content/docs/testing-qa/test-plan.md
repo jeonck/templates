@@ -104,6 +104,18 @@ and feel is not); the HR system itself; contractor identities (not built).
 | DR | RPO/RTO under a simulated region loss | Platform | Manual exercise, once |
 
 
+## 3. Approach per quality attribute
+| Attribute | Approach | Evidence produced |
+|---|---|---|
+| Functional | Automated integration against sandbox targets, nightly, plus scripted UAT for the business flows | Suite results, UAT scenario sign-off |
+| Performance | Load test at 40 events/h sustained and a 500-event intake burst, on the perf environment | p95/p99 latency, throughput |
+| Resilience | Chaos runs killing one adapter, the poller leader, and the database primary in turn | Observed behaviour vs the failure-modes table in the design |
+| Security | External penetration test on the release candidate; secret scanning and dependency gates in CI | Pen test report, CI evidence |
+| Data migration | Not applicable — no legacy data is migrated. The 14-month backfill is validated by reconciliation against service desk tickets | Reconciliation report |
+| Accessibility | Automated axe scan plus keyboard-only walkthrough of the admin UI, against WCAG 2.1 AA | Scan output, walkthrough notes |
+| Auditability | 1,000-grant sample checked for a matching audit record; one auditor-led question answered end to end | Sample result, UAT scenario 7 |
+
+
 ## 4. Environments
 | Environment | Purpose | Data | Refresh | Owner |
 |---|---|---|---|---|
@@ -166,6 +178,22 @@ approver may defer a Sev-2, and only in writing.
 | Vendor sandbox behaviour diverges from production | False confidence — assumption A-03 | 5% live ramp before full cutover; treat the ramp as a test phase |
 | Anonymisation script defect | Personal data in a lower environment | TC-240 verifies it; uat refresh blocked if it fails |
 
+
+## 11. Schedule and resources
+| Phase | Dates | Who |
+|---|---|---|
+| Test design and case authoring | 2026-09-14 to 2026-10-02 | H. Ito, plus 2 days of A. Vogel's time for the failure-mode cases |
+| System test cycle 1 | 2026-10-05 to 2026-10-30 | H. Ito full time, developers on defect turnaround |
+| System test cycle 2 (regression) | 2026-11-02 to 2026-11-14 | H. Ito full time |
+| Penetration test | 2026-11-03 to 2026-11-07 | External supplier, A. Berg coordinating |
+| DR exercise | 2026-10-22, one day | Platform team, H. Ito observing |
+| UAT | 2026-11-17 to 2026-11-28 | Business participants, H. Ito coordinating |
+| Reporting and exit review | 2026-12-01 to 2026-12-04 | H. Ito |
+
+
+One tester for the whole cycle is the constraint. If cycle 1 finds more than
+about 25 defects the regression cycle cannot also be completed by 2026-11-14,
+and UAT moves rather than being shortened — see risk 1 in section 10.
 
 ## 12. Deliverables
 Test plan (this), test cases in the tracker, defect reports, weekly progress
