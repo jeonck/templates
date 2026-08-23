@@ -6,7 +6,9 @@ hero:
   template: hero
 
   badge:
-    text: "35 templates, 7 categories"
+    # :templates: and :categories: are expanded at build time from the content
+    # tree (see layouts/partials/landing/hero.html).
+    text: ":templates: templates, :categories: categories"
     color: primary
     pill: true
     soft: true
