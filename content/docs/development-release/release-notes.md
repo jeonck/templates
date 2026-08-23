@@ -34,6 +34,7 @@ Two sentences. Who should care about this release.
 | Action | Who | By when | Consequence if skipped |
 |---|---|---|---|
 
+
 If none: "None."
 
 ## Breaking changes
@@ -51,9 +52,11 @@ Advisory IDs, severity, and whether exploitation was observed.
 | Item | Deprecated in | Removed in | Replacement |
 |---|---|---|---|
 
+
 ## Known issues
 | Issue | Impact | Workaround | Fix expected |
 |---|---|---|---|
+
 
 ## Upgrade notes
 Order of operations, downtime, compatibility window, rollback.
@@ -74,6 +77,7 @@ One security fix, no exploitation observed.
 |---|---|---|---|
 | Stop relying on `GET /requests?state=PENDING` — it is removed in v2 | Service desk tooling team | 2027-02-28 | Tooling breaks at the v2 cutover |
 | Upgrade the Go client to >= 1.9.0 if you parse `bundle_version` | All API consumers | Before v1.15.0 | Older clients reject the now-always-present field |
+
 
 ## Breaking changes
 None in v1. See Deprecated for what changes in v2.
@@ -112,6 +116,7 @@ None in v1. See Deprecated for what changes in v2.
 | `GET /requests?state=PENDING` (the PENDING pseudo-state) | v1.14.0 | v2.0.0 (no earlier than 2027-03-01) | `?state=AWAITING_APPROVAL` or `?state=AWAITING_BUNDLE` |
 | `X-Request-Trace` header | v1.12.0 | v2.0.0 | `X-Correlation-Id` |
 
+
 Deprecated endpoints return `Deprecation` and `Sunset` headers from this
 release onwards.
 
@@ -119,6 +124,7 @@ release onwards.
 | Issue | Impact | Workaround | Fix expected |
 |---|---|---|---|
 | Legacy ERP revocation runs on the nightly batch | Worst-case 26h revocation latency vs the 1h target | Daily exception report reviewed by People Ops | Blocked on the ERP replacement, FY2027 |
+
 
 ## Upgrade notes
 Rolling deploy, no downtime. The database migration is additive and reversible.

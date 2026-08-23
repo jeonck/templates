@@ -35,6 +35,7 @@ An SRS states what the system must do, precisely enough that two independent tea
 | Status | |
 | Supersedes | |
 
+
 ## 1. Purpose and scope
 ## 2. Definitions and abbreviations
 ## 3. System context
@@ -44,6 +45,7 @@ Actors, external systems, trust boundaries. One diagram.
 | ID | Requirement | Priority | Source | Verification |
 |---|---|---|---|---|
 
+
 Write each as: "The system shall <observable behaviour> when <condition>."
 Verification is one of: test, demonstration, inspection, analysis.
 
@@ -51,12 +53,14 @@ Verification is one of: test, demonstration, inspection, analysis.
 | ID | Attribute | Requirement | Measured at | Verification |
 |---|---|---|---|---|
 
+
 Cover at least: performance, capacity, availability, recovery, security,
 privacy/retention, accessibility, observability, portability.
 
 ## 6. External interfaces
 | Interface | Direction | Protocol / format | Owner | Failure behaviour |
 |---|---|---|---|---|
+
 
 ## 7. Data requirements
 Entities, retention, residency, classification.
@@ -79,6 +83,7 @@ Entities, retention, residency, classification.
 | Owner | A. Vogel |
 | Status | Approved for build |
 
+
 ## 3. System context
 Actors: HR system (source of record), line manager (approver), target systems
 (11), service desk agent (exception handling), auditor (read-only). The service
@@ -96,6 +101,7 @@ existing secrets manager.
 | FR-06 | The system shall allow a People Ops administrator to modify bundle contents without a code deployment | Should | BR-04 | Demonstration |
 | FR-07 | The system shall retry a failed target-system call 5 times with exponential backoff before raising a service desk ticket | Must | Ops | Test |
 
+
 ## 5. Non-functional requirements
 | ID | Attribute | Requirement | Measured at | Verification |
 |---|---|---|---|---|
@@ -107,6 +113,7 @@ existing secrets manager.
 | NFR-06 | Privacy | Personal data limited to name, employee ID, job code, dates; audit log retained 7 years, operational logs 90 days | Data inventory | Inspection |
 | NFR-07 | Observability | Every request exposes a correlation ID present in all downstream calls and in the audit log | Log sampling | Inspection |
 
+
 ## 6. External interfaces
 | Interface | Direction | Protocol / format | Owner | Failure behaviour |
 |---|---|---|---|---|
@@ -114,6 +121,7 @@ existing secrets manager.
 | Target systems (9) | Out | SCIM 2.0 | Identity platform | Retry per FR-07, then ticket |
 | Legacy ERP | Out | SFTP batch, fixed-width, nightly | ERP team | File rejected -> ticket + no partial apply |
 | Audit export | Out | Signed NDJSON to object storage, daily | Internal Audit | Missing file alerts within 2h |
+
 
 ## 9. Out of scope
 Contractor identities, badge provisioning, payroll enrolment, mobile device

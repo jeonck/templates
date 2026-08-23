@@ -34,6 +34,7 @@ A TDD (design document, not the testing acronym) sits below architecture and abo
 | Status | Draft / In review / Approved / Implemented |
 | Related | Story / SRS / ADRs |
 
+
 ## 1. Problem
 ## 2. Goals and non-goals
 ## 3. Proposed design
@@ -47,6 +48,7 @@ Schema changes, migration and backfill plan, reversibility.
 ## 6. Failure modes
 | Failure | Detection | Behaviour | Blast radius |
 |---|---|---|---|
+
 
 ## 7. Performance and capacity
 Expected load, hot paths, and the number that would make this design wrong.
@@ -77,6 +79,7 @@ Flags, migration order, backwards compatibility window, kill switch.
 | Reviewers | A. Vogel, H. Ito |
 | Status | Approved 2026-07-02 |
 | Related | FR-03, UC-07 ext. 4a, ADR-0012 |
+
 
 ## 2. Goals and non-goals
 **Goals:** a single authoritative state per request; no entitlement applied
@@ -129,6 +132,7 @@ a default.
 | due_action poller stops | `due_actions_overdue` gauge > 0 for 10 min | Escalations delayed; alert pages platform on-call | All pending approvals |
 | Two managers approve simultaneously | Version conflict | Second gets 412; first approval stands and is the audited one | One request |
 | HR event replayed | Idempotency on event ID | No new request created | None |
+
 
 ## 7. Performance and capacity
 Peak is the graduate intake: 500 requests in a day, each with ~9 entitlements,

@@ -33,6 +33,7 @@ A risk register differs from a project [RAID Log](/docs/project-management/raid-
 | Review cycle | |
 | Last reviewed | |
 
+
 ## Scoring
 State the likelihood and impact scales, and the tolerance thresholds. Do not
 assume they are obvious.
@@ -41,11 +42,13 @@ assume they are obvious.
 | ID | Risk (cause -> event -> consequence) | Category | Inherent L/I | Existing controls | Residual L/I | Treatment | Owner | Action / due | Accepted by | Review date | Status |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 
+
 Treatment: mitigate, transfer, avoid, accept.
 
 ## Accepted risks and policy exceptions
 | ID | Exception to | Compensating control | Accepted by | Expires |
 |---|---|---|---|---|
+
 
 ## Movement since last review
 New, escalated, de-escalated, closed.
@@ -75,11 +78,13 @@ Score = L x I. Tolerance: score >= 12 requires Executive Committee acceptance;
 | R-2026-027 | A single-leader poller with no liveness signal can stall silently, delaying provisioning and (in a leaver window) delaying revocation beyond policy | Availability / Access | 3 x 3 = 9 | Heartbeat alert (OPS-882); hourly synthetic provisioning check (OPS-885); backlog alert | 2 x 3 = 6 | Mitigate | Platform lead | OPS-885 due 2027-01-16 | CISO | 2027-01-20 | Open, on track |
 | R-2026-031 | Growth in direct third-party dependencies raises the chance of a compromised package reaching production | Supply chain | 4 x 4 = 16 | Dependency scanning gating CI on High/Critical; new dependencies require maintainer approval; lockfiles pinned | 3 x 4 = 12 | Mitigate | Engineering director | Build provenance attestation and artefact signing, due 2027-03-31 | Executive Committee | 2027-01-20 | Open, above tolerance |
 
+
 ## Accepted risks and policy exceptions
 | ID | Exception to | Compensating control | Accepted by | Expires |
 |---|---|---|---|---|
 | EX-2026-014 | AC-03 (revocation within 24h) for the legacy ERP | Daily exception report reviewed by People Ops by 09:00 | CISO | 2027-06-30 |
 | EX-2026-019 | LM-03 (no personal data in operational logs) for the legacy ERP's own logs, which we do not control | Log access restricted to 4 named administrators; 30-day retention | CISO | 2027-06-30 |
+
 
 ## Movement since last review
 - New: R-2026-031 (supply chain) raised after an industry incident; above

@@ -34,6 +34,7 @@ The test summary report is the evidence behind a release decision. It is not a r
 | Build tested | commit / version |
 | Related | Test Plan v_, RTM v_ |
 
+
 ## 1. Summary
 Three sentences: what was tested, headline result, what remains open.
 
@@ -41,15 +42,18 @@ Three sentences: what was tested, headline result, what remains open.
 | Suite | Planned | Executed | Passed | Failed | Blocked | Not run |
 |---|---|---|---|---|---|---|
 
+
 Explain every deviation from plan.
 
 ## 3. Exit criteria status
 | Criterion | Target | Actual | Met? |
 |---|---|---|---|
 
+
 ## 4. Defects
 | Severity | Found | Fixed | Open | Deferred |
 |---|---|---|---|---|
+
 
 Open defects listed individually with impact and workaround.
 
@@ -62,6 +66,7 @@ Performance, resilience, security, accessibility — numbers, not verdicts.
 ## 7. Untested areas and residual risk
 | Area | Why not tested | Residual risk | Accepted by |
 |---|---|---|---|
+
 
 ## 8. Environment and data notes
 Anything that limits confidence in the results.
@@ -82,6 +87,7 @@ business owner and is recorded separately.
 | Test lead | H. Ito |
 | Build tested | v1.0.0-rc4, commit 9f3c1ab |
 
+
 ## 1. Summary
 All Must requirements are covered and passing except FR-04 for the legacy ERP,
 where revocation is nightly rather than hourly. One Sev-1 defect was found late
@@ -97,6 +103,7 @@ one accepted gap is carried into production with a compensating control.
 | Security (pen test) | — | 1 engagement | — | — | — | — |
 | DR exercise | 1 | 1 | 1 | 0 | 0 | 0 |
 | UAT scenarios | 8 | 8 | 7 | 1 | 0 | 0 |
+
 
 Deviation: integration testing was suspended 2026-10-21 to 2026-10-23 when the
 vendor sandbox changed its 3DS response shape without notice. The affected 26
@@ -115,6 +122,7 @@ cases were re-run from a clean state after contract recordings were refreshed.
 | Pen test High/Critical unresolved | 0 | 0 (2 Medium open, scheduled) | Yes |
 | Audit log completeness on 1,000-grant sample | 100% | 100% | Yes |
 
+
 ## 4. Defects
 | Severity | Found | Fixed | Open | Deferred |
 |---|---|---|---|---|
@@ -122,6 +130,7 @@ cases were re-run from a clean state after contract recordings were refreshed.
 | Sev-2 | 6 | 6 | 0 | 0 |
 | Sev-3 | 19 | 17 | 2 | 0 |
 | Sev-4 | 31 | 12 | 19 | 19 |
+
 
 Open Sev-3:
 - DEF-2026-0327: bundle admin screen paginates incorrectly beyond 200 bundles.
@@ -148,6 +157,7 @@ Open Sev-3:
 | Contractor identities | Not built | None for this release | K. Ferreira |
 | Sustained load beyond 500 events/day | No business case for higher volumes | Unknown behaviour above ~2x peak; would need a load test before any acquisition-driven intake | A. Vogel |
 | ERP behaviour under simultaneous joiner and leaver for the same person | Cannot be produced in the vendor sandbox | Ordering ambiguity in a rare case; mitigated by the daily exception report | A. Vogel, L. Haddad |
+
 
 ## 8. Environment and data notes
 UAT ran on anonymised production data refreshed 2026-11-14. Two UAT scenarios

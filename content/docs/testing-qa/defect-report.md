@@ -35,6 +35,7 @@ The measure of a defect report is whether a developer who has never seen the sys
 | Reproducibility | Always / Intermittent (x of y) / Once |
 | Related case | TC-nnn |
 
+
 ## Steps to reproduce
 1.
 2.
@@ -68,6 +69,7 @@ Investigation so far — clearly separated from observed facts.
 | Priority | Immediate |
 | Reproducibility | Always, when the pinned bundle version row is absent |
 | Related case | TC-112 (did not cover the missing-row case) |
+
 
 ## Steps to reproduce
 1. Create a provisioning request for job code ENG-3 while bundle version

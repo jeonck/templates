@@ -33,13 +33,16 @@ Everything a handover needs is already somewhere — in dashboards, tickets, inc
 | ID | Sev | State | What is needed next | Channel |
 |---|---|---|---|---|
 
+
 ## Degraded or on a workaround
 | Service | State | Workaround in place | Expires / needs attention |
 |---|---|---|---|
 
+
 ## Expected during your shift
 | When | What | Whose | What to do if it goes wrong |
 |---|---|---|---|
+
 
 ## Watch list
 Things not yet broken but trending badly, with the threshold that matters.
@@ -66,6 +69,7 @@ Anything unusual about who is reachable.
 |---|---|---|---|---|
 | INC-2026-0207 | Sev-2 | Resolved 11:40, monitoring | Nothing unless the poller backlog rises again. Postmortem is Friday; do not start analysis in the channel | #inc-2026-0207 |
 
+
 ## Degraded or on a workaround
 | Service | State | Workaround | Expires / needs attention |
 |---|---|---|---|
@@ -73,12 +77,14 @@ Anything unusual about who is reachable.
 | Provisioning poller | Running normally, but no heartbeat alert yet (OPS-882 in progress) | Backlog alert only, now routed correctly | If the backlog alert fires, check leader identity first — it is on the pipeline dashboard as of today |
 | Node pool upgrades | Paused on 3 remaining nodes since 08:05 | Manual pause | Security wants them completed by 2026-12-06. Do not resume during your shift; A. Vogel is coordinating with the lease handover fix |
 
+
 ## Expected during your shift
 | When | What | Whose | What to do if it goes wrong |
 |---|---|---|---|
 | 22:00 UTC | HR nightly batch, ~40 events | HR platform | Expect a brief backlog; it should clear within 15 min. If not, check adapters before assuming the poller |
 | 23:30 UTC | Legacy ERP nightly provisioning batch | ERP team | Failures show as PARTIAL requests plus tickets. Not a page — the daily exception report catches it. ERP on-call is #erp-oncall but they do not staff overnight |
 | 02:00 UTC | Certificate renewal on the admin ingress (automated) | Platform | Runbook section 7. Manual renewal command is there; takes 4 minutes |
+
 
 ## Watch list
 - Postgres primary disk at 71%, rising ~1.5pp/week. Alert threshold 85%. Not

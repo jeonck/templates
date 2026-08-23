@@ -62,6 +62,17 @@
 {{- $body := replaceRE `\n{3,}` "\n\n" (delimit $done "\n```") -}}
 
 {{- $id := printf "doctab-%d" .Ordinal -}}
+{{- if eq .Ordinal 0 }}
+{{/* Emitted once per page. The theme compiles a single scss entry point that a
+     project-level file would shadow wholesale, so a scoped style block is
+     cheaper than forking the stylesheet for one rule. Two blank lines' worth
+     of space after each table, matching the source. */}}
+<style>
+  .doctabs .table-responsive { margin-bottom: 2.75rem; }
+  .doctabs .table-responsive:last-child { margin-bottom: 0; }
+</style>
+{{- end }}
+<div class="doctabs">
 <nav>
   <div class="nav nav-tabs" role="tablist">
     <a class="nav-link active" id="{{ $id }}-0Tab" data-bs-toggle="tab" data-bs-target="#{{ $id }}-0"
@@ -77,4 +88,5 @@
   <div class="tab-pane fade" id="{{ $id }}-1" role="tabpanel" aria-labelledby="{{ $id }}-1Tab">
     {{ $.Page.RenderString (dict "display" "block") (printf "%smarkdown\n%s\n%s" $fence $raw $fence) }}
   </div>
+</div>
 </div>

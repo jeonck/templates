@@ -35,6 +35,7 @@ An API specification is a contract, so it must be precise about the parts people
 | Support channel | |
 | Stability | Experimental / Stable / Deprecated |
 
+
 ## 1. Purpose and audience
 Who calls this, for what.
 
@@ -50,11 +51,13 @@ correlation header.
 | Method | Path | Purpose | Idempotent? | Required scope |
 |---|---|---|---|---|
 
+
 Request and response examples for each non-trivial operation.
 
 ## 5. Errors
 | HTTP | Code | Meaning | Retryable? | Caller action |
 |---|---|---|---|---|
+
 
 Error body shape, and the rule for machine-readable codes.
 
@@ -86,6 +89,7 @@ Latency targets, availability, and where they are measured.
 | Owner team | Platform Identity |
 | Stability | Stable since 2026-09-01 |
 
+
 ## 2. Authentication and authorisation
 OAuth 2.0 client credentials. Tokens live 15 minutes. Scopes:
 
@@ -94,6 +98,7 @@ OAuth 2.0 client credentials. Tokens live 15 minutes. Scopes:
 | provisioning.read | Read requests and their status |
 | provisioning.write | Create requests, re-resolve pending requests |
 | provisioning.approve | Approve or reject non-standard entitlements |
+
 
 Approval requires a user-delegated token; a service token with
 provisioning.approve is rejected, because approval must be attributable to a
@@ -117,6 +122,7 @@ it in the response.
 | POST | /requests/{id}/approve | Approve pending entitlements | Yes, with If-Match | provisioning.approve |
 | POST | /requests/{id}/reject | Reject pending entitlements | Yes, with If-Match | provisioning.approve |
 | POST | /requests/{id}/re-resolve | Re-resolve against the current bundle | No | provisioning.write |
+
 
 POST /requests
 
@@ -163,6 +169,7 @@ Body shape:
 | 422 | bundle_not_found | Job code has no bundle | No | Route to People Ops |
 | 429 | rate_limited | Quota exceeded | Yes, after Retry-After | Back off |
 | 503 | target_unavailable | A downstream target system is down | Yes | Retry with backoff; request is queued regardless |
+
 
 `code` values are stable and part of the contract; `message` is human-readable
 and may change without notice. Never branch on `message`.

@@ -37,12 +37,14 @@ An incident report records what happened. It is deliberately separate from the [
 | Incident commander | |
 | Services affected | |
 
+
 ## Impact
 Who, how many, what they could not do, and any financial or regulatory effect.
 
 ## Timeline (UTC)
 | Time | Event | Source |
 |---|---|---|
+
 
 Facts only. Analysis goes in the postmortem.
 
@@ -53,6 +55,7 @@ How we found out, and whether monitoring or a human found it first.
 | Time | Action | By | Effect |
 |---|---|---|---|
 
+
 ## Current state
 What is fixed, what is on a workaround, what is still degraded.
 
@@ -60,9 +63,11 @@ What is fixed, what is on a workaround, what is still degraded.
 | # | Item | Owner | Due | Tracker |
 |---|---|---|---|---|
 
+
 ## Communications
 | Time | Audience | Channel | Message summary |
 |---|---|---|---|
+
 
 ## Data and security impact
 Any data loss, exposure or integrity issue. State "none identified" explicitly.
@@ -83,6 +88,7 @@ Any data loss, exposure or integrity issue. State "none identified" explicitly.
 | Duration of impact | 2026-12-02 22:31 to 2026-12-03 07:58 UTC (9h 27m) |
 | Incident commander | J. Marek |
 | Services affected | Access Provisioning Service (scheduled actions only) |
+
 
 ## Impact
 Fourteen joiners due to start on 2026-12-03 did not have access at 08:00 local
@@ -108,6 +114,7 @@ person-hours of lost productivity plus 3 hours of People Ops effort.
 | 2026-12-03 09:50 | 3 remaining joiners provisioned manually via re-resolve | Audit log |
 | 2026-12-03 11:40 | Alert routing corrected and verified with a test alert; resolved | PagerDuty |
 
+
 ## Detection
 Monitoring detected the condition at 22:41 but the alert was never delivered:
 its notification target was a Slack channel deleted two weeks earlier, and
@@ -123,6 +130,7 @@ of the postmortem.
 | 09:50 | Manually re-resolved 3 requests whose start-date action was skipped | T. Blomqvist | Joiners provisioned; both actions audited |
 | 11:20 | Added a fallback route on the PagerDuty service | J. Marek | Undelivered alerts now escalate to the primary |
 
+
 ## Current state
 Resolved. Poller is running with a leader; backlog is zero. Alert routing has a
 fallback and was verified with a test alert at 11:38. The underlying fragility —
@@ -137,12 +145,14 @@ the subject of follow-up item 2.
 | 3 | Node pool upgrades drain leader-holding pods gracefully with lease handover | Platform | 2027-01-16 | OPS-884 |
 | 4 | Add a synthetic joiner every hour and alert if it is not provisioned | H. Ito | 2027-01-16 | OPS-885 |
 
+
 ## Communications
 | Time | Audience | Channel | Message summary |
 |---|---|---|---|
 | 07:25 | People Ops, service desk | #platform-support | Incident declared, investigating, manual workaround available |
 | 08:05 | Same | #platform-support | Mitigated; confirming affected joiners |
 | 12:00 | Engineering leadership | Email | Summary, impact, follow-ups, postmortem scheduled 2026-12-05 |
+
 
 ## Data and security impact
 None identified. No entitlement was granted without approval; the audit log

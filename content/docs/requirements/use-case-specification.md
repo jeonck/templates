@@ -37,6 +37,7 @@ A use case documents a complete interaction from trigger to outcome. Its distinc
 | Minimal guarantee | What holds even when the case fails |
 | Frequency | |
 
+
 ## Main success scenario
 1. Actor does X.
 2. System validates Y.
@@ -71,6 +72,7 @@ Performance, security, localisation, accessibility specific to this case.
 | Success guarantee | All entitlements for the resolved bundle are active before the start date, and every grant is recorded in the audit log |
 | Minimal guarantee | No entitlement is granted without a recorded justification, and any partial state is visible as an open service desk ticket |
 | Frequency | ~380 per year, peaking at 90 in the September graduate intake |
+
 
 ## Main success scenario
 1. HR feed emits a joiner event.

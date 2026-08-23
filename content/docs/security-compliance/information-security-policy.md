@@ -35,6 +35,7 @@ A security policy states what must be true. It is not a standard (how), a proced
 | Review cycle | |
 | Applies to | |
 
+
 ## 1. Purpose and scope
 Who and what is covered, including contractors and third parties.
 
@@ -42,12 +43,14 @@ Who and what is covered, including contractors and third parties.
 | Role | Responsibility |
 |---|---|
 
+
 ## 3. Policy statements
 Each statement: mandatory, testable, owned.
 
 ### 3.1 <Domain>
 | ID | Statement | Owner | Evidence of compliance |
 |---|---|---|---|
+
 
 Domains to cover: access control, authentication, data classification and
 handling, cryptography, secure development, change management, logging and
@@ -81,6 +84,7 @@ Standards and procedures that implement this policy.
 | Review cycle | Annual, or on material change |
 | Applies to | All employees, contractors and third parties with access to company systems or data |
 
+
 ## 3.1 Access control
 | ID | Statement | Owner | Evidence |
 |---|---|---|---|
@@ -90,6 +94,7 @@ Standards and procedures that implement this policy.
 | AC-04 | Privileged accounts are individually attributable; shared administrative credentials are prohibited | Head of IT | Account inventory; no accounts of type "shared" |
 | AC-05 | Access rights are reviewed at least quarterly by the system owner | System owners | Signed review records retained 3 years |
 
+
 ## 3.2 Authentication
 | ID | Statement | Owner | Evidence |
 |---|---|---|---|
@@ -97,12 +102,14 @@ Standards and procedures that implement this policy.
 | AU-02 | Service credentials are stored in the approved secrets manager and rotated at least every 90 days | Platform lead | Secrets manager age report; alert on any credential over 90 days |
 | AU-03 | Credentials must not appear in source code, configuration files, logs, or ticketing systems | Engineering leads | Secret scanning in CI; findings tracked to closure |
 
+
 ## 3.6 Logging and monitoring
 | ID | Statement | Owner | Evidence |
 |---|---|---|---|
 | LM-01 | Security-relevant events are logged with actor, timestamp, action and outcome | System owners | Log schema review per system |
 | LM-02 | Security logs are retained for at least 12 months and are tamper-evident | Platform lead | Retention configuration; append-only storage settings |
 | LM-03 | Personal data must not be written to operational logs | Engineering leads | Log sampling each quarter; findings tracked |
+
 
 ## 4. Exceptions
 Exceptions are requested through the risk register, approved by the CISO for

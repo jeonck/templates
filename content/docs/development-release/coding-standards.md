@@ -32,11 +32,13 @@ A coding standard is only worth writing for rules that are contested and consequ
 | Owner | |
 | Last reviewed | |
 
+
 ## 1. Automated rules
 Everything here is enforced in CI; reviewers must not spend time on it.
 
 | Rule | Tool | Config location | Failing behaviour |
 |---|---|---|---|
+
 
 ## 2. Language conventions
 Naming, file layout, package structure, public surface.
@@ -75,6 +77,7 @@ How to deviate: marker, justification, approver, review date.
 | Dependency vulnerabilities | govulncheck | CI workflow | CI fails on High/Critical |
 | Licence policy | go-licenses | CI workflow | CI fails on GPL family |
 | Test coverage on changed lines | CI script | ci/coverage.sh | Warning below 70%, fail below 50% |
+
 
 Reviewers must not comment on anything in this table. If a rule is wrong,
 change the config, not the review comment.

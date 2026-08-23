@@ -32,6 +32,7 @@ Most status reports are written to reassure. A useful one is written to surface 
 | # | Decision | Owner | Needed by | Impact if late |
 |---|---|---|---|---|
 
+
 ## Progress this period
 - Completed: ...
 - Slipped: ... (planned <date>, now <date>, cause)
@@ -43,9 +44,11 @@ Most status reports are written to reassure. A useful one is written to surface 
 | ID | Item | Change since last report |
 |---|---|---|
 
+
 ## Metrics
 | Metric | Last | Now | Target |
 |---|---|---|---|
+
 
 ## Budget
 Spent to date / forecast at completion / approved.
@@ -64,6 +67,7 @@ Spent to date / forecast at completion / approved.
 |---|---|---|---|---|
 | 1 | Confirm P. Nowak stays at 50% through September | M. Duarte | 2026-08-28 | Reconciliation feed slips 3 weeks and consumes all float |
 | 2 | Accept 3DS challenge rate rising to 8% during ramp | R. Okafor | 2026-09-04 | Ramp cannot start; M3 slips |
+
 
 ## Progress this period
 - Completed: sandbox test suite green on 5 consecutive nightly runs — M2 met,
@@ -85,12 +89,14 @@ Spent to date / forecast at completion / approved.
 | R-07 | Shared data engineer | Escalated to Amber — this is decision 1 above. |
 | I-02 | Sandbox rate limits | Closed. Provider raised the limit on 2026-08-18. |
 
+
 ## Metrics
 | Metric | Last | Now | Target |
 |---|---|---|---|
 | Sandbox suite pass rate | 92% | 100% | 100% |
 | Live volume on new provider | 0% | 0% | 5% by 2026-09-30 |
 | Open defects (sev 1–2) | 3 | 1 | 0 before ramp |
+
 
 ## Budget
 Spent EUR 402k of EUR 785k approved. Forecast at completion EUR 760k,

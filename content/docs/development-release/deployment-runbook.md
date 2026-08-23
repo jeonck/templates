@@ -36,6 +36,7 @@ A deployment runbook is executed under time pressure by someone who may not have
 | Expected duration | |
 | Point of no return | Step N |
 
+
 ## 1. Pre-checks (T-24h)
 - [ ] Change approved
 - [ ] CI green on the exact commit: <sha>
@@ -47,15 +48,18 @@ A deployment runbook is executed under time pressure by someone who may not have
 | Condition | Check | Go? |
 |---|---|---|
 
+
 ## 3. Steps
 | # | Action | Command | Expected result | Verify | Owner |
 |---|---|---|---|---|---|
+
 
 Mark the point of no return explicitly.
 
 ## 4. Verification
 | Check | How | Pass criteria | Owner |
 |---|---|---|---|
+
 
 ## 5. Rollback
 Trigger conditions, procedure, expected duration, data implications.
@@ -82,6 +86,7 @@ Who is told at start, at completion, and on rollback.
 | Expected duration | 25 minutes |
 | Point of no return | Step 5 (migration applied) |
 
+
 ## 1. Pre-checks (T-24h)
 - [x] CR-2026-0884 approved at CAB 2026-11-10
 - [x] CI green on commit 9f3c1ab
@@ -98,6 +103,7 @@ Who is told at start, at completion, and on rollback.
 | No HR bulk load running | `SELECT count(*) FROM due_action WHERE state='RUNNING'` returns 0 | |
 | Approver present | — | |
 
+
 ## 3. Steps
 | # | Action | Command | Expected result | Verify | Owner |
 |---|---|---|---|---|---|
@@ -109,6 +115,7 @@ Who is told at start, at completion, and on rollback.
 | 6 | Deploy v1.14.0 | `provctl deploy --version 1.14.0` | Rolling update completes | All pods Ready, version endpoint reports 1.14.0 | J. Marek |
 | 7 | Resume ingest | `provctl ingest resume` | "running" | Backlog drains within 5 minutes | J. Marek |
 | 8 | Announce completion | post in #platform-deploys | — | — | J. Marek |
+
 
 Migration 0042 is additive (adds a nullable column and an index) and is
 reversible with `migrate down --to 0041`; "point of no return" here means any
@@ -123,6 +130,7 @@ a simple redeploy.
 | Real request end to end | Create a test request for job code TEST-1 | Reaches COMPLETE, audit record written | H. Ito |
 | Error rate | Dashboard, 15 minutes | 5xx rate <= baseline + 0.1pp | A. Vogel |
 | New metric present | `grants_with_missing_bundle_version` | Exists and is 0 | J. Marek |
+
 
 ## 5. Rollback
 **Trigger any of:** 5xx rate above baseline + 1pp for 5 minutes; any request

@@ -37,9 +37,11 @@ A test case is a repeatable experiment. If the preconditions are vague or the ex
 | Preconditions | |
 | Test data | |
 
+
 ## Steps
 | # | Action | Expected result |
 |---|---|---|
+
 
 ## Postconditions
 State the system should be left in, including data and audit records.
@@ -62,6 +64,7 @@ State the system should be left in, including data and audit records.
 | Preconditions | Service running with `approval_state_machine` enabled; employee E-TEST-01 exists with manager E-TEST-02, whose manager is E-TEST-03; notification service reachable |
 | Test data | Job code ENG-3 (bundle eng-3@17); additional entitlement `repo:payments:write` |
 
+
 ## Steps
 | # | Action | Expected result |
 |---|---|---|
@@ -73,6 +76,7 @@ State the system should be left in, including data and audit records.
 | 6 | Confirm bundle entitlements applied | The 9 bundle entitlements move to APPLIED; `repo:payments:write` remains AWAITING_APPROVAL |
 | 7 | Approve as E-TEST-03 with justification "Covering approver, joiner starts Monday" | 200; `repo:payments:write` moves to APPLIED; audit record shows approver E-TEST-03 and the justification |
 | 8 | Query the audit log for the request | Exactly one record per grant, one for the escalation, one for the approval; no duplicates |
+
 
 ## Postconditions
 Request in state COMPLETE with 10 applied entitlements. Audit log contains 12

@@ -37,12 +37,14 @@ A runbook is read in the worst conditions a document ever faces: at night, under
 | Source | repo link |
 | Last reviewed | |
 
+
 ## 1. What this service does
 Three sentences. Business impact if it is down.
 
 ## 2. Dependencies
 | Depends on | Impact if unavailable | Their on-call |
 |---|---|---|
+
 
 ## 3. Health checks
 How to tell in 60 seconds whether it is healthy.
@@ -62,6 +64,7 @@ Restart, scale, drain, replay, pause, backfill.
 ## 6. Safe / unsafe actions
 | Action | Safe? | Notes |
 |---|---|---|
+
 
 ## 7. Maintenance
 Certificates, credential rotation, log volume, capacity headroom.
@@ -85,6 +88,7 @@ Backup locations, restore procedure, RPO/RTO, last exercise date.
 | Dashboards | "Provisioning — pipeline", "Provisioning — adapters" |
 | Last reviewed | 2026-11-30 |
 
+
 ## 1. What this service does
 Grants and revokes system access for employees, driven by HR events. If it is
 down, new joiners do not get access and leavers are not revoked on time. It is
@@ -98,6 +102,7 @@ significant problem; a four-hour outage overnight usually is not.
 | Postgres (primary) | Service is down; requests queue at ingest | #dba-oncall |
 | Secrets manager | Adapters fail auth after the current lease expires (max 1h) | #security-oncall |
 | Target systems (11) | Only those entitlements fail; requests end PARTIAL | Varies — see adapter table |
+
 
 ## 4. Alerts
 
@@ -155,6 +160,7 @@ significant problem; a four-hour outage overnight usually is not.
 | Delete rows from `due_action` | **No** | Silently drops provisioning; no recovery path |
 | Edit `request.state` directly | **No** | Bypasses the audit log; creates states the application cannot produce |
 | Re-run a completed request | **No** | Use the re-resolve action, which is audited |
+
 
 ## 8. Recovery
 Postgres PITR, 15-minute RPO, snapshots retained 35 days. Restore procedure is

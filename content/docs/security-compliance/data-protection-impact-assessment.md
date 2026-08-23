@@ -36,6 +36,7 @@ A DPIA is required under the GDPR (Article 35) where processing is likely to res
 | Status | Draft / Approved / Under review |
 | Review date | |
 
+
 ## 1. Screening
 Why a DPIA is required (or why not, if this is a screening record).
 
@@ -44,6 +45,7 @@ Nature, scope, context and purposes. Data flows, including transfers.
 
 | Data category | Subjects | Volume | Source | Retention | Special category? |
 |---|---|---|---|---|---|
+
 
 Recipients, sub-processors, transfers outside the jurisdiction.
 
@@ -62,9 +64,11 @@ and what they said.
 | # | Risk to the individual | Likelihood | Severity | Overall |
 |---|---|---|---|---|
 
+
 ## 7. Measures
 | Risk | Measure | Effect | Residual | Owner |
 |---|---|---|---|---|
+
 
 ## 8. Data subject rights
 How access, rectification, erasure, restriction, portability and objection are
@@ -88,6 +92,7 @@ supervisory authority is required.
 | Status | Approved |
 | Review date | 2027-09-22, or on material change |
 
+
 ## 1. Screening
 The processing concerns employees, is systematic, and determines access to
 systems required to perform their job. It is not automated decision-making with
@@ -109,6 +114,7 @@ are recorded in an append-only audit log.
 | Entitlement grants and revocations | Employees | ~9,000/yr | Generated | 7 years | No |
 | Approval justification (free text) | Employees + approving managers | ~800/yr | Manager input | 7 years | Potentially — free text |
 | Last authentication timestamp | Employees | 4,100 | Target systems | 12 months | No |
+
 
 Recipients: eleven internal target systems; Internal Audit (read-only export).
 No transfers outside the EEA. One processor: the cloud infrastructure provider,
@@ -158,6 +164,7 @@ are implemented.
 | 4 | Excess personal data reaches lower environments through a test data copy | Unlikely | High | Medium |
 | 5 | An individual cannot find out what access they hold or why | Possible | Low | Low |
 
+
 ## 7. Measures
 | Risk | Measure | Effect | Residual | Owner |
 |---|---|---|---|---|
@@ -166,6 +173,7 @@ are implemented.
 | 3 | Field exposed only in the access review export; not in any manager-facing view; works council agreement records the purpose limitation; access to the export is logged | Reduced | Low | Platform |
 | 4 | Only anonymised copies reach lower environments; the anonymisation script is itself tested (TC-240) and a refresh is blocked if that test fails | Reduced | Low | QA |
 | 5 | Self-service page showing an employee their current entitlements, the bundle that granted each, and the date | Reduced | Low | Platform |
+
 
 ## 8. Data subject rights
 - **Access:** the self-service page covers current entitlements; a full audit

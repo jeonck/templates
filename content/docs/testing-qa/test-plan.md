@@ -34,6 +34,7 @@ A test plan is a scoping document, not a list of tests. Its most valuable sectio
 | Approvers | |
 | Related | SRS v_, RTM v_ |
 
+
 ## 1. Scope
 In scope / out of scope, by feature and by quality attribute.
 
@@ -41,12 +42,14 @@ In scope / out of scope, by feature and by quality attribute.
 | Level | What it proves | Owner | Automation |
 |---|---|---|---|
 
+
 ## 3. Approach per quality attribute
 Functional, performance, security, resilience, accessibility, data migration.
 
 ## 4. Environments
 | Environment | Purpose | Data | Refresh | Owner |
 |---|---|---|---|---|
+
 
 ## 5. Test data
 Source, anonymisation, volume, and how personal data is handled.
@@ -65,6 +68,7 @@ Severity definitions, triage cadence, who decides on deferral.
 | Risk | Impact | Mitigation |
 |---|---|---|
 
+
 ## 11. Schedule and resources
 ## 12. Deliverables
 {{< /doctabs >}}
@@ -79,6 +83,7 @@ Severity definitions, triage cadence, who decides on deferral.
 | Version / date | 2.0 / 2026-09-08 |
 | Test lead | H. Ito |
 | Approvers | A. Vogel (engineering), K. Ferreira (business), L. Haddad (audit) |
+
 
 ## 1. Scope
 **In scope:** all Must and Should requirements in SRS v2.0; the eleven target
@@ -98,6 +103,7 @@ and feel is not); the HR system itself; contractor identities (not built).
 | Security | Authorisation, secrets handling, injection | External pen test | Manual, once per release |
 | DR | RPO/RTO under a simulated region loss | Platform | Manual exercise, once |
 
+
 ## 4. Environments
 | Environment | Purpose | Data | Refresh | Owner |
 |---|---|---|---|---|
@@ -105,6 +111,7 @@ and feel is not); the HR system itself; contractor identities (not built).
 | int | Automated integration | Synthetic, 4,000 employees | Nightly rebuild | QA |
 | uat | Business acceptance | Anonymised production copy | Weekly | QA |
 | perf | Load and soak | Synthetic, 6,000 employees | Per test | QA |
+
 
 Only int and uat are connected to real vendor sandboxes. There is one uat
 environment shared with the Finance reconciliation project — a scheduling
@@ -148,6 +155,7 @@ condition cleared and a re-run of the affected suite from a clean state.
 | Sev-3 | Workaround exists | Fix or defer with approval |
 | Sev-4 | Cosmetic | Backlog |
 
+
 Triage daily at 09:30 during the cycle. Only the test lead plus the business
 approver may defer a Sev-2, and only in writing.
 
@@ -157,6 +165,7 @@ approver may defer a Sev-2, and only in writing.
 | uat shared with the Finance project | Cycle delayed by contention | Booked slots agreed 2026-09-01; escalation to M. Duarte |
 | Vendor sandbox behaviour diverges from production | False confidence — assumption A-03 | 5% live ramp before full cutover; treat the ramp as a test phase |
 | Anonymisation script defect | Personal data in a lower environment | TC-240 verifies it; uat refresh blocked if it fails |
+
 
 ## 12. Deliverables
 Test plan (this), test cases in the tracker, defect reports, weekly progress

@@ -35,6 +35,7 @@ Vendor assessment goes wrong in two directions: a 300-question form sent to a ve
 | Tier | 1 (critical) / 2 / 3 (low) |
 | Decision | Approve / Approve with conditions / Reject |
 
+
 ## 1. Service description
 What they do for us, and what we could not do without them.
 
@@ -42,8 +43,10 @@ What they do for us, and what we could not do without them.
 | Data category | Volume | Classification | Personal data? | Purpose |
 |---|---|---|---|---|
 
+
 | Access granted | Type | Justification |
 |---|---|---|
+
 
 ## 3. Tiering
 The criteria that put this vendor in its tier.
@@ -52,9 +55,11 @@ The criteria that put this vendor in its tier.
 | Evidence | Provided? | Date | Reviewed by | Notes |
 |---|---|---|---|---|
 
+
 ## 5. Control assessment
 | Domain | Finding | Rating | Evidence |
 |---|---|---|---|
+
 
 ## 6. Concentration and exit
 Dependency, lock-in, exit plan, data return and deletion.
@@ -63,9 +68,11 @@ Dependency, lock-in, exit plan, data return and deletion.
 | Requirement | In contract? | Clause |
 |---|---|---|
 
+
 ## 8. Findings and conditions
 | # | Finding | Severity | Required action | Owner | Due |
 |---|---|---|---|---|---|
+
 
 ## 9. Residual risk and decision
 | Risk | Rating | Accepted by | Date | Review date |
@@ -85,6 +92,7 @@ Dependency, lock-in, exit plan, data return and deletion.
 | Tier | 1 — critical |
 | Decision | Approve with conditions |
 
+
 ## 1. Service description
 Processes all card payments for web and mobile. An outage stops revenue
 immediately; a breach exposes cardholder data and triggers regulatory
@@ -96,6 +104,7 @@ notification. There is no manual fallback.
 | Cardholder data (PAN, expiry) | ~2.1M transactions/yr | Restricted | Yes | Payment authorisation |
 | Customer name and billing address | ~2.1M/yr | Confidential | Yes | Fraud screening, AVS |
 | Transaction metadata | ~2.1M/yr | Internal | Indirectly | Reconciliation |
+
 
 Access granted: outbound API calls from our systems to theirs; a webhook
 endpoint they call, restricted by mutual TLS and IP allow-list; no access to
@@ -116,6 +125,7 @@ provider.
 | Business continuity plan | Partial | 2026-04 | A. Berg | Summary only. RTO stated as 4 hours; last exercise date not disclosed |
 | Sub-processor list | Yes | 2026-04 | DPO | 7 sub-processors, 2 outside the EEA with standard contractual clauses in place |
 
+
 ## 5. Control assessment
 | Domain | Finding | Rating | Evidence |
 |---|---|---|---|
@@ -125,6 +135,7 @@ provider.
 | Change management | One incomplete change record in the SOC 2 period | Minor concern | SOC 2 exception 2 |
 | Business continuity | RTO 4h claimed; no exercise evidence provided | Concern | Gap |
 | Sub-processor management | Notification of new sub-processors, but only 30 days' notice with no right to object | Concern | Contract review |
+
 
 ## 6. Concentration and exit
 Single provider for all card traffic. Exit would take an estimated 6–9 months
@@ -143,6 +154,7 @@ own transaction ledger independently, so exit does not depend on their export.
 | Data return and certified deletion | Yes | 15.2 |
 | Liability cap | 12 months' fees | 18.1 — below our EUR 5M standard for Tier 1 |
 
+
 ## 8. Findings and conditions
 | # | Finding | Severity | Required action | Owner | Due |
 |---|---|---|---|---|---|
@@ -151,12 +163,14 @@ own transaction ledger independently, so exit does not depend on their export.
 | 3 | No BCP exercise evidence | Medium | Request the most recent exercise report annually; treat non-provision as a finding at renewal | A. Berg | Annually |
 | 4 | Pen test detail not disclosed | Low | Accept — consistent with the market; the PCI AoC provides independent coverage | A. Berg | — |
 
+
 ## 9. Residual risk and decision
 | Risk | Rating | Accepted by | Date | Review date |
 |---|---|---|---|---|
 | Concentration: no rapid alternative provider | High | Executive Committee | 2026-05-06 | 2027-05 |
 | Liability cap below policy | Medium | CFO | 2026-05-06 | At renewal |
 | Unverified BCP capability | Medium | CISO | 2026-05-06 | 2027-04 |
+
 
 Approved with conditions 1 and 2 resolved before signature. Condition 1 was
 agreed by the vendor on 2026-05-02 (60 days' notice with an objection right);

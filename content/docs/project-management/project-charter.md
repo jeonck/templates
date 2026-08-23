@@ -38,6 +38,7 @@ A charter is the document that turns an idea into a funded project. Its real job
 | Project manager | Name, role |
 | Status | Draft / Approved |
 
+
 ## 1. Business case
 Two or three sentences. What changes in the business if this succeeds, and what
 happens if we do nothing.
@@ -46,6 +47,7 @@ happens if we do nothing.
 | # | Objective | Measure | Baseline | Target | Measured by |
 |---|---|---|---|---|---|
 | 1 | | | | | |
+
 
 ## 3. Scope
 **In scope**
@@ -61,6 +63,7 @@ happens if we do nothing.
 | Milestone | Deliverable | Target date |
 |---|---|---|
 
+
 ## 5. Budget
 | Category | Amount | Notes |
 |---|---|---|
@@ -68,12 +71,14 @@ happens if we do nothing.
 | Licences / cloud | | |
 | Contingency | | |
 
+
 ## 6. Key risks
 Top three only; the full list lives in the RAID log.
 
 ## 7. Stakeholders and governance
 | Name | Role | Decision rights | Cadence |
 |---|---|---|---|
+
 
 ## 8. Approval
 | Name | Role | Date | Signature |
@@ -93,6 +98,7 @@ Top three only; the full list lives in the RAID log.
 | Project manager | S. Lindqvist |
 | Status | Approved |
 
+
 ## 1. Business case
 Our contract with the incumbent payment provider ends 2027-01-31 and renewal
 pricing is 40% higher. Migrating to the new provider saves roughly EUR 380k
@@ -105,6 +111,7 @@ January. Doing nothing means auto-renewal at the higher rate.
 | 1 | Migrate all card traffic | % of volume on new provider | 0% | 100% | 2026-12-15 |
 | 2 | Hold authorisation rate | Weekly auth success rate | 96.4% | >= 96.4% | 2027-01-15 |
 | 3 | Reduce annual cost | Provider fees per year | EUR 950k | <= EUR 570k | FY2027 close |
+
 
 ## 3. Scope
 **In scope**
@@ -130,12 +137,14 @@ January. Doing nothing means auto-renewal at the higher rate.
 | M4 | 100% traffic migrated | 2026-12-15 |
 | M5 | Incumbent card contract terminated | 2027-01-31 |
 
+
 ## 5. Budget
 | Category | Amount | Notes |
 |---|---|---|
 | People | EUR 640k | 4 engineers, 1 QA, 0.5 PM for 9 months |
 | Licences / cloud | EUR 45k | Sandbox, additional egress during dual-run |
 | Contingency | EUR 100k | 15% |
+
 
 ## 6. Key risks
 1. Authorisation rate drops after cutover and revenue falls before we can react.
@@ -149,6 +158,7 @@ January. Doing nothing means auto-renewal at the higher rate.
 | M. Duarte | Head of Finance | Accepts reconciliation design | Monthly steering |
 | S. Lindqvist | PM | Day-to-day scope within charter | Weekly |
 | A. Berg | Security lead | Accepts PCI scope changes | Gate reviews |
+
 
 ## 8. Approval
 | Name | Role | Date | Signature |

@@ -35,6 +35,7 @@ User acceptance testing answers a different question from system testing: not "d
 | Environment | |
 | Related | Test Plan v_, BRD v_ |
 
+
 ## 1. Objectives
 What acceptance will and will not prove.
 
@@ -42,9 +43,11 @@ What acceptance will and will not prove.
 | Name | Role | Scenarios | Time committed |
 |---|---|---|---|
 
+
 ## 3. Scenarios
 | # | Business scenario | Participant | Data needed | Acceptance condition |
 |---|---|---|---|---|
+
 
 ## 4. Environment and data
 ## 5. Entry criteria
@@ -57,6 +60,7 @@ Severity, response times, who decides.
 ## 8. Schedule
 | Day | Activity | Who |
 |---|---|---|
+
 
 ## 9. Sign-off
 | Name | Role | Decision | Date | Conditions |
@@ -75,6 +79,7 @@ Severity, response times, who decides.
 | Window | 2026-11-17 to 2026-11-28 |
 | Environment | uat, refreshed 2026-11-14 with anonymised production data |
 
+
 ## 1. Objectives
 Prove that People Ops can run joiner, mover and leaver events without IT
 involvement, that line managers can approve from a phone, and that Internal
@@ -90,6 +95,7 @@ prove performance or resilience — those are covered by the system test plan.
 | L. Haddad | Internal Audit | 7 | 3h |
 | D. Achebe | Service desk lead | 5, 8 | 4h |
 
+
 ## 3. Scenarios
 | # | Business scenario | Participant | Data needed | Acceptance condition |
 |---|---|---|---|---|
@@ -101,6 +107,7 @@ prove performance or resilience — those are covered by the system test plan.
 | 6 | Bundle change | K. Ferreira | — | A bundle edit takes effect for new requests without an IT release, and does not alter pending requests |
 | 7 | Audit question: who granted X to Y on date Z, and under which rule? | L. Haddad | Historical export | Answered from the export in under 5 minutes, without engineering help |
 | 8 | Something goes wrong: a target system is down | D. Achebe | Simulated adapter outage | A ticket is raised with the correlation ID, and other entitlements still apply |
+
 
 ## 5. Entry criteria
 System test exit criteria met; zero open Sev-1; uat refreshed within 7 days;

@@ -34,6 +34,7 @@ A solution architecture document (SAD) describes a system at the level where cha
 | Status | Draft / Reviewed / Approved |
 | Related | Charter, SRS, ADRs |
 
+
 ## 1. Context
 Business purpose in five sentences. Who uses it, what it replaces.
 
@@ -41,9 +42,11 @@ Business purpose in five sentences. Who uses it, what it replaces.
 | # | Driver / constraint | Type | Source | Architectural consequence |
 |---|---|---|---|---|
 
+
 ## 3. Quality attribute scenarios
 | Attribute | Stimulus | Response | Measure |
 |---|---|---|---|
+
 
 ## 4. Logical view
 Components and responsibilities. One diagram plus a table — the table is what
@@ -51,6 +54,7 @@ people actually read.
 
 | Component | Responsibility | Owner | Technology | Notes |
 |---|---|---|---|---|
+
 
 ## 5. Data view
 Entities, stores, classification, retention, residency.
@@ -75,6 +79,7 @@ Trust boundaries, threat summary, controls, residual risk.
 | Option | Why rejected |
 |---|---|
 
+
 ## 12. Risks and open decisions
 | # | Item | Owner | Needed by |
 |---|---|---|---|
@@ -94,6 +99,7 @@ Trust boundaries, threat summary, controls, residual risk.
 | D4 | People Ops must change bundles without a release | Business | BR-04 | Bundle definitions are data, versioned in the database, not code |
 | D5 | No new identity licences before FY2027 | Budget | BRD §7 | Reuse existing identity platform for SCIM; no third-party IGA product |
 
+
 ## 3. Quality attribute scenarios
 | Attribute | Stimulus | Response | Measure |
 |---|---|---|---|
@@ -101,6 +107,7 @@ Trust boundaries, threat summary, controls, residual risk.
 | Availability | One target system unavailable | Other entitlements still applied; failed one queued and ticketed | No cascading failure; partial state visible |
 | Auditability | Auditor asks who granted X to Y on date Z | Answer from the audit store | < 5 minutes, without engineer involvement |
 | Elasticity | 500 joiners in one day (graduate intake) | Processed within the working day | No manual intervention |
+
 
 ## 4. Logical view
 | Component | Responsibility | Owner | Technology | Notes |
@@ -111,6 +118,7 @@ Trust boundaries, threat summary, controls, residual risk.
 | Adapters (11) | Talk to each target system | Platform | SCIM client; SFTP batch for ERP | One adapter per target, uniform interface, per-adapter retry policy |
 | Audit sink | Append-only record of grants and revocations | Security | Object storage, daily signed export | Write precedes success; failure to write fails the grant |
 | Admin UI | Bundle maintenance for People Ops | Platform | Server-rendered | Changes are reviewed by a second People Ops user before taking effect |
+
 
 ## 8. Cross-cutting concerns
 - **Identity:** the service authenticates to targets with per-target service
@@ -132,6 +140,7 @@ is never dropped; the queue is the durability boundary.
 | Commercial IGA product | EUR 90k/yr recurring, exceeds FY2027 budget constraint D5; also requires works council review, adding ~6 weeks |
 | Direct HR-to-target integrations, no service | No central audit point, which is the whole reason for the project (D1) |
 | Synchronous provisioning at HR event time | Couples availability to eleven targets; one target's outage would fail the joiner entirely |
+
 
 ## 12. Risks and open decisions
 | # | Item | Owner | Needed by |

@@ -34,12 +34,14 @@ A BRD describes the problem in business terms. Its discipline is negative: it mu
 | Business owner | |
 | Status | Draft / In review / Approved |
 
+
 ## 1. Background and problem statement
 What is happening now. Quantify it.
 
 ## 2. Objectives
 | # | Objective | Measure | Baseline | Target |
 |---|---|---|---|---|
+
 
 ## 3. Scope
 In scope / out of scope / future phases.
@@ -48,12 +50,14 @@ In scope / out of scope / future phases.
 | Group | Interest | Impact of change | Who speaks for them |
 |---|---|---|---|
 
+
 ## 5. Current state
 Process, systems, volumes, pain points. A diagram beats a paragraph.
 
 ## 6. Business requirements
 | ID | Requirement | Priority (MoSCoW) | Rationale | Acceptance |
 |---|---|---|---|---|
+
 
 ## 7. Constraints
 Regulatory, contractual, budgetary, timing.
@@ -63,6 +67,7 @@ Regulatory, contractual, budgetary, timing.
 ## 9. Options considered
 | Option | Description | Cost | Benefit | Risk |
 |---|---|---|---|---|
+
 
 ## 10. Approval
 {{< /doctabs >}}
@@ -78,6 +83,7 @@ Regulatory, contractual, budgetary, timing.
 | Business owner | K. Ferreira, Head of People Operations |
 | Status | Approved |
 
+
 ## 1. Background and problem statement
 New joiners currently take an average of 4.6 working days to receive all
 system access. HR raises 11 separate tickets per joiner, manually, from a
@@ -91,6 +97,7 @@ accounts more than 30 days after their end date.
 | 1 | Faster access provisioning | Working days from contract signed to full access | 4.6 | <= 1.0 |
 | 2 | Reduce manual effort | HR+IT hours per joiner | 5.0 | <= 1.0 |
 | 3 | Close the leaver gap | Accounts active >7 days after end date | 23% | 0% |
+
 
 ## 3. Scope
 **In scope:** permanent and fixed-term employees; the 11 systems currently
@@ -107,6 +114,7 @@ issuance, payroll enrolment.
 | Line managers | Joiners productive on day one | Must approve access requests within 24h | Managers' forum |
 | Internal Audit | Leaver revocation evidence | Gains an automated evidence trail | L. Haddad |
 
+
 ## 5. Current state
 HR spreadsheet -> 11 manual tickets -> per-system admin action -> email to
 manager. No single record of who approved what. Leaver process depends on HR
@@ -120,6 +128,7 @@ remembering to raise a closure ticket.
 | BR-03 | Access must be revoked automatically on the recorded leave date | Must | Objective 3 | Sampling shows 0 active accounts >24h after end date |
 | BR-04 | Role-based access bundles must be maintainable by People Ops without IT | Should | Bundles change monthly | A bundle change reaches production without a code release |
 | BR-05 | Joiners should receive a status page showing provisioning progress | Could | Reduces "where is my laptop" tickets | — |
+
 
 ## 7. Constraints
 - The HR system of record cannot be replaced; it exposes a read-only API.
@@ -138,6 +147,7 @@ remembering to raise a closure ticket.
 | A | Extend existing identity platform | EUR 210k | Reuses licences and skills | Two systems still need custom connectors |
 | B | Buy a dedicated onboarding SaaS | EUR 340k + 90k/yr | Fastest to first value | New vendor, new data processing agreement, works council review |
 | C | Do nothing, add HR headcount | EUR 120k/yr | No project risk | Audit finding remains open |
+
 
 Recommendation: Option A.
 

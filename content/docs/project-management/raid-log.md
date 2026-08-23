@@ -35,19 +35,23 @@ Last reviewed: YYYY-MM-DD by <name>
 | ID | Risk (if X then Y) | Prob (H/M/L) | Impact (H/M/L) | Score | Response | Mitigation / owner | Review date | Status |
 |---|---|---|---|---|---|---|---|---|
 
+
 Response is one of: avoid, reduce, transfer, accept.
 
 ## Assumptions
 | ID | Assumption | Made by | Validate by | Consequence if false | Status |
 |---|---|---|---|---|---|
 
+
 ## Issues
 | ID | Issue | Raised | Severity | Owner | Action | Due | Status |
 |---|---|---|---|---|---|---|---|
 
+
 ## Dependencies
 | ID | We need | From | By when | Escalation | Status |
 |---|---|---|---|---|---|
+
 
 ## Closed items
 Keep them; do not delete. Closure date and outcome.
@@ -66,6 +70,7 @@ Last reviewed: 2026-08-21 by S. Lindqvist
 | R-07 | If Reporting reclaims P. Nowak, then the reconciliation feed slips 3 weeks and M4 moves | H | M | 6 | Avoid | Sponsor to confirm allocation through Sept — S. Lindqvist | 2026-08-28 | Open, escalated |
 | R-11 | If PSD2 challenge flows differ, then checkout needs redesign mid-project | L | H | 3 | Reduce | Spike completed 2026-06-12; flows are compatible for 97% of cases | 2026-09-30 | Open, downgraded |
 
+
 ## Assumptions
 | ID | Assumption | Made by | Validate by | Consequence if false | Status |
 |---|---|---|---|---|---|
@@ -73,11 +78,13 @@ Last reviewed: 2026-08-21 by S. Lindqvist
 | A-03 | Sandbox behaviour matches production for 3DS | A. Vogel | 2026-09-30 (5% ramp) | Test coverage is illusory; defects appear in live traffic | Open |
 | A-05 | Incumbent will not charge early-termination fees | M. Duarte | 2026-09-15 | Business case loses EUR 120k of benefit | Validated 2026-08-11 — no fee. Closed |
 
+
 ## Issues
 | ID | Issue | Raised | Severity | Owner | Action | Due | Status |
 |---|---|---|---|---|---|---|---|
 | I-05 | Reconciliation UAT cannot run during Finance month-end close | 2026-08-14 | Medium | P. Nowak | Move UAT to 2026-09-02; confirm no knock-on to M3 | 2026-08-25 | Open |
 | I-02 | Sandbox rate limits block full-suite nightly runs | 2026-07-22 | Medium | H. Ito | Provider raised limit to 50 rps | 2026-08-18 | Closed |
+
 
 ## Dependencies
 | ID | We need | From | By when | Escalation | Status |

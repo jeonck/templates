@@ -36,6 +36,7 @@ A postmortem asks why the system allowed the incident, not who made a mistake. B
 | Date of review | |
 | Status | Draft / Reviewed / Actions tracked |
 
+
 ## 1. Summary
 Five sentences a newcomer can understand.
 
@@ -44,6 +45,7 @@ Not "the root cause". List the conditions that had to hold simultaneously.
 
 | Factor | Why it existed | Why it was reasonable at the time |
 |---|---|---|
+
 
 ## 3. What went well
 Genuinely — the things worth keeping.
@@ -60,6 +62,7 @@ The things that could have made this much worse and did not.
 ## 7. Actions
 | # | Action | Type (prevent/detect/mitigate) | Owner | Due | Tracker |
 |---|---|---|---|---|---|
+
 
 ## 8. Actions we are deliberately not taking
 With reasons.
@@ -80,6 +83,7 @@ With reasons.
 | Participants | J. Marek, A. Vogel, T. Blomqvist, platform on-call rotation |
 | Date of review | 2026-12-05 |
 
+
 ## 1. Summary
 A routine node pool upgrade drained the node holding the provisioning poller's
 leader lease. No new leader was elected because the lease-renewal path had no
@@ -97,6 +101,7 @@ human noticed missing access.
 | No fallback route in PagerDuty | The service was configured with one notification target | Consistent with every other service we own — this was a fleet-wide gap, not a local oversight |
 | Node pool upgrades do not consider leases | Cluster upgrades are automated and treat all pods as stateless | True for every other workload we run |
 | Overnight window | The failure began at 22:31; nobody was looking | Expected — the service has no overnight SLO |
+
 
 Note that four of these five had to hold at once. Fixing any single one would
 have reduced impact from nine hours to under one.
@@ -144,6 +149,7 @@ dashboard would have made the cause visible immediately.
 | 4 | Graceful lease handover on SIGTERM; verify with a chaos test | Prevent | J. Marek | 2027-01-16 | OPS-884 |
 | 5 | Leader identity and lease age on the pipeline dashboard | Mitigate | J. Marek | 2026-12-12 | OPS-886 |
 | 6 | Share the alert-route audit pattern at the platform guild — likely fleet-wide | Prevent | H. Ito | 2026-12-19 | OPS-887 |
+
 
 ## 8. Actions we are deliberately not taking
 - **Running the poller in multiple instances.** Two leaders double-apply

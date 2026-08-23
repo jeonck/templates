@@ -33,17 +33,21 @@ The RTM answers two questions that nothing else answers cheaply: is every requir
 | Maintained by | |
 | Sources | BRD v_, SRS v_, Test Plan v_ |
 
+
 ## Forward trace
 | BR ID | SRS ID | Design ref | Code ref | Test case IDs | Test result | Status |
 |---|---|---|---|---|---|---|
+
 
 ## Backward trace (orphans)
 | Built element | Traces to | Justification if none |
 |---|---|---|
 
+
 ## Coverage summary
 | Priority | Requirements | With >=1 test | Passed | Deferred |
 |---|---|---|---|---|
+
 
 ## Accepted gaps
 | Requirement | Gap | Accepted by | Date | Compensating control |
@@ -72,11 +76,13 @@ Sources: BRD v1.2, SRS v2.0, Test Plan v2.
 | — | NFR-04 | Runbook §9 | — | DR-01 (exercise 2026-10-22) | Pass — RTO 2h51m | Verified |
 | — | NFR-06 | Data inventory v4 | — | TC-230 (retention) | Pass | Verified |
 
+
 ## Backward trace (orphans)
 | Built element | Traces to | Justification if none |
 |---|---|---|
 | /admin/bulk-import | — | Built for the September intake load; no requirement. Retained — approved by K. Ferreira 2026-09-08, documented as FR-08 in SRS v2.1 |
 | Slack notification channel | — | Removed before release. No requirement, no owner |
+
 
 ## Coverage summary
 | Priority | Requirements | With >=1 test | Passed | Deferred |
@@ -84,6 +90,7 @@ Sources: BRD v1.2, SRS v2.0, Test Plan v2.
 | Must | 12 | 12 | 11 | 0 |
 | Should | 3 | 3 | 3 | 0 |
 | Could | 2 | 0 | 0 | 2 |
+
 
 ## Accepted gaps
 | Requirement | Gap | Accepted by | Date | Compensating control |

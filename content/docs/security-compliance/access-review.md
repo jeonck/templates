@@ -36,6 +36,7 @@ An access review is a control that fails quietly. Reviewers approve everything t
 | Reviewers | |
 | Policy reference | |
 
+
 ## 1. Population
 | Category | Count |
 |---|---|
@@ -45,6 +46,7 @@ An access review is a control that fails quietly. Reviewers approve everything t
 | External / third party | |
 | Dormant (> 90 days) | |
 
+
 ## 2. Method
 How reviewers were given the data, what they were asked, and how long they had.
 
@@ -52,13 +54,16 @@ How reviewers were given the data, what they were asked, and how long they had.
 | Reviewer | Accounts | Certified | Revoked | Modified | No response |
 |---|---|---|---|---|---|
 
+
 ## 4. Findings
 | # | Finding | Accounts affected | Action | Owner | Due | Status |
 |---|---|---|---|---|---|---|
 
+
 ## 5. Revocations performed
 | Account | Access removed | Reason | Date | Verified by |
 |---|---|---|---|---|
+
 
 ## 6. Exclusions
 What was not reviewed, and why.
@@ -84,6 +89,7 @@ Trend, and whether previous findings recurred.
 | Coordinator | T. Blomqvist (People Operations) |
 | Policy reference | AC-05 |
 
+
 ## 1. Population
 | Category | Count |
 |---|---|
@@ -93,6 +99,7 @@ Trend, and whether previous findings recurred.
 | Service accounts | 63 |
 | External / third party | 89 |
 | Dormant (> 90 days, no authentication) | 147 |
+
 
 ## 2. Method
 Each system owner received a list of their system's entitlement holders with
@@ -110,6 +117,7 @@ accounts were listed first so that queue fatigue hit the lowest-risk entries.
 | ERP (external supplier) | 1,204 | 1,204 | 0 | 0 | 0 |
 | Collaboration (D. Achebe) | 1,462 | 1,401 | 54 | 7 | 0 |
 
+
 The ERP result — 1,204 of 1,204 certified with zero exceptions in under two
 hours — is not credible and is treated as a review failure, not a clean result.
 See finding 3.
@@ -123,6 +131,7 @@ See finding 3.
 | 4 | 8 service accounts had no named human owner | 8 | Owner assigned or account removed | A. Vogel | 2027-01-15 | 5 assigned, 3 removed |
 | 5 | 4 third-party accounts belonged to individuals whose contract ended | 4 | Revoked same day; supplier notified | T. Blomqvist | 2026-12-08 | Closed |
 
+
 ## 6. Exclusions
 Two systems (the archived reporting warehouse and the decommissioned intranet)
 were excluded: both are read-only, offline, and scheduled for deletion in
@@ -135,6 +144,7 @@ re-enter scope.
 | Entitlements revoked | 78 | 107 |
 | Dormant accounts | 203 | 147 |
 | Findings repeated from the previous review | — | 1 (the ERP rubber-stamp, also seen in Q3) |
+
 
 Dormant accounts are down 28% following the automated leaver flow. The residual
 entitlements from internal moves (finding 2) are new — the mover flow was not

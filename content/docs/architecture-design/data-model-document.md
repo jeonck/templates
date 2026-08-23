@@ -34,6 +34,7 @@ Code gets rewritten; data outlives it. A data model document records what each e
 | Data steward | |
 | Classification | |
 
+
 ## 1. Scope
 Which stores this covers, and which it deliberately does not.
 
@@ -43,10 +44,12 @@ One diagram, plus:
 | Entity | Business meaning | Natural key | Volume | Growth |
 |---|---|---|---|---|
 
+
 ## 3. Entity detail
 ### <Entity>
 | Field | Type | Required | Classification | Meaning / valid values |
 |---|---|---|---|---|
+
 
 Relationships, with cardinality and what enforces it.
 
@@ -57,9 +60,11 @@ Code lists, who maintains them, how changes are released.
 | Entity.field | Data category | Lawful basis | Subject rights impact |
 |---|---|---|---|
 
+
 ## 6. Retention and deletion
 | Entity | Retention | Trigger | Method | Owner |
 |---|---|---|---|---|
+
 
 ## 7. Residency and replication
 Where data lives, where copies exist, cross-border transfers.
@@ -85,6 +90,7 @@ Source of each field on initial load, and the reconciliation method.
 | Entitlement grant | One entitlement applied to one person at one time | grant_id | ~9,000/yr | flat |
 | Audit record | Append-only fact about a grant, revocation or approval | audit_id | ~30,000/yr | flat |
 
+
 ## 3. Entity detail
 
 ### Request
@@ -98,6 +104,7 @@ Source of each field on initial load, and the reconciliation method.
 | justification | text | no | Personal (free text — may contain anything) | Minimum 20 chars when present |
 | created_at / updated_at | timestamptz | yes | Internal | UTC |
 
+
 Relationships: Request 1—N Entitlement grant (enforced by FK, cascade
 forbidden — grants are never deleted with their request). Request N—1 Bundle,
 pointing at an immutable version row.
@@ -109,6 +116,7 @@ pointing at an immutable version row.
 | employee_projection.job_code | Personal | Legitimate interest | — |
 | request.justification | Personal, free text | Legal obligation (audit trail) | Erasure refused for the audit retention period; documented in the DPIA |
 | audit_record.* | Personal | Legal obligation | Retained 7 years; not erasable |
+
 
 No special-category data is held. Free-text justification is the one field
 where a user could enter something sensitive; the UI warns against it and the
@@ -122,6 +130,7 @@ field is excluded from operational log export.
 | Entitlement grant | 7 years | Grant date | Partition drop | Platform |
 | Audit record | 7 years, then legal review | Record date | Export to cold storage, then delete | Security |
 | Operational logs | 90 days | Ingest | Retention policy on log platform | Platform |
+
 
 ## 8. Integrity rules
 - A grant must reference an audit record; the grant is only marked applied
