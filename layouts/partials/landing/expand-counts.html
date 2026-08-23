@@ -1,0 +1,25 @@
+{{/*
+  Expand count tokens in a landing-page string, so nothing on the home page
+  carries a number that can drift from the content tree. Same idea as the
+  theme's :YEAR: token in the footer copyright.
+
+  Takes a string, returns it expanded:
+
+    :templates:       35        total template pages
+    :categories:      7         number of categories
+    :categoriesWord:  Seven     the same count spelled out and capitalised,
+                                for headings where a numeral reads badly
+
+  Beyond the spelled-out range the word form falls back to the numeral.
+*/}}
+{{- $s := . -}}
+{{- with site.GetPage "/docs" -}}
+  {{- $n := len .Sections -}}
+  {{- $words := slice "Zero" "One" "Two" "Three" "Four" "Five" "Six" "Seven" "Eight" "Nine" "Ten" "Eleven" "Twelve" -}}
+  {{- $word := printf "%d" $n -}}
+  {{- if lt $n (len $words) -}}{{- $word = index $words $n -}}{{- end -}}
+  {{- $s = replace $s ":templates:" (printf "%d" (len .RegularPagesRecursive)) -}}
+  {{- $s = replace $s ":categoriesWord:" $word -}}
+  {{- $s = replace $s ":categories:" (printf "%d" $n) -}}
+{{- end -}}
+{{- $s -}}

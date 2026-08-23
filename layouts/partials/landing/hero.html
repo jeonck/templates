@@ -31,14 +31,7 @@
             <div class="col-lg-6 col-md-6">
                 <div class="title-heading">
                     {{ with .badge }}
-                    {{/* Expand :templates: and :categories: from the content tree, in the
-                         same spirit as the theme's :YEAR: token in the footer, so the
-                         badge cannot drift out of step with the library. */}}
-                    {{ $text := .text }}
-                    {{ with site.GetPage "/docs" }}
-                        {{ $text = replace $text ":templates:" (printf "%d" (len .RegularPagesRecursive)) }}
-                        {{ $text = replace $text ":categories:" (printf "%d" (len .Sections)) }}
-                    {{ end }}
+                    {{ $text := partial "landing/expand-counts.html" .text }}
                     <span class="badge {{ if eq .pill true }}rounded-pill{{ end }} bg-{{ if eq .soft true }}soft-{{ else }}hard-{{ end }}{{ .color }} mb-1">{{ $text }}</span>
                     {{ end }}
                     <h4 class="heading mt-0 mb-3">

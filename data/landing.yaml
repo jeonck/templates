@@ -32,7 +32,8 @@ featureGrid:
   weight: 20
   template: feature grid
 
-  title: "Seven kinds of paperwork"
+  # :categoriesWord: is expanded at build time (layouts/partials/landing/expand-counts.html)
+  title: ":categoriesWord: kinds of paperwork"
   subtitle: "Grouped by the moment you actually need them — starting a project, arguing about requirements, defending a design, shipping, testing, firefighting, or answering an auditor."
 
   items:

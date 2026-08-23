@@ -8,10 +8,10 @@
             <div class="col-12 text-center">
                 <div class="section-title">
                     {{ with .title }}
-                        <h4 class="title fw-bold mb-4">{{ . }}</h4>
+                        <h4 class="title fw-bold mb-4">{{ partial "landing/expand-counts.html" . }}</h4>
                     {{ end }}
                     {{ with .subtitle }}
-                        <p class="text-muted para-desc mb-4 pb-2 mx-auto">{{ . | markdownify }}</p>
+                        <p class="text-muted para-desc mb-4 pb-2 mx-auto">{{ partial "landing/expand-counts.html" . | markdownify }}</p>
                     {{ end }}
                 </div>
             </div><!--end col-->
