@@ -1,0 +1,32 @@
+{{/*
+  Backlinks: every page that links to the current page with a markdown link.
+  Matches on the raw markdown, so links must be written as absolute site paths,
+  e.g. [Test Plan](/docs/testing-qa/test-plan/).
+
+  ponytail: O(pages^2) scan on every build — fine for a few hundred pages.
+  If the site grows past that, build the map once in a .Store on the home page.
+*/}}
+{{- $target := .RelPermalink -}}
+{{- $bare := strings.TrimSuffix "/" $target -}}
+{{- $backlinks := slice -}}
+{{- range site.Pages -}}
+  {{- if ne .RelPermalink $target -}}
+    {{- $raw := .RawContent -}}
+    {{- if or (in $raw (printf "](%s)" $target)) (in $raw (printf "](%s)" $bare)) -}}
+      {{- $backlinks = $backlinks | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- with sort $backlinks "Title" -}}
+<section class="backlinks mt-5 pt-4 border-top">
+  <h2 class="h5 mb-3">Linked from</h2>
+  <ul class="list-unstyled mb-0">
+    {{- range . }}
+    <li class="mb-2">
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{- with .Description }}<span class="text-body-secondary"> — {{ . }}</span>{{ end -}}
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end -}}

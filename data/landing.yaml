@@ -1,0 +1,84 @@
+# Landing page blocks. Order is controlled by 'weight'.
+
+hero:
+  enable: true
+  weight: 10
+  template: hero
+
+  badge:
+    text: "35 templates, 7 categories"
+    color: primary
+    pill: true
+    soft: true
+
+  title: "IT Template Library"
+  subtitle: "Copy-paste document templates for IT work — charters, requirement specs, decision records, runbooks, incident reports and access reviews. Every template comes with a filled-in example and the mistakes that usually spoil it."
+
+  ctaButton:
+    icon: rocket_launch
+    btnText: "Browse the templates"
+    url: "/docs/"
+  cta2Button:
+    icon: hub
+    btnText: "View on GitHub"
+    url: "https://github.com/jeonck/templates"
+
+  info: "Free to copy, adapt and ship. Built with **Hugo** and **Lotus Docs**."
+
+featureGrid:
+  enable: true
+  weight: 20
+  template: feature grid
+
+  title: "Seven kinds of paperwork"
+  subtitle: "Grouped by the moment you actually need them — starting a project, arguing about requirements, defending a design, shipping, testing, firefighting, or answering an auditor."
+
+  items:
+    - title: "Project Management"
+      icon: assignment
+      description: "Charters, plans, status reports, RAID logs and meeting minutes that record what was agreed and what changed."
+      ctaLink:
+        text: browse
+        url: /docs/project-management/
+
+    - title: "Requirements & Analysis"
+      icon: fact_check
+      description: "BRDs, SRSs, user stories, use case specifications and the traceability matrix that ties them together."
+      ctaLink:
+        text: browse
+        url: /docs/requirements/
+
+    - title: "Architecture & Design"
+      icon: architecture
+      description: "Solution architecture documents, ADRs, API specifications, data models and technical designs."
+      ctaLink:
+        text: browse
+        url: /docs/architecture-design/
+
+    - title: "Development & Release"
+      icon: code
+      description: "Coding standards, review checklists, PR templates, release notes and deployment runbooks."
+      ctaLink:
+        text: browse
+        url: /docs/development-release/
+
+    - title: "Testing & QA"
+      icon: bug_report
+      description: "Test plans, case specifications, defect reports, UAT plans and test summary reports."
+      ctaLink:
+        text: browse
+        url: /docs/testing-qa/
+
+    - title: "Operations & Incident"
+      icon: monitor_heart
+      description: "Runbooks, incident reports, blameless postmortems, change requests and on-call handovers."
+      ctaLink:
+        text: browse
+        url: /docs/operations-incident/
+
+    - title: "Security & Compliance"
+      icon: shield
+      description: "Security policies, risk registers, access reviews, vendor assessments and data protection impact assessments."
+      ctaLink:
+        text: browse
+        url: /docs/security-compliance/
