@@ -4,7 +4,6 @@ title: "User Story"
 description: "A small unit of value with acceptance criteria you can argue about before the work starts."
 icon: "person"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

@@ -4,7 +4,6 @@ title: "Solution Architecture Document"
 description: "The structure of a system, the constraints that shaped it, and the trade-offs accepted."
 icon: "schema"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

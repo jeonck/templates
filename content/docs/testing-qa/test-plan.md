@@ -4,7 +4,6 @@ title: "Test Plan"
 description: "What will be tested, how, by whom, and what we are consciously not testing."
 icon: "science"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

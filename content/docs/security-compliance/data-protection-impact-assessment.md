@@ -4,7 +4,6 @@ title: "Data Protection Impact Assessment"
 description: "Structured analysis of privacy risk before processing starts — necessity, proportionality, and what you will do about the risks."
 icon: "privacy_tip"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

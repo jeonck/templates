@@ -4,7 +4,6 @@ title: "Deployment Runbook"
 description: "The exact sequence to ship a release, verify it, and back it out — written before the deployment starts."
 icon: "rocket_launch"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

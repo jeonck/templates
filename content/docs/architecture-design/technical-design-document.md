@@ -4,7 +4,6 @@ title: "Technical Design Document"
 description: "How one component will actually be built — enough detail to review the idea before the code exists."
 icon: "draft"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

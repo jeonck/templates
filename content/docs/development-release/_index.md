@@ -4,7 +4,6 @@ title: "Development & Release"
 description: "Coding standards, review checklists, PR templates, release notes and deployment runbooks."
 icon: "code"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

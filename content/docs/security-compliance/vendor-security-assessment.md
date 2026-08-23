@@ -4,7 +4,6 @@ title: "Vendor Security Assessment"
 description: "Due diligence on a third party, scaled to what they will actually hold and do."
 icon: "handshake"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

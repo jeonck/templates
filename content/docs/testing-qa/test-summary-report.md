@@ -4,7 +4,6 @@ title: "Test Summary Report"
 description: "What was tested, what was found, and what is being shipped with known problems."
 icon: "assessment"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

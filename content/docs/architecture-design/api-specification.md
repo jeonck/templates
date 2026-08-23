@@ -4,7 +4,6 @@ title: "API Specification"
 description: "The contract between two teams: resources, errors, versioning and what happens when it breaks."
 icon: "api"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

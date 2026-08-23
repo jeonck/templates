@@ -4,7 +4,6 @@ title: "Risk Register"
 description: "Standing organisational risks with owners, treatment decisions, and dated reviews."
 icon: "crisis_alert"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

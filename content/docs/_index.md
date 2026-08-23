@@ -4,7 +4,6 @@ title: "Overview"
 description: "Copy-paste document templates for IT work, each with a worked example and the mistakes that usually spoil it."
 icon: "home"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

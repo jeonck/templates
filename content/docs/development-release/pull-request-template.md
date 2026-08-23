@@ -4,7 +4,6 @@ title: "Pull Request Template"
 description: "The context a reviewer needs, collected before they start rather than asked for afterwards."
 icon: "merge"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

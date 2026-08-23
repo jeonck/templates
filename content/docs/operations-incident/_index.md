@@ -4,7 +4,6 @@ title: "Operations & Incident"
 description: "Runbooks, incident reports, postmortems, change requests and on-call handovers."
 icon: "monitor_heart"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

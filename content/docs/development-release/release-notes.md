@@ -4,7 +4,6 @@ title: "Release Notes"
 description: "What changed, what breaks, and what the reader has to do about it."
 icon: "new_releases"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

@@ -4,7 +4,6 @@ title: "Defect Report"
 description: "Enough information for someone else to reproduce the problem without asking you a single question."
 icon: "bug_report"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

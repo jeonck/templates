@@ -4,7 +4,6 @@ title: "Use Case Specification"
 description: "Step-by-step actor–system interaction, including every way it can go wrong."
 icon: "account_tree"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

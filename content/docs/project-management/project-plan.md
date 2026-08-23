@@ -4,7 +4,6 @@ title: "Project Plan"
 description: "Schedule, dependencies, resourcing and the critical path, in a form a delivery team will actually maintain."
 icon: "calendar_month"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

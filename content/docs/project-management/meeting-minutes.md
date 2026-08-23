@@ -4,7 +4,6 @@ title: "Meeting Minutes"
 description: "Decisions and actions, captured in a form that survives the disagreement three months later."
 icon: "groups"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

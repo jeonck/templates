@@ -4,7 +4,6 @@ title: "Requirements Traceability Matrix"
 description: "One table proving every requirement reached design, code and test — and that nothing untraceable was built."
 icon: "table_chart"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

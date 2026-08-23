@@ -4,7 +4,6 @@ title: "Data Model Document"
 description: "Entities, relationships, classification and retention — the parts of the schema that outlive the code."
 icon: "database"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

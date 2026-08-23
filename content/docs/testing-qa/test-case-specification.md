@@ -4,7 +4,6 @@ title: "Test Case Specification"
 description: "Cases precise enough that two testers get the same result, and a failure is unambiguous."
 icon: "checklist"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

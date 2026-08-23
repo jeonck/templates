@@ -4,7 +4,6 @@ title: "RAID Log"
 description: "One table for Risks, Assumptions, Issues and Dependencies — the project's short-term memory."
 icon: "warning"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

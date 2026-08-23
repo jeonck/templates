@@ -4,7 +4,6 @@ title: "UAT Plan"
 description: "How business users will decide whether to accept the system — and what happens when they do not."
 icon: "how_to_reg"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

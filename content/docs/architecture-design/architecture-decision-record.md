@@ -4,7 +4,6 @@ title: "Architecture Decision Record"
 description: "One decision, its context, the options rejected, and what it costs — in under a page."
 icon: "gavel"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

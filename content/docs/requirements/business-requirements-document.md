@@ -4,7 +4,6 @@ title: "Business Requirements Document"
 description: "What the business needs and why, stated without prescribing a solution."
 icon: "business_center"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

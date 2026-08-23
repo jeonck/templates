@@ -4,7 +4,6 @@ title: "Requirements & Analysis"
 description: "BRDs, SRSs, user stories, use cases and traceability matrices."
 icon: "fact_check"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

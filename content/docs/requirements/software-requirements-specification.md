@@ -4,7 +4,6 @@ title: "Software Requirements Specification"
 description: "System-level functional and non-functional requirements, each one testable."
 icon: "description"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

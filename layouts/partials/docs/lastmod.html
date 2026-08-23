@@ -1,0 +1,14 @@
+{{/* Compact "last updated" line under the page title.
+
+     Uses .GitInfo.AuthorDate rather than a `lastmod` front matter field, so
+     it cannot go stale: it is whatever the last commit touching this file
+     says. The theme's own gitinfo partial at the foot of the page falls back
+     to the same value now that the front matter field is gone, so the two
+     agree. No id="relativetime" here — that id belongs to the footer line and
+     must stay unique for the theme's relative-time script. */}}
+{{- with .GitInfo -}}
+<p class="doc-lastmod small opacity-75 mb-4">
+  <span class="material-icons size-20 align-text-bottom opacity-75">history</span>
+  Last updated <time datetime="{{ dateFormat "2006-01-02T15:04:05Z0700" .AuthorDate }}">{{ dateFormat "2 January 2006" .AuthorDate }}</time>
+</p>
+{{- end -}}

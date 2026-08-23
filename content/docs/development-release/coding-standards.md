@@ -4,7 +4,6 @@ title: "Coding Standards"
 description: "The rules a team agrees to enforce — and, more importantly, which ones a machine enforces instead of a human."
 icon: "rule"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

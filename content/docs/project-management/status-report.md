@@ -4,7 +4,6 @@ title: "Status Report"
 description: "A weekly one-pager that reports the delta, the decisions needed, and the truth about the date."
 icon: "summarize"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

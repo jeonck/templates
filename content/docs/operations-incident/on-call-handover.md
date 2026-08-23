@@ -4,7 +4,6 @@ title: "On-call Handover"
 description: "Live context passed between shifts, so the next engineer does not start from zero."
 icon: "swap_horiz"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

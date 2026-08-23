@@ -4,7 +4,6 @@ title: "Code Review Checklist"
 description: "What a human should look for once linters, tests and scanners have had their turn."
 icon: "reviews"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

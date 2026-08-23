@@ -4,7 +4,6 @@ title: "Project Management"
 description: "Charters, plans, status reports, risk logs and minutes for running IT projects."
 icon: "assignment"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

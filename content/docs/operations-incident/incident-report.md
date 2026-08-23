@@ -4,7 +4,6 @@ title: "Incident Report"
 description: "The factual record of an outage: timeline, impact, actions — written during and immediately after, not weeks later."
 icon: "report"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

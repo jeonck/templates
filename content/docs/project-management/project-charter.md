@@ -4,7 +4,6 @@ title: "Project Charter"
 description: "The one-page authorisation that says a project exists, who runs it, and what 'done' means."
 icon: "flag"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

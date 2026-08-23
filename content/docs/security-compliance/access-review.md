@@ -4,7 +4,6 @@ title: "Access Review"
 description: "Periodic recertification of who has access to what — and the evidence that someone actually looked."
 icon: "key"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

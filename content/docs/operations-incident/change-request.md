@@ -4,7 +4,6 @@ title: "Change Request"
 description: "The approval record for a production change: what, when, risk, backout, and who said yes."
 icon: "change_circle"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

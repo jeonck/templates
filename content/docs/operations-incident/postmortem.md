@@ -4,7 +4,6 @@ title: "Postmortem"
 description: "Blameless analysis of why an incident was possible, and what change would prevent the class of it."
 icon: "history_edu"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

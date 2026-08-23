@@ -4,7 +4,6 @@ title: "Operational Runbook"
 description: "What to do when the alert fires, written for someone half asleep who did not build the system."
 icon: "menu_book"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 

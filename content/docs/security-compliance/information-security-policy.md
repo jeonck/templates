@@ -4,7 +4,6 @@ title: "Information Security Policy"
 description: "Mandatory rules with named owners, written so people can actually comply with them."
 icon: "policy"
 date: "2026-08-23"
-lastmod: "2026-08-23"
 draft: false
 ---
 
