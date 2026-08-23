@@ -82,3 +82,10 @@ featureGrid:
       ctaLink:
         text: browse
         url: /docs/security-compliance/
+
+# The theme module ships its own data/landing.yaml and Hugo deep-merges it with
+# this file, so any block NOT defined here survives from the theme. imageCompare
+# is a Lotus Docs marketing section ("Customise The Lotus Docs Appearance") that
+# was rendering at the foot of this home page. Turn it off explicitly.
+imageCompare:
+  enable: false
