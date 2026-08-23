@@ -116,3 +116,4 @@ result (A-32), revised cost forecast (A-33).
 - [Status Report](/docs/project-management/status-report/) — carries open decisions forward between meetings.
 - [Architecture Decision Record](/docs/architecture-design/architecture-decision-record/) — for technical decisions that need a durable home outside minutes.
 - [Change Request](/docs/operations-incident/change-request/) — the CAB equivalent of these minutes.
+- [Project Management](/docs/project-management/) — the other four project-management templates.

@@ -140,3 +140,4 @@ enrolment.
 - [Requirements Traceability Matrix](/docs/requirements/requirements-traceability-matrix/) — links each FR/NFR to a test.
 - [API Specification](/docs/architecture-design/api-specification/) — expands section 6.
 - [Test Plan](/docs/testing-qa/test-plan/) — consumes the verification column.
+- [Requirements & Analysis](/docs/requirements/) — the other four requirements templates.

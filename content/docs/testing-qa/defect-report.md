@@ -132,3 +132,4 @@ resolvers have a similar "fall back to latest" path.
 - [Incident Report](/docs/operations-incident/incident-report/) — when the defect is live and hurting users.
 - [Release Notes](/docs/development-release/release-notes/) — where the fix and its blast radius are announced.
 - [Postmortem](/docs/operations-incident/postmortem/) — for defects worth a systemic look.
+- [Testing & QA](/docs/testing-qa/) — the other four testing and QA templates.

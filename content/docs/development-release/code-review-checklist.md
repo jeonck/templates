@@ -124,3 +124,4 @@ Automation catches formatting, obvious bugs and known vulnerabilities. A human r
 - [Coding Standards](/docs/development-release/coding-standards/) — the automated rules that keep this checklist short.
 - [Pull Request Template](/docs/development-release/pull-request-template/) — gives the reviewer the context this checklist assumes.
 - [Defect Report](/docs/testing-qa/defect-report/) — for issues found that are too large to fix in this change.
+- [Development & Release](/docs/development-release/) — the other four development and release templates.

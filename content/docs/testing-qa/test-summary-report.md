@@ -177,3 +177,4 @@ and the business owner. All other criteria are met with margin.
 - [UAT Plan](/docs/testing-qa/uat-plan/) — the acceptance side of the evidence.
 - [Requirements Traceability Matrix](/docs/requirements/requirements-traceability-matrix/) — the coverage source.
 - [Release Notes](/docs/development-release/release-notes/) — where open defects become known issues.
+- [Testing & QA](/docs/testing-qa/) — the other four testing and QA templates.

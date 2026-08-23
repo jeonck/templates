@@ -180,3 +180,4 @@ in the register as R-2026-008.
 - [Information Security Policy](/docs/security-compliance/information-security-policy/) — the third-party requirements this assesses against.
 - [Data Protection Impact Assessment](/docs/security-compliance/data-protection-impact-assessment/) — needed when the vendor processes personal data at scale.
 - [Business Requirements Document](/docs/requirements/business-requirements-document/) — the build-or-buy decision this informs.
+- [Security & Compliance](/docs/security-compliance/) — the other four security and compliance templates.

@@ -99,3 +99,4 @@ injected clock.
 - [User Story](/docs/requirements/user-story/) — acceptance criteria convert almost directly into cases.
 - [Use Case Specification](/docs/requirements/use-case-specification/) — each extension deserves at least one case.
 - [Defect Report](/docs/testing-qa/defect-report/) — what to raise when a case fails.
+- [Testing & QA](/docs/testing-qa/) — the other four testing and QA templates.

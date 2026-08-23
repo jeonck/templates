@@ -142,3 +142,4 @@ not weaken a policy statement.
 - [Access Review](/docs/security-compliance/access-review/) — evidence for AC-05.
 - [Vendor Security Assessment](/docs/security-compliance/vendor-security-assessment/) — how third-party scope is assessed.
 - [Data Protection Impact Assessment](/docs/security-compliance/data-protection-impact-assessment/) — for processing that carries privacy risk.
+- [Security & Compliance](/docs/security-compliance/) — the other four security and compliance templates.

@@ -106,3 +106,4 @@ Sources: BRD v1.2, SRS v2.0, Test Plan v2.
 - [Software Requirements Specification](/docs/requirements/software-requirements-specification/) — the SRS column.
 - [Test Plan](/docs/testing-qa/test-plan/) — defines what "verified" means here.
 - [Test Summary Report](/docs/testing-qa/test-summary-report/) — the results column comes from there.
+- [Requirements & Analysis](/docs/requirements/) — the other four requirements templates.

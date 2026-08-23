@@ -140,3 +140,4 @@ Rollback to v1.13.x is safe: `bundle_version` is ignored by that release.
 - [API Specification](/docs/architecture-design/api-specification/) — the versioning policy these notes follow.
 - [Defect Report](/docs/testing-qa/defect-report/) — the source of the Fixed section.
 - [Change Request](/docs/operations-incident/change-request/) — the approval record for the deployment.
+- [Development & Release](/docs/development-release/) — the other four development and release templates.

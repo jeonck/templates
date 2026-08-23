@@ -179,3 +179,4 @@ path as everything else.
 - [Operational Runbook](/docs/operations-incident/operational-runbook/) — where response improvements land.
 - [RAID Log](/docs/project-management/raid-log/) — for risks the postmortem reveals but cannot fix now.
 - [Risk Register](/docs/security-compliance/risk-register/) — when the finding is a standing organisational risk.
+- [Operations & Incident](/docs/operations-incident/) — the other four operations and incident templates.

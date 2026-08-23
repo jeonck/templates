@@ -156,3 +156,4 @@ cleanly.
 - [Release Notes](/docs/development-release/release-notes/) — what the change delivers.
 - [Incident Report](/docs/operations-incident/incident-report/) — when a change causes one.
 - [Meeting Minutes](/docs/project-management/meeting-minutes/) — the CAB's own record.
+- [Operations & Incident](/docs/operations-incident/) — the other four operations and incident templates.

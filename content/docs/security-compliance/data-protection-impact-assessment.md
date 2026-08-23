@@ -203,3 +203,4 @@ Review on material change or by 2027-09-22.
 - [Risk Register](/docs/security-compliance/risk-register/) — where accepted privacy risk is tracked.
 - [Vendor Security Assessment](/docs/security-compliance/vendor-security-assessment/) — needed when a processor is involved.
 - [Information Security Policy](/docs/security-compliance/information-security-policy/) — the controls this assessment relies on.
+- [Security & Compliance](/docs/security-compliance/) — the other four security and compliance templates.

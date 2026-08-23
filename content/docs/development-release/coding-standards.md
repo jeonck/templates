@@ -150,3 +150,4 @@ justified in two sentences gets deleted rather than debated.
 - [Code Review Checklist](/docs/development-release/code-review-checklist/) — what a human checks once the machine has checked the rest.
 - [Pull Request Template](/docs/development-release/pull-request-template/) — where the standard is applied per change.
 - [Technical Design Document](/docs/architecture-design/technical-design-document/) — where deviations get argued before code exists.
+- [Development & Release](/docs/development-release/) — the other four development and release templates.

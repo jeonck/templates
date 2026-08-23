@@ -178,3 +178,4 @@ summary, RTM coverage extract, and the test summary report at exit.
 - [UAT Plan](/docs/testing-qa/uat-plan/) — the business acceptance slice.
 - [Test Summary Report](/docs/testing-qa/test-summary-report/) — reports against these exit criteria.
 - [Requirements Traceability Matrix](/docs/requirements/requirements-traceability-matrix/) — where coverage is proven.
+- [Testing & QA](/docs/testing-qa/) — the other four testing and QA templates.

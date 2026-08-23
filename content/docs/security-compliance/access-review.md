@@ -163,3 +163,4 @@ live during the Q3 review.
 - [Information Security Policy](/docs/security-compliance/information-security-policy/) — statement AC-05 that this evidences.
 - [Risk Register](/docs/security-compliance/risk-register/) — where unresolved findings go.
 - [Vendor Security Assessment](/docs/security-compliance/vendor-security-assessment/) — for third-party access populations.
+- [Security & Compliance](/docs/security-compliance/) — the other four security and compliance templates.

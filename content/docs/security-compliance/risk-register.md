@@ -107,3 +107,4 @@ Score = L x I. Tolerance: score >= 12 requires Executive Committee acceptance;
 - [RAID Log](/docs/project-management/raid-log/) — the project-level equivalent.
 - [Postmortem](/docs/operations-incident/postmortem/) — a common source of new entries.
 - [Vendor Security Assessment](/docs/security-compliance/vendor-security-assessment/) — third-party risks land here.
+- [Security & Compliance](/docs/security-compliance/) — the other four security and compliance templates.

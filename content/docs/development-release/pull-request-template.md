@@ -122,3 +122,4 @@ right, but it is a judgement call.
 - [Code Review Checklist](/docs/development-release/code-review-checklist/) — the reviewer's side of the same conversation.
 - [Coding Standards](/docs/development-release/coding-standards/) — what CI enforces so this stays short.
 - [Release Notes](/docs/development-release/release-notes/) — breaking changes flagged here end up there.
+- [Development & Release](/docs/development-release/) — the other four development and release templates.

@@ -142,3 +142,4 @@ three. The business owner decides severity disputes, not engineering.
 - [Test Plan](/docs/testing-qa/test-plan/) — the system testing that must finish first.
 - [Test Summary Report](/docs/testing-qa/test-summary-report/) — evidence supporting the acceptance decision.
 - [Business Requirements Document](/docs/requirements/business-requirements-document/) — the scenarios trace back to these requirements.
+- [Testing & QA](/docs/testing-qa/) — the other four testing and QA templates.

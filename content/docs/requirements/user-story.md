@@ -130,3 +130,4 @@ And an alert is raised, because this indicates an HR data defect
 - [Test Case Specification](/docs/testing-qa/test-case-specification/) — acceptance criteria become test cases directly.
 - [Pull Request Template](/docs/development-release/pull-request-template/) — where the definition of done is enforced.
 - [Software Requirements Specification](/docs/requirements/software-requirements-specification/) — the formal alternative.
+- [Requirements & Analysis](/docs/requirements/) — the other four requirements templates.

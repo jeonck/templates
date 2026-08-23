@@ -172,3 +172,4 @@ the first cohort is one job code.
 - [Architecture Decision Record](/docs/architecture-design/architecture-decision-record/) — for decisions inside this design that outlive it.
 - [Code Review Checklist](/docs/development-release/code-review-checklist/) — what reviewers check once this is built.
 - [Operational Runbook](/docs/operations-incident/operational-runbook/) — the failure modes table feeds it directly.
+- [Architecture & Design](/docs/architecture-design/) — the other four architecture and design templates.

@@ -100,3 +100,4 @@ Last reviewed: 2026-08-21 by S. Lindqvist
 - [Status Report](/docs/project-management/status-report/) — reports the deltas in this log.
 - [Project Plan](/docs/project-management/project-plan/) — dependencies here should match section 6 there.
 - [Risk Register](/docs/security-compliance/risk-register/) — the organisation-level equivalent for security risk.
+- [Project Management](/docs/project-management/) — the other four project-management templates.

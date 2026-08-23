@@ -147,3 +147,4 @@ the plan that do not move a milestone are the PM's to make.
 - [Status Report](/docs/project-management/status-report/) — the weekly delta against this plan.
 - [RAID Log](/docs/project-management/raid-log/) — dependencies and risks from sections 6 and 7.
 - [Deployment Runbook](/docs/development-release/deployment-runbook/) — the detail behind the ramp work packages.
+- [Project Management](/docs/project-management/) — the other four project-management templates.

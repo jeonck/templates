@@ -149,3 +149,4 @@ Performance, security, localisation, accessibility specific to this case.
 - [Software Requirements Specification](/docs/requirements/software-requirements-specification/) — where these cases are referenced as sources.
 - [Test Case Specification](/docs/testing-qa/test-case-specification/) — each extension becomes at least one test case.
 - [Technical Design Document](/docs/architecture-design/technical-design-document/) — states and transitions above become the design's state machine.
+- [Requirements & Analysis](/docs/requirements/) — the other four requirements templates.

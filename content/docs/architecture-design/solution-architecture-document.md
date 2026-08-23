@@ -156,3 +156,4 @@ is never dropped; the queue is the durability boundary.
 - [Data Model Document](/docs/architecture-design/data-model-document/) — expands section 5.
 - [API Specification](/docs/architecture-design/api-specification/) — expands section 6.
 - [Software Requirements Specification](/docs/requirements/software-requirements-specification/) — the requirements this structure satisfies.
+- [Architecture & Design](/docs/architecture-design/) — the other four architecture and design templates.

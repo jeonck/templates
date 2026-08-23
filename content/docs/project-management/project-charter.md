@@ -172,3 +172,4 @@ January. Doing nothing means auto-renewal at the higher rate.
 - [RAID Log](/docs/project-management/raid-log/) — where the full risk list lives.
 - [Business Requirements Document](/docs/requirements/business-requirements-document/) — expands the business case into requirements.
 - [Status Report](/docs/project-management/status-report/) — reports progress against the charter's milestones.
+- [Project Management](/docs/project-management/) — the other four project-management templates.

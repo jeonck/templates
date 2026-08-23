@@ -152,3 +152,4 @@ than filled with a guess.
 - [Solution Architecture Document](/docs/architecture-design/solution-architecture-document/) — section 5 of that document points here.
 - [Data Protection Impact Assessment](/docs/security-compliance/data-protection-impact-assessment/) — takes its inventory from this.
 - [Software Requirements Specification](/docs/requirements/software-requirements-specification/) — data requirements are stated there and modelled here.
+- [Architecture & Design](/docs/architecture-design/) — the other four architecture and design templates.

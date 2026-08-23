@@ -119,3 +119,4 @@ the system well. DBA on-call rotation changed on Monday: it is now
 - [Operational Runbook](/docs/operations-incident/operational-runbook/) — the standing procedures this assumes.
 - [Incident Report](/docs/operations-incident/incident-report/) — for incidents crossing a shift boundary.
 - [Change Request](/docs/operations-incident/change-request/) — the source of "expected during your shift".
+- [Operations & Incident](/docs/operations-incident/) — the other four operations and incident templates.

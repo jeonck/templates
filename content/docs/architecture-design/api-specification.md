@@ -197,3 +197,4 @@ paged against.
 - [Technical Design Document](/docs/architecture-design/technical-design-document/) — the internals behind the contract.
 - [Release Notes](/docs/development-release/release-notes/) — where deprecations are announced.
 - [Test Plan](/docs/testing-qa/test-plan/) — contract tests are derived from this document.
+- [Architecture & Design](/docs/architecture-design/) — the other four architecture and design templates.

@@ -166,3 +166,4 @@ in the affected window (verified against the HR feed).
 - [Operational Runbook](/docs/operations-incident/operational-runbook/) — where the fix procedure should have lived.
 - [Defect Report](/docs/testing-qa/defect-report/) — for the underlying code defect, if there is one.
 - [On-call Handover](/docs/operations-incident/on-call-handover/) — how an active incident crosses a shift boundary.
+- [Operations & Incident](/docs/operations-incident/) — the other four operations and incident templates.

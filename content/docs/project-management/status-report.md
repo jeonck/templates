@@ -111,3 +111,4 @@ including EUR 45k of the EUR 100k contingency. No new budget request.
 - [Project Plan](/docs/project-management/project-plan/) — the baseline this reports against.
 - [RAID Log](/docs/project-management/raid-log/) — the source of the risks and issues section.
 - [Meeting Minutes](/docs/project-management/meeting-minutes/) — where decisions get recorded once made.
+- [Project Management](/docs/project-management/) — the other four project-management templates.

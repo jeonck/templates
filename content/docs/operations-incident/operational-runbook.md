@@ -182,3 +182,4 @@ a 4h target. Next exercise due 2027-04.
 - [On-call Handover](/docs/operations-incident/on-call-handover/) — carries live context between shifts.
 - [Technical Design Document](/docs/architecture-design/technical-design-document/) — the failure modes table feeds section 4.
 - [Deployment Runbook](/docs/development-release/deployment-runbook/) — the change-time counterpart.
+- [Operations & Incident](/docs/operations-incident/) — the other four operations and incident templates.

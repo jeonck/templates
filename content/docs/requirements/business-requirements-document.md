@@ -160,3 +160,4 @@ K. Ferreira (business owner) 2026-04-18; D. Achebe (IT) 2026-04-22.
 - [Requirements Traceability Matrix](/docs/requirements/requirements-traceability-matrix/) — proves each BR survives into design and test.
 - [Project Charter](/docs/project-management/project-charter/) — the funding decision this feeds.
 - [Vendor Security Assessment](/docs/security-compliance/vendor-security-assessment/) — if option B wins, vendor due diligence starts here.
+- [Requirements & Analysis](/docs/requirements/) — the other four requirements templates.

@@ -153,3 +153,4 @@ technical design.
 - [Solution Architecture Document](/docs/architecture-design/solution-architecture-document/) — references ADRs instead of restating decisions.
 - [Technical Design Document](/docs/architecture-design/technical-design-document/) — where an accepted ADR gets implemented.
 - [Meeting Minutes](/docs/project-management/meeting-minutes/) — decisions made in governance meetings that deserve an ADR.
+- [Architecture & Design](/docs/architecture-design/) — the other four architecture and design templates.
