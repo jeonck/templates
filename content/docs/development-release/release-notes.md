@@ -25,56 +25,7 @@ Release notes are written for someone deciding whether to upgrade and what it wi
 
 ## Template
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="Rendered" %}}
-
-**&lt;Product&gt; v&lt;version&gt; — YYYY-MM-DD**
-
-**Summary**
-
-Two sentences. Who should care about this release.  
-
-**Action required**
-
-| Action | Who | By when | Consequence if skipped |
-|---|---|---|---|
-
-If none: "None."  
-
-**Breaking changes**
-
-Each with: what changed, why, and the migration path.  
-
-**New**
-
-**Improved**
-
-**Fixed**
-
-Reference the issue or defect ID.  
-
-**Security**
-
-Advisory IDs, severity, and whether exploitation was observed.  
-
-**Deprecated**
-
-| Item | Deprecated in | Removed in | Replacement |
-|---|---|---|---|
-
-**Known issues**
-
-| Issue | Impact | Workaround | Fix expected |
-|---|---|---|---|
-
-**Upgrade notes**
-
-Order of operations, downtime, compatibility window, rollback.
-
-{{% /tab %}}
-{{% tab tabName="Markdown" %}}
-
-```markdown
+{{< doctabs >}}
 # <Product> v<version> — YYYY-MM-DD
 
 ## Summary
@@ -107,92 +58,11 @@ Advisory IDs, severity, and whether exploitation was observed.
 
 ## Upgrade notes
 Order of operations, downtime, compatibility window, rollback.
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /doctabs >}}
 
 ## Worked example
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="Rendered" %}}
-
-**Provisioning API v1.14.0 — 2026-11-12**
-
-**Summary**
-
-Adds re-resolution of pending requests and tightens bundle version handling.  
-Callers who read `bundle_version` should note it is now always present.  
-One security fix, no exploitation observed.  
-
-**Action required**
-
-| Action | Who | By when | Consequence if skipped |
-|---|---|---|---|
-| Stop relying on `GET /requests?state=PENDING` — it is removed in v2 | Service desk tooling team | 2027-02-28 | Tooling breaks at the v2 cutover |
-| Upgrade the Go client to >= 1.9.0 if you parse `bundle_version` | All API consumers | Before v1.15.0 | Older clients reject the now-always-present field |
-
-**Breaking changes**
-
-None in v1. See Deprecated for what changes in v2.  
-
-**New**
-
-- `POST /requests/{id}/re-resolve` re-evaluates a pending request against the  
-&nbsp;&nbsp;current bundle. Requires `provisioning.write` and a justification of at least  
-&nbsp;&nbsp;20 characters. Both the old and new bundle version appear in the audit record.  
-&nbsp;&nbsp;(AP-131)  
-- `RateLimit-*` response headers on all endpoints. (AP-140)  
-
-**Improved**
-
-- Bundle resolution p95 down from 240 ms to 55 ms by caching immutable bundle  
-&nbsp;&nbsp;versions. No behaviour change. (AP-138)  
-- Clearer error when a job code has no bundle: `bundle_not_found` now includes  
-&nbsp;&nbsp;the job code in `details`. (AP-142)  
-
-**Fixed**
-
-- DEF-2026-0311: a request whose pinned bundle version was missing silently fell  
-&nbsp;&nbsp;back to the latest version, so a grant could trace to the wrong rule. It now  
-&nbsp;&nbsp;fails with `bundle_version_missing` and alerts. Affected 3 requests between  
-&nbsp;&nbsp;2026-10-28 and 2026-11-04; all three were reviewed and re-issued, and  
-&nbsp;&nbsp;Internal Audit was notified on 2026-11-05.  
-- DEF-2026-0318: the 72-hour approval escalation did not fire if the service  
-&nbsp;&nbsp;restarted within the window. Timers are now persisted.  
-
-**Security**
-
-- GHSA-xxxx-yyyy-zzzz (High) in a transitive JSON dependency, allowing  
-&nbsp;&nbsp;excessive memory allocation on malformed input. Dependency updated. Our  
-&nbsp;&nbsp;ingress limits request bodies to 256 KB, so exploitation was not possible  
-&nbsp;&nbsp;through the public path; no exploitation observed in logs.  
-
-**Deprecated**
-
-| Item | Deprecated in | Removed in | Replacement |
-|---|---|---|---|
-| `GET /requests?state=PENDING` (the PENDING pseudo-state) | v1.14.0 | v2.0.0 (no earlier than 2027-03-01) | `?state=AWAITING_APPROVAL` or `?state=AWAITING_BUNDLE` |
-| `X-Request-Trace` header | v1.12.0 | v2.0.0 | `X-Correlation-Id` |
-
-Deprecated endpoints return `Deprecation` and `Sunset` headers from this  
-release onwards.  
-
-**Known issues**
-
-| Issue | Impact | Workaround | Fix expected |
-|---|---|---|---|
-| Legacy ERP revocation runs on the nightly batch | Worst-case 26h revocation latency vs the 1h target | Daily exception report reviewed by People Ops | Blocked on the ERP replacement, FY2027 |
-
-**Upgrade notes**
-
-Rolling deploy, no downtime. The database migration is additive and reversible.  
-Rollback to v1.13.x is safe: `bundle_version` is ignored by that release.
-
-{{% /tab %}}
-{{% tab tabName="Markdown" %}}
-
-```markdown
+{{< doctabs >}}
 # Provisioning API v1.14.0 — 2026-11-12
 
 ## Summary
@@ -254,10 +124,7 @@ release onwards.
 ## Upgrade notes
 Rolling deploy, no downtime. The database migration is additive and reversible.
 Rollback to v1.13.x is safe: `bundle_version` is ignored by that release.
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /doctabs >}}
 
 ## Common mistakes
 

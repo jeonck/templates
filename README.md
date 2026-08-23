@@ -34,8 +34,15 @@ hugo server
   site-wide, so Lotus Docs' Prev/Next navigation walks categories in order.
 - `data/landing.yaml` — the home page (Lotus Docs renders it from data, not
   from `content/_index.md`).
+- `layouts/shortcodes/doctabs.html` — wraps a template block in
+  Rendered / Markdown tabs. Write the template **once** inside
+  `{{< doctabs >}}…{{< /doctabs >}}`; both tabs are derived from it at
+  build time, so there is nothing to keep in sync by hand.
 - `layouts/partials/backlinks.html` — "Linked from" section, wired into
-  `layouts/docs/single.html` and `layouts/_default/single.html`.
+  `layouts/docs/single.html`, `layouts/docs/list.html` and
+  `layouts/_default/single.html`.
+- `layouts/docs/_markup/render-table.html` — wraps tables in
+  `.table-responsive` so wide ones scroll instead of overflowing.
 - `static/CNAME` — custom domain, copied to `public/` on every build.
 
 Built with [Hugo](https://gohugo.io) and [Lotus Docs](https://github.com/colinwilson/lotusdocs).

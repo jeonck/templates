@@ -1,0 +1,80 @@
+{{/*
+  doctabs — one source block, two tabs.
+
+  Usage in content:
+
+      {{< doctabs >}}
+      # Some Template
+      | ID | Field |
+      |---|---|
+      {{< /doctabs >}}
+
+  The inner text is the copy-paste template, written once. This shortcode
+  derives both tabs from it, so editing the block updates both:
+
+    * "Markdown" — the text verbatim in a fenced block, so the theme's
+      codeblock hook still gives Prism highlighting and a copy button.
+    * "Rendered" — the same text massaged so markdown tables render as
+      tables: headings become bold labels (h1/h2 here would pollute the
+      page TOC and can produce ids starting with a digit, which breaks
+      Bootstrap ScrollSpy), angle-bracket placeholders like <Project> are
+      escaped so they are not eaten as HTML, leading indentation is kept
+      with &nbsp;, and every other line gets a hard break so the template's
+      line layout survives.
+
+  Text inside a nested code fence is passed through untouched, so JSON
+  snippets stay JSON.
+*/}}
+
+{{- $raw := trim .Inner "\n" -}}
+
+{{/* Outer fence for the Markdown tab must be longer than any nested fence. */}}
+{{- $fenceLen := 3 -}}
+{{- range findRE "(?m)^`{3,}" $raw -}}
+  {{- if ge (len .) $fenceLen }}{{ $fenceLen = add (len .) 1 }}{{ end -}}
+{{- end -}}
+{{- $fence := strings.Repeat $fenceLen "`" -}}
+
+{{/* Split on fence markers: even segments are outside a fence, odd are inside. */}}
+{{- $segments := split $raw "\n```" -}}
+{{- $done := slice -}}
+{{- range $i, $seg := $segments -}}
+  {{- if eq (mod $i 2) 1 -}}
+    {{- $done = $done | append $seg -}}
+  {{- else -}}
+    {{- $t := $seg -}}
+    {{- $t = replace $t "<" "&lt;" -}}
+    {{- $t = replace $t ">" "&gt;" -}}
+    {{/* headings -> bold label, and the trailing \n leaves a blank line behind it */}}
+    {{- $t = replaceRE `(?m)^#{1,6}[ \t]+(.*)$` "**$1**\n" $t -}}
+    {{/* a table must start and end its own block */}}
+    {{- $t = replaceRE "(?m)^([^|\n].*)\n(\\|)" "$1\n\n$2" $t -}}
+    {{- $t = replaceRE "(?m)^(\\|.*)\n([^|\n])" "$1\n\n$2" $t -}}
+    {{/* keep indentation: one leading space per pass, deepest indent in use is 8 */}}
+    {{- range seq 12 -}}
+      {{- $t = replaceRE `(?m)^((?:&nbsp;)*) ` "${1}&nbsp;" $t -}}
+    {{- end -}}
+    {{/* hard break on every line that is not blank and not a table row */}}
+    {{- $t = replaceRE "(?m)([^ |\n])[ \t]*$" "$1  " $t -}}
+    {{- $done = $done | append $t -}}
+  {{- end -}}
+{{- end -}}
+{{- $body := replaceRE `\n{3,}` "\n\n" (delimit $done "\n```") -}}
+
+{{- $id := printf "doctab-%d" .Ordinal -}}
+<nav>
+  <div class="nav nav-tabs" role="tablist">
+    <a class="nav-link active" id="{{ $id }}-0Tab" data-bs-toggle="tab" data-bs-target="#{{ $id }}-0"
+       type="button" role="tab" aria-controls="{{ $id }}-0" aria-selected="true">Rendered</a>
+    <a class="nav-link" id="{{ $id }}-1Tab" data-bs-toggle="tab" data-bs-target="#{{ $id }}-1"
+       type="button" role="tab" aria-controls="{{ $id }}-1" aria-selected="false">Markdown</a>
+  </div>
+</nav>
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="{{ $id }}-0" role="tabpanel" aria-labelledby="{{ $id }}-0Tab">
+    {{ $.Page.RenderString (dict "display" "block") $body }}
+  </div>
+  <div class="tab-pane fade" id="{{ $id }}-1" role="tabpanel" aria-labelledby="{{ $id }}-1Tab">
+    {{ $.Page.RenderString (dict "display" "block") (printf "%smarkdown\n%s\n%s" $fence $raw $fence) }}
+  </div>
+</div>

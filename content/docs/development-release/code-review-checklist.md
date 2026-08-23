@@ -25,67 +25,7 @@ Automation catches formatting, obvious bugs and known vulnerabilities. A human r
 
 ## Template
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="Rendered" %}}
-
-**Code Review Checklist**
-
-**Before reviewing**
-
-- [ ] CI is green — do not review red pull requests  
-- [ ] The description explains the *why*, and links a story or issue  
-- [ ] The change is small enough to review properly (target &lt; 400 lines)  
-
-**Correctness**
-
-- [ ] The change does what the description claims — no unrelated changes  
-- [ ] Edge cases: empty, one, many, maximum, null, duplicate  
-- [ ] Error paths return or propagate; nothing is silently swallowed  
-- [ ] Idempotent where it can be retried or replayed  
-- [ ] Concurrency: shared state, ordering assumptions, transaction boundaries  
-
-**Data**
-
-- [ ] Migrations are backwards compatible for the deploy window  
-- [ ] Migration is reversible, or the irreversibility is called out  
-- [ ] Query plans checked for anything touching a large table  
-- [ ] No unbounded result set or unbounded memory growth  
-
-**Security**
-
-- [ ] Authorisation checked at the right layer, for every new path  
-- [ ] Input validated at the trust boundary  
-- [ ] No secrets, tokens or personal data in code, logs or tests  
-- [ ] New dependency justified and licence-compatible  
-
-**Operability**
-
-- [ ] Metric or alert for the new failure mode  
-- [ ] Log lines carry correlation identifiers, and nothing sensitive  
-- [ ] Feature flag or another way to disable it without a deploy  
-- [ ] Runbook updated if operational behaviour changed  
-
-**Tests**
-
-- [ ] A failing test existed first, for a bug fix  
-- [ ] Tests assert behaviour, not implementation detail  
-- [ ] Failure modes are tested, not only the happy path  
-
-**Readability**
-
-- [ ] Names say what the thing is; comments say why, not what  
-- [ ] The next person can follow the control flow without a diagram  
-
-**Reviewer conduct**
-
-- [ ] Distinguish blocking from non-blocking: prefix "nit:" for preference  
-- [ ] Ask rather than assert when you might be missing context  
-- [ ] Approve when it is better than what is there, not when it is perfect
-
-{{% /tab %}}
-{{% tab tabName="Markdown" %}}
-
-```markdown
+{{< doctabs >}}
 # Code Review Checklist
 
 ## Before reviewing
@@ -131,54 +71,11 @@ Automation catches formatting, obvious bugs and known vulnerabilities. A human r
 - [ ] Distinguish blocking from non-blocking: prefix "nit:" for preference
 - [ ] Ask rather than assert when you might be missing context
 - [ ] Approve when it is better than what is there, not when it is perfect
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /doctabs >}}
 
 ## Worked example
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="Rendered" %}}
-
-**Review of PR #482 — "Pin bundle version at request creation"**
-
-**Blocking**  
-
-1. `resolveBundle` returns the latest version when the pinned version row is  
-&nbsp;&nbsp;&nbsp;missing (bundles.go:88). That silently defeats ADR-0012 — the grant would  
-&nbsp;&nbsp;&nbsp;trace to the wrong rule. Should be an error; a missing pinned version is a  
-&nbsp;&nbsp;&nbsp;data-integrity problem, not something to paper over.  
-
-2. The migration adds `bundle_version NOT NULL` with no default, while the  
-&nbsp;&nbsp;&nbsp;previous release still writes rows without it. During the rolling deploy the  
-&nbsp;&nbsp;&nbsp;old pods will fail every insert. Two-step it: nullable now, backfill,  
-&nbsp;&nbsp;&nbsp;NOT NULL next release.  
-
-**Non-blocking**  
-
-3. nit: `bv` reads as "bundle version" only if you already know. `bundleVer`  
-&nbsp;&nbsp;&nbsp;costs nothing.  
-
-4. The table test covers 6 of the 8 transitions; APPROVED -&gt; APPLYING and  
-&nbsp;&nbsp;&nbsp;REJECTED -&gt; APPLYING are missing. Not blocking since integration tests hit  
-&nbsp;&nbsp;&nbsp;both, but they belong in the unit table.  
-
-**Question**  
-
-5. If People Ops re-resolves a pending request, does the audit record show both  
-&nbsp;&nbsp;&nbsp;the original and the new pinned version? I could not tell from  
-&nbsp;&nbsp;&nbsp;`reResolve()`. If not, an auditor cannot reconstruct the change — that would  
-&nbsp;&nbsp;&nbsp;be blocking.  
-
-**Good**  
-
-6. The idempotency key on adapter calls is exactly right and was not asked for.
-
-{{% /tab %}}
-{{% tab tabName="Markdown" %}}
-
-```markdown
+{{< doctabs >}}
 ## Review of PR #482 — "Pin bundle version at request creation"
 
 **Blocking**
@@ -212,10 +109,7 @@ Automation catches formatting, obvious bugs and known vulnerabilities. A human r
 **Good**
 
 6. The idempotency key on adapter calls is exactly right and was not asked for.
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /doctabs >}}
 
 ## Common mistakes
 

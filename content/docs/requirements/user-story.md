@@ -25,49 +25,7 @@ A user story is a placeholder for a conversation, plus a written record of how t
 
 ## Template
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="Rendered" %}}
-
-**&lt;Short title&gt;**
-
-**As a** &lt;role&gt;  
-**I want** &lt;capability&gt;  
-**So that** &lt;outcome the role values&gt;  
-
-**Acceptance criteria**
-
-Given &lt;context&gt;  
-When &lt;action&gt;  
-Then &lt;observable result&gt;  
-
-(Repeat per scenario. Cover the unhappy paths and the boundaries, not just  
-the golden path.)  
-
-**Out of scope**
-
-- ...  
-
-**Preconditions / dependencies**
-
-- ...  
-
-**Non-functional notes**
-
-Performance, security, accessibility or data constraints that apply to  
-this story specifically.  
-
-**Definition of done**
-
-- [ ] Acceptance criteria demonstrated  
-- [ ] Automated tests added at the appropriate level  
-- [ ] Observability: metric or log line for the new path  
-- [ ] Documentation updated  
-- [ ] No new high or critical vulnerability introduced
-
-{{% /tab %}}
-{{% tab tabName="Markdown" %}}
-
-```markdown
+{{< doctabs >}}
 ## <Short title>
 
 **As a** <role>
@@ -98,78 +56,11 @@ this story specifically.
 - [ ] Observability: metric or log line for the new path
 - [ ] Documentation updated
 - [ ] No new high or critical vulnerability introduced
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /doctabs >}}
 
 ## Worked example
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="Rendered" %}}
-
-**Manager approves a non-standard entitlement**
-
-**As a** line manager  
-**I want** to approve or reject access that falls outside a joiner's standard role bundle  
-**So that** unusual access is granted deliberately and there is a record of who allowed it  
-
-**Acceptance criteria**
-
-Given a provisioning request contains an entitlement not present in the resolved bundle  
-When the request is created  
-Then the request enters state AWAITING_APPROVAL  
-And the line manager named on the HR record receives a notification within 5 minutes  
-And no entitlement in the request is applied to any target system  
-
-Given a request is AWAITING_APPROVAL  
-When the line manager approves it with a justification of at least 20 characters  
-Then all entitlements in the request are applied  
-And the audit log records approver, timestamp, entitlement list and justification  
-
-Given a request is AWAITING_APPROVAL  
-When the line manager rejects it  
-Then only the standard bundle entitlements are applied  
-And the non-standard entitlements are recorded as REJECTED with the reason  
-
-Given a request is AWAITING_APPROVAL  
-When 72 hours pass with no decision  
-Then the request escalates to the manager's manager  
-And the joiner's standard bundle is applied in the meantime  
-
-Given the HR record has no line manager  
-When a request requiring approval is created  
-Then the request is routed to the People Ops queue  
-And an alert is raised, because this indicates an HR data defect  
-
-**Out of scope**
-
-- Bulk approval of multiple joiners in one action (separate story).  
-- Delegation of approval rights during absence (backlog item AP-118).  
-
-**Preconditions / dependencies**
-
-- HR feed exposes the manager's employee ID (delivered in story AP-104).  
-- Notification service supports the approval deep link.  
-
-**Non-functional notes**
-
-- The approval link must be usable on mobile; managers approve from phones.  
-- Justification text is personal data adjacent — retained with the audit log  
-&nbsp;&nbsp;for 7 years, not in operational logs.  
-
-**Definition of done**
-
-- [x] Acceptance criteria demonstrated to product owner 2026-07-09  
-- [x] Contract tests for the four states, plus the no-manager case  
-- [x] Metric: approvals_pending gauge, alert at &gt;20 for 2h  
-- [x] Runbook section added for the People Ops queue  
-- [x] Dependency scan clean
-
-{{% /tab %}}
-{{% tab tabName="Markdown" %}}
-
-```markdown
+{{< doctabs >}}
 ## Manager approves a non-standard entitlement
 
 **As a** line manager
@@ -223,10 +114,7 @@ And an alert is raised, because this indicates an HR data defect
 - [x] Metric: approvals_pending gauge, alert at >20 for 2h
 - [x] Runbook section added for the People Ops queue
 - [x] Dependency scan clean
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /doctabs >}}
 
 ## Common mistakes
 

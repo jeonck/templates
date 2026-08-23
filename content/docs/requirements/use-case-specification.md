@@ -25,47 +25,7 @@ A use case documents a complete interaction from trigger to outcome. Its distinc
 
 ## Template
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="Rendered" %}}
-
-**UC-&lt;id&gt;: &lt;Use case name&gt;**
-
-| Field | Value |
-|---|---|
-| Primary actor | |
-| Secondary actors | |
-| Trigger | |
-| Preconditions | |
-| Success guarantee | |
-| Minimal guarantee | What holds even when the case fails |
-| Frequency | |
-
-**Main success scenario**
-
-1. Actor does X.  
-2. System validates Y.  
-3. System records Z.  
-4. System notifies ...  
-
-**Extensions**
-
-2a. &lt;Condition at step 2&gt;  
-&nbsp;&nbsp;&nbsp;&nbsp;2a1. System does ...  
-&nbsp;&nbsp;&nbsp;&nbsp;2a2. Use case ends / resumes at step 3.  
-
-3a. &lt;Condition at step 3&gt;  
-&nbsp;&nbsp;&nbsp;&nbsp;3a1. ...  
-
-**Special requirements**
-
-Performance, security, localisation, accessibility specific to this case.  
-
-**Open questions**
-
-{{% /tab %}}
-{{% tab tabName="Markdown" %}}
-
-```markdown
+{{< doctabs >}}
 # UC-<id>: <Use case name>
 
 | Field | Value |
@@ -96,96 +56,11 @@ Performance, security, localisation, accessibility specific to this case.
 Performance, security, localisation, accessibility specific to this case.
 
 ## Open questions
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /doctabs >}}
 
 ## Worked example
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="Rendered" %}}
-
-**UC-07: Provision access for a new joiner**
-
-| Field | Value |
-|---|---|
-| Primary actor | Provisioning Service (triggered by HR event) |
-| Secondary actors | Line manager, target systems, service desk |
-| Trigger | New employee record appears in the HR feed |
-| Preconditions | Employee record has employee ID, job code, start date and manager ID |
-| Success guarantee | All entitlements for the resolved bundle are active before the start date, and every grant is recorded in the audit log |
-| Minimal guarantee | No entitlement is granted without a recorded justification, and any partial state is visible as an open service desk ticket |
-| Frequency | ~380 per year, peaking at 90 in the September graduate intake |
-
-**Main success scenario**
-
-1. HR feed emits a joiner event.  
-2. System validates the record has all mandatory fields.  
-3. System resolves the job code to an access bundle.  
-4. System creates a provisioning request in state APPROVED.  
-5. System applies each entitlement to its target system in dependency order.  
-6. System writes a grant record to the audit log for each entitlement.  
-7. System notifies the joiner's manager that provisioning is complete.  
-8. Use case ends with the request in state COMPLETE.  
-
-**Extensions**
-
-2a. Mandatory field missing.  
-&nbsp;&nbsp;&nbsp;&nbsp;2a1. System raises a data-quality ticket naming the field and employee ID.  
-&nbsp;&nbsp;&nbsp;&nbsp;2a2. System does not create a provisioning request.  
-&nbsp;&nbsp;&nbsp;&nbsp;2a3. Use case ends.  
-
-2b. Duplicate event for an employee ID already provisioned.  
-&nbsp;&nbsp;&nbsp;&nbsp;2b1. System deduplicates on event ID and records the duplicate.  
-&nbsp;&nbsp;&nbsp;&nbsp;2b2. Use case ends without side effects.  
-
-3a. Job code does not map to any bundle.  
-&nbsp;&nbsp;&nbsp;&nbsp;3a1. System routes the request to the People Ops queue in state  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AWAITING_BUNDLE.  
-&nbsp;&nbsp;&nbsp;&nbsp;3a2. People Ops assigns a bundle or creates one.  
-&nbsp;&nbsp;&nbsp;&nbsp;3a3. Resume at step 4.  
-
-4a. Request contains an entitlement outside the bundle (added by People Ops).  
-&nbsp;&nbsp;&nbsp;&nbsp;4a1. System sets state AWAITING_APPROVAL and notifies the line manager.  
-&nbsp;&nbsp;&nbsp;&nbsp;4a2. Manager approves -&gt; resume at step 5.  
-&nbsp;&nbsp;&nbsp;&nbsp;4a3. Manager rejects -&gt; system applies only bundle entitlements, records  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the rejection, resumes at step 6.  
-&nbsp;&nbsp;&nbsp;&nbsp;4a4. No decision within 72 hours -&gt; system escalates to the manager's  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manager and applies the standard bundle; resume at step 5 for  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bundle entitlements only.  
-
-5a. A target system rejects the call.  
-&nbsp;&nbsp;&nbsp;&nbsp;5a1. System retries 5 times with exponential backoff.  
-&nbsp;&nbsp;&nbsp;&nbsp;5a2. If still failing, system marks that entitlement FAILED, leaves the  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;others applied, and raises a service desk ticket with the  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;correlation ID.  
-&nbsp;&nbsp;&nbsp;&nbsp;5a3. Request ends in state PARTIAL. Resume at step 6 for successful  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entitlements.  
-
-5b. Start date is more than 14 days in the future.  
-&nbsp;&nbsp;&nbsp;&nbsp;5b1. System schedules application for start date minus 1 working day.  
-&nbsp;&nbsp;&nbsp;&nbsp;5b2. Use case suspends until then, then resumes at step 5.  
-
-7a. Manager notification fails.  
-&nbsp;&nbsp;&nbsp;&nbsp;7a1. System retries for 24 hours, then logs and continues. Notification  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;failure never blocks provisioning.  
-
-**Special requirements**
-
-- Steps 5 and 6 must be idempotent; a replayed event must not double-grant.  
-- The audit log write (step 6) must succeed or the grant is treated as FAILED —  
-&nbsp;&nbsp;an unlogged grant is worse than a missing one.  
-- Correlation ID from step 1 propagates to every downstream call.  
-
-**Open questions**
-
-- Does the legacy ERP support scheduling (5b), or must we hold the request?
-
-{{% /tab %}}
-{{% tab tabName="Markdown" %}}
-
-```markdown
+{{< doctabs >}}
 # UC-07: Provision access for a new joiner
 
 | Field | Value |
@@ -258,10 +133,7 @@ Performance, security, localisation, accessibility specific to this case.
 
 ## Open questions
 - Does the legacy ERP support scheduling (5b), or must we hold the request?
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /doctabs >}}
 
 ## Common mistakes
 

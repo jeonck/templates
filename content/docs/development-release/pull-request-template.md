@@ -24,54 +24,7 @@ A pull request description is written once and read by every reviewer, every fut
 
 ## Template
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="Rendered" %}}
-
-**What**
-
-One or two sentences. What behaviour changes for a user or a caller.  
-
-**Why**
-
-Link the story, incident or ADR. If there is no link, explain the trigger.  
-
-**How**
-
-The approach, and anything non-obvious about it. Skip if the diff is  
-self-explanatory.  
-
-**Testing**
-
-- [ ] Unit tests added or updated  
-- [ ] Integration/contract tests  
-- [ ] Manually verified: &lt;what, in which environment&gt;  
-
-**Risk and rollback**
-
-- Blast radius if this is wrong:  
-- Feature flag:  
-- Rollback procedure:  
-- Migration reversible? yes / no / n/a  
-
-**Checklist**
-
-- [ ] No secrets, tokens or personal data added  
-- [ ] Observability: metric/alert for any new failure mode  
-- [ ] Docs, runbook or API spec updated  
-- [ ] Breaking change? If yes, note it here and in the release notes  
-
-**Reviewer notes**
-
-Where to look first, and anything you are unsure about.  
-
-**Screenshots / output**
-
-For UI or CLI changes.
-
-{{% /tab %}}
-{{% tab tabName="Markdown" %}}
-
-```markdown
+{{< doctabs >}}
 ## What
 One or two sentences. What behaviour changes for a user or a caller.
 
@@ -104,73 +57,11 @@ Where to look first, and anything you are unsure about.
 
 ## Screenshots / output
 For UI or CLI changes.
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /doctabs >}}
 
 ## Worked example
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="Rendered" %}}
-
-**What**
-
-Provisioning requests now pin the bundle version at creation time. A bundle  
-edited after a request is created no longer changes what that request applies.  
-
-**Why**
-
-ADR-0012, driven by audit finding 2025-11: every grant must trace to exactly  
-one rule version. Story AP-127.  
-
-**How**
-
-`request.bundle_version` is written at creation and read at application time.  
-Bundle rows become immutable — `UPDATE` is revoked at the database role level  
-and edits create a new version row. `reResolve()` is the only way to change a  
-pending request's pinned version, and it writes an audit record with the old  
-and new version plus the operator's justification.  
-
-**Testing**
-
-- [x] Unit tests: table-driven over all 8 state transitions, plus the  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;missing-pinned-version error case  
-- [x] Contract tests unchanged and green  
-- [x] Manually verified in staging: created a request, edited the bundle,  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;confirmed the applied entitlements matched the pinned version and that  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the audit record showed `eng-3@17` not `eng-3@18`  
-
-**Risk and rollback**
-
-- Blast radius: all provisioning requests. Wrong behaviour means wrong access  
-&nbsp;&nbsp;granted, which is a security-relevant defect, not a cosmetic one.  
-- Feature flag: none — the pin is a data property, not a code path. Flagging it  
-&nbsp;&nbsp;would create two grant semantics simultaneously, which is worse.  
-- Rollback: revert the code. The `bundle_version` column stays and is ignored  
-&nbsp;&nbsp;by the previous release.  
-- Migration reversible? Yes. Step 1 of 2 — column added nullable here, made  
-&nbsp;&nbsp;NOT NULL in the next release after backfill.  
-
-**Checklist**
-
-- [x] No secrets or personal data added  
-- [x] Metric `grants_with_missing_bundle_version` added, alerts at &gt; 0  
-- [x] Data model document and ADR-0012 updated  
-- [ ] Breaking change? No — additive for API consumers  
-
-**Reviewer notes**
-
-Look hardest at `bundles.go:80-110`. An earlier draft fell back to the latest  
-version when the pinned row was missing, which quietly defeats the whole point;  
-it now errors. I would like a second opinion on whether `re-resolve` should be  
-allowed while a request is APPLYING — currently it is not, and I think that is  
-right, but it is a judgement call.
-
-{{% /tab %}}
-{{% tab tabName="Markdown" %}}
-
-```markdown
+{{< doctabs >}}
 ## What
 Provisioning requests now pin the bundle version at creation time. A bundle
 edited after a request is created no longer changes what that request applies.
@@ -216,10 +107,7 @@ version when the pinned row was missing, which quietly defeats the whole point;
 it now errors. I would like a second opinion on whether `re-resolve` should be
 allowed while a request is APPLYING — currently it is not, and I think that is
 right, but it is a judgement call.
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /doctabs >}}
 
 ## Common mistakes
 

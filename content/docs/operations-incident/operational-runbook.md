@@ -25,68 +25,7 @@ A runbook is read in the worst conditions a document ever faces: at night, under
 
 ## Template
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="Rendered" %}}
-
-**Runbook: &lt;Service&gt;**
-
-| Field | Value |
-|---|---|
-| Owning team | |
-| On-call rotation | |
-| Escalation | L1 -> L2 -> owner |
-| Dashboards | |
-| Logs | |
-| Source | repo link |
-| Last reviewed | |
-
-**1. What this service does**
-
-Three sentences. Business impact if it is down.  
-
-**2. Dependencies**
-
-| Depends on | Impact if unavailable | Their on-call |
-|---|---|---|
-
-**3. Health checks**
-
-How to tell in 60 seconds whether it is healthy.  
-
-**4. Alerts**
-
-**&lt;ALERT_NAME&gt;**
-
-- **Means:**  
-- **Impact:**  
-- **Check:** commands  
-- **Fix:** steps  
-- **If that fails:** escalation  
-- **Do not:** actions that make it worse  
-
-**5. Common procedures**
-
-Restart, scale, drain, replay, pause, backfill.  
-
-**6. Safe / unsafe actions**
-
-| Action | Safe? | Notes |
-|---|---|---|
-
-**7. Maintenance**
-
-Certificates, credential rotation, log volume, capacity headroom.  
-
-**8. Recovery**
-
-Backup locations, restore procedure, RPO/RTO, last exercise date.  
-
-**9. Known issues**
-
-{{% /tab %}}
-{{% tab tabName="Markdown" %}}
-
-```markdown
+{{< doctabs >}}
 # Runbook: <Service>
 
 | Field | Value |
@@ -132,119 +71,11 @@ Certificates, credential rotation, log volume, capacity headroom.
 Backup locations, restore procedure, RPO/RTO, last exercise date.
 
 ## 9. Known issues
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /doctabs >}}
 
 ## Worked example
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="Rendered" %}}
-
-**Runbook: Access Provisioning Service**
-
-| Field | Value |
-|---|---|
-| Owning team | Platform Identity |
-| On-call | #platform-oncall, PagerDuty schedule "platform-primary" |
-| Escalation | Primary -> secondary (15 min) -> A. Vogel (30 min) |
-| Dashboards | "Provisioning — pipeline", "Provisioning — adapters" |
-| Last reviewed | 2026-11-30 |
-
-**1. What this service does**
-
-Grants and revokes system access for employees, driven by HR events. If it is  
-down, new joiners do not get access and leavers are not revoked on time. It is  
-not customer-facing: a four-hour outage during the working day is a  
-significant problem; a four-hour outage overnight usually is not.  
-
-**2. Dependencies**
-
-| Depends on | Impact if unavailable | Their on-call |
-|---|---|---|
-| HR feed (webhook) | No new events; existing queue still drains | #hr-platform |
-| Postgres (primary) | Service is down; requests queue at ingest | #dba-oncall |
-| Secrets manager | Adapters fail auth after the current lease expires (max 1h) | #security-oncall |
-| Target systems (11) | Only those entitlements fail; requests end PARTIAL | Varies — see adapter table |
-
-**4. Alerts**
-
-**PROV_DUE_ACTIONS_OVERDUE**
-
-- **Means:** the poller has not processed scheduled actions for over 10 minutes.  
-&nbsp;&nbsp;Approval escalations and start-date applications are stalled.  
-- **Impact:** joiners may not have access on their start date. Silent — nobody  
-&nbsp;&nbsp;will report it until someone cannot log in.  
-- **Check:**  
-&nbsp;&nbsp;`provctl poller status` — is a leader elected?  
-&nbsp;&nbsp;`SELECT count(*), min(due_at) FROM due_action WHERE state='PENDING' AND due_at &lt; now();`  
-- **Fix:**  
-&nbsp;&nbsp;1. If no leader: `provctl poller elect --force` and confirm within 60s.  
-&nbsp;&nbsp;2. If a leader exists but is stuck, restart it: `provctl restart poller`.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Safe at any time — due actions are idempotent.  
-&nbsp;&nbsp;3. Confirm the overdue count returns to 0 within 5 minutes.  
-- **If that fails:** escalate to secondary. Do not delete rows from  
-&nbsp;&nbsp;`due_action` to clear the alert — that silently drops joiner provisioning.  
-- **Do not:** run the poller in two places manually. Two leaders double-apply  
-&nbsp;&nbsp;entitlements, which is a security-relevant event requiring an incident.  
-
-**PROV_ADAPTER_ERROR_RATE**
-
-- **Means:** one adapter is failing more than 20% of calls over 5 minutes.  
-- **Impact:** entitlements for that target are not applied; requests end  
-&nbsp;&nbsp;PARTIAL and tickets accumulate. Everything else continues.  
-- **Check:** dashboard "Provisioning — adapters", identify which target.  
-&nbsp;&nbsp;`provctl adapter status &lt;target&gt;` shows last error and retry state.  
-- **Fix:**  
-&nbsp;&nbsp;1. If the target is in a known maintenance window (see #change-calendar),  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pause the adapter: `provctl adapter pause &lt;target&gt;`. Queued work resumes  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;when unpaused. Note it in the incident channel.  
-&nbsp;&nbsp;2. If auth errors: check credential lease age with  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`provctl secrets status &lt;target&gt;`. Rotate with  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`provctl secrets rotate &lt;target&gt;` — safe, takes ~30 seconds.  
-&nbsp;&nbsp;3. Otherwise contact the target system's on-call from the adapter table.  
-- **If that fails:** if more than 3 adapters are affected, this is likely  
-&nbsp;&nbsp;network or secrets, not the targets. Escalate to secondary immediately.  
-- **Do not:** raise retry limits to push work through. That was the cause of  
-&nbsp;&nbsp;INC-2026-0142, where nested retries turned a 30-second blip into 40 minutes.  
-
-**PROV_MISSING_BUNDLE_VERSION**
-
-- **Means:** a grant referenced a bundle version that does not exist.  
-- **Impact:** security-relevant. A grant may be unattributable.  
-- **Check:** `provctl audit orphan-grants --since 24h`  
-- **Fix:** none at 3am. Page the owner (A. Vogel) regardless of hour, and open  
-&nbsp;&nbsp;a Sev-1 incident. Do not attempt to reconstruct the bundle version.  
-
-**6. Safe / unsafe actions**
-
-| Action | Safe? | Notes |
-|---|---|---|
-| Restart any service pod | Yes | Stateless; in-flight work resumes from the database |
-| Pause ingest | Yes | Events queue at the webhook; no loss for up to 24h |
-| Pause an adapter | Yes | Other targets unaffected |
-| Rotate adapter credentials | Yes | ~30s of failures during rotation |
-| Delete rows from `due_action` | **No** | Silently drops provisioning; no recovery path |
-| Edit `request.state` directly | **No** | Bypasses the audit log; creates states the application cannot produce |
-| Re-run a completed request | **No** | Use the re-resolve action, which is audited |
-
-**8. Recovery**
-
-Postgres PITR, 15-minute RPO, snapshots retained 35 days. Restore procedure is  
-in the DBA runbook, section 4. Last DR exercise 2026-10-22: RTO 2h51m against  
-a 4h target. Next exercise due 2027-04.  
-
-**9. Known issues**
-
-- Legacy ERP revokes on the nightly batch only; worst case 26h latency against  
-&nbsp;&nbsp;a 1h target. The daily exception report (delivered 07:00 to People Ops) is  
-&nbsp;&nbsp;the compensating control. Do not raise an incident for this — it is expected.
-
-{{% /tab %}}
-{{% tab tabName="Markdown" %}}
-
-```markdown
+{{< doctabs >}}
 # Runbook: Access Provisioning Service
 
 | Field | Value |
@@ -335,10 +166,7 @@ a 4h target. Next exercise due 2027-04.
 - Legacy ERP revokes on the nightly batch only; worst case 26h latency against
   a 1h target. The daily exception report (delivered 07:00 to People Ops) is
   the compensating control. Do not raise an incident for this — it is expected.
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /doctabs >}}
 
 ## Common mistakes
 

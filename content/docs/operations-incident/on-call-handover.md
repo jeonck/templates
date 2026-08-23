@@ -25,48 +25,7 @@ Everything a handover needs is already somewhere — in dashboards, tickets, inc
 
 ## Template
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="Rendered" %}}
-
-**On-call handover: &lt;rotation&gt; — YYYY-MM-DD HH:MM UTC**
-
-**Outgoing:** name    **Incoming:** name  
-
-**Active incidents**
-
-| ID | Sev | State | What is needed next | Channel |
-|---|---|---|---|---|
-
-**Degraded or on a workaround**
-
-| Service | State | Workaround in place | Expires / needs attention |
-|---|---|---|---|
-
-**Expected during your shift**
-
-| When | What | Whose | What to do if it goes wrong |
-|---|---|---|---|
-
-**Watch list**
-
-Things not yet broken but trending badly, with the threshold that matters.  
-
-**Known noise**
-
-Alerts that will fire and are expected — with the reason and the ticket.  
-
-**Tried and did not work**
-
-So the next person does not repeat it.  
-
-**Access and escalation notes**
-
-Anything unusual about who is reachable.
-
-{{% /tab %}}
-{{% tab tabName="Markdown" %}}
-
-```markdown
+{{< doctabs >}}
 # On-call handover: <rotation> — YYYY-MM-DD HH:MM UTC
 
 **Outgoing:** name    **Incoming:** name
@@ -94,74 +53,11 @@ So the next person does not repeat it.
 
 ## Access and escalation notes
 Anything unusual about who is reachable.
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /doctabs >}}
 
 ## Worked example
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="Rendered" %}}
-
-**On-call handover: platform-primary — 2026-12-03 18:00 UTC**
-
-**Outgoing:** J. Marek    **Incoming:** P. Nowak  
-
-**Active incidents**
-
-| ID | Sev | State | What is needed next | Channel |
-|---|---|---|---|---|
-| INC-2026-0207 | Sev-2 | Resolved 11:40, monitoring | Nothing unless the poller backlog rises again. Postmortem is Friday; do not start analysis in the channel | #inc-2026-0207 |
-
-**Degraded or on a workaround**
-
-| Service | State | Workaround | Expires / needs attention |
-|---|---|---|---|
-| Provisioning | Bundle clean-up admin action disabled since 2026-11-04 | Manual, by config flag | Stays until v1.14.0 ships (2026-11-12 — already shipped; flag can now be re-enabled, ticket OPS-878 open, not urgent) |
-| Provisioning poller | Running normally, but no heartbeat alert yet (OPS-882 in progress) | Backlog alert only, now routed correctly | If the backlog alert fires, check leader identity first — it is on the pipeline dashboard as of today |
-| Node pool upgrades | Paused on 3 remaining nodes since 08:05 | Manual pause | Security wants them completed by 2026-12-06. Do not resume during your shift; A. Vogel is coordinating with the lease handover fix |
-
-**Expected during your shift**
-
-| When | What | Whose | What to do if it goes wrong |
-|---|---|---|---|
-| 22:00 UTC | HR nightly batch, ~40 events | HR platform | Expect a brief backlog; it should clear within 15 min. If not, check adapters before assuming the poller |
-| 23:30 UTC | Legacy ERP nightly provisioning batch | ERP team | Failures show as PARTIAL requests plus tickets. Not a page — the daily exception report catches it. ERP on-call is #erp-oncall but they do not staff overnight |
-| 02:00 UTC | Certificate renewal on the admin ingress (automated) | Platform | Runbook section 7. Manual renewal command is there; takes 4 minutes |
-
-**Watch list**
-
-- Postgres primary disk at 71%, rising ~1.5pp/week. Alert threshold 85%. Not  
-&nbsp;&nbsp;your problem this shift, but if it jumps more than 3pp overnight, something  
-&nbsp;&nbsp;is writing more than it should — check the audit table partition size first.  
-- One adapter (the HR-adjacent directory) has been at a 3–4% error rate all  
-&nbsp;&nbsp;week, well below the 20% alert. Retries absorb it. Ticket OPS-879.  
-
-**Known noise**
-
-- `PROV_ADAPTER_ERROR_RATE` for the ERP target will fire around 23:35 and clear  
-&nbsp;&nbsp;by 23:50. Expected — the batch closes its connection abruptly. Ticket  
-&nbsp;&nbsp;OPS-860, fix scheduled but not started. Do not escalate.  
-
-**Tried and did not work**
-
-- During INC-2026-0207 I tried `provctl poller restart` before forcing an  
-&nbsp;&nbsp;election. It did not help, because the stale lease had not expired; the pod  
-&nbsp;&nbsp;restarted and waited. `provctl poller elect --force` is the command that  
-&nbsp;&nbsp;works. The runbook now says so.  
-
-**Access and escalation notes**
-
-A. Vogel is on a flight 20:00–23:30 UTC and unreachable. Secondary escalation  
-for anything provisioning-related is H. Ito, who ran the test cycle and knows  
-the system well. DBA on-call rotation changed on Monday: it is now  
-#dba-oncall-eu, not the old channel, which still exists and is unmonitored.
-
-{{% /tab %}}
-{{% tab tabName="Markdown" %}}
-
-```markdown
+{{< doctabs >}}
 # On-call handover: platform-primary — 2026-12-03 18:00 UTC
 
 **Outgoing:** J. Marek    **Incoming:** P. Nowak
@@ -208,10 +104,7 @@ A. Vogel is on a flight 20:00–23:30 UTC and unreachable. Secondary escalation
 for anything provisioning-related is H. Ito, who ran the test cycle and knows
 the system well. DBA on-call rotation changed on Monday: it is now
 #dba-oncall-eu, not the old channel, which still exists and is unmonitored.
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /doctabs >}}
 
 ## Common mistakes
 
