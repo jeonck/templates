@@ -4,6 +4,7 @@ title: "Architecture & Design"
 description: "Architecture documents, decision records, API specs and data models."
 icon: "architecture"
 date: "2026-08-23"
+moment: "defending a design"
 draft: false
 ---
 

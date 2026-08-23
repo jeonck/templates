@@ -4,6 +4,7 @@ title: "Security & Compliance"
 description: "Security policies, risk registers, access reviews, vendor assessments and DPIAs."
 icon: "shield"
 date: "2026-08-23"
+moment: "answering an auditor"
 draft: false
 ---
 

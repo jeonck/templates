@@ -9,6 +9,11 @@
     :categories:      7         number of categories
     :categoriesWord:  Seven     the same count spelled out and capitalised,
                                 for headings where a numeral reads badly
+    :moments:         a, b, or c  each category's `moment` front matter, in
+                                sidebar order, as an English list. A category
+                                with no `moment` contributes its lowercased
+                                title, so a new one can never be silently
+                                dropped from the sentence.
 
   Beyond the spelled-out range the word form falls back to the numeral.
 */}}
@@ -21,5 +26,12 @@
   {{- $s = replace $s ":templates:" (printf "%d" (len .RegularPagesRecursive)) -}}
   {{- $s = replace $s ":categoriesWord:" $word -}}
   {{- $s = replace $s ":categories:" (printf "%d" $n) -}}
+  {{- if in $s ":moments:" -}}
+    {{- $moments := slice -}}
+    {{- range .Sections.ByWeight -}}
+      {{- $moments = $moments | append (.Params.moment | default (lower .Title)) -}}
+    {{- end -}}
+    {{- $s = replace $s ":moments:" (delimit $moments ", " ", or ") -}}
+  {{- end -}}
 {{- end -}}
 {{- $s -}}

@@ -4,6 +4,7 @@ title: "Testing & QA"
 description: "Test plans, test case specifications, defect reports, UAT plans and summary reports."
 icon: "bug_report"
 date: "2026-08-23"
+moment: "testing"
 draft: false
 ---
 
