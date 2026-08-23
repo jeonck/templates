@@ -107,10 +107,15 @@
         <!-- sidebar-menu  -->
     </div>
     <!-- Sidebar Footer -->
-        <ul class="sidebar-footer list-unstyled mb-0">
-            <!-- <li class="list-inline-item mb-0">
-                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#lang-selector-popup" class="btn btn-primary m-1">Language</a>
-            </li> -->
+        {{/* The theme reserves a fixed 60px footer strip here and leaves it
+             empty; put the library total in it. */}}
+        <ul class="sidebar-footer list-unstyled mb-0 d-flex align-items-center">
+            {{- with site.GetPage "/docs" }}
+            <li class="small opacity-75">
+                <span class="material-icons size-20 align-text-bottom opacity-75">library_books</span>
+                {{ len .RegularPagesRecursive }} templates in {{ len .Sections }} categories
+            </li>
+            {{- end }}
         </ul>
     <!-- Sidebar Footer -->
 </nav>
